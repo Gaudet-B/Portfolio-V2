@@ -1,0 +1,86 @@
+
+@import url(https://fonts.googleapis.com/css?family=Anonymous+Pro);
+
+
+.contactTitle {
+    width: inherit;
+    font-size: 26pt;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+    color: whitesmoke;
+    background-color: #262626;
+    padding: 2rem 0;
+}
+
+.contactMain {
+    width: 100vw;
+    margin: auto;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(25, 25, 25, .6);
+}
+
+.formComponent {
+    width: fit-content;
+    padding: 1rem 0;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: left;
+}
+
+.label {
+    margin: 1rem 0;
+    width: 38%;
+    min-width: fit-content;
+    font-size: 1.3rem;
+    color: whitesmoke;
+}
+
+.textInput {
+    padding: 8px;
+    width: 60vw;
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: whitesmoke;
+    background-color: transparent;
+    border: 1px solid rgba(245, 245, 245, 0.5);
+}
+
+.option {
+    min-height: 30px;
+    font-family: 'Anonymous Pro', monospace;
+    background-color: rgb(25, 25, 25, 1);
+}
+
+.buttonContainer {
+    margin: 1em 0;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.formButton {
+    transition: 1s ease-out;
+    height: 40px;
+    width: 110px;
+    background-color: whitesmoke;
+    border: 2px solid transparent;
+    border-radius: 5% / 10%;
+    box-shadow: 0 25px 12px -15px rgba(245, 245, 245, 0.24);
+    font-family: 'Anonymous Pro', monospace;
+    font-size: 1.1rem;
+    font-weight: bold;
+    letter-spacing: 1.2px;
+    color: black;
+}
+.formButton:hover {
+    cursor: pointer;
+    animation: flash .5s linear;
+    background-color: transparent;
+    border: 1px solid whitesmoke;
+    color: whitesmoke;
+}
