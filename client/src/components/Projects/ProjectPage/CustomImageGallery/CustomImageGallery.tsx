@@ -1,3 +1,5 @@
+/* GLOBAL */
+import React from 'react'
 /* LOCAL */
 import DemoImg from '../DemoImg'
 import {

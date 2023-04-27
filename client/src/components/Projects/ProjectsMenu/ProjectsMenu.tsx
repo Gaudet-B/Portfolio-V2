@@ -1,5 +1,6 @@
 /* GLOBAL */
-import { useState, useEffect } from 'react'
+import React from 'react'
+import { useState } from 'react'
 
 /* PROJECT */
 import FiltersLists from './FiltersLists'
