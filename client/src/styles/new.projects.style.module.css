@@ -1,0 +1,233 @@
+@keyframes un-mask {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes spinner {
+    0% {transform: translate3d(-50%, -50%, 0) rotate(0deg);}
+    90% {transform: translate3d(-50%, -50%, 0) rotate(365deg);}
+    100% {transform: translate3d(-50%, -50%, 0) rotate(360deg);}
+}
+
+@keyframes reverse-spinner {
+    0% {transform: translate3d(-50%, -50%, 0) rotate(0deg);}
+    100% {transform: translate3d(-50%, -50%, 0) rotate(-360deg);}
+}
+
+@keyframes openContainer {
+    from {height: 20px;}
+    /* to {height: 110vh;} */
+    to {height: 90vh;}
+}
+
+@keyframes closeContainer {
+    from {height: 90vh;}
+    to {height: 20px;}
+}
+
+@keyframes border-flicker {
+    0% {
+        opacity:0.1;
+        background-color: 0px 0px 78px 18px whitesmoke;
+        -webkit-box-shadow: 0px 0px 10px 15px whitesmoke;
+        -moz-box-shadow: 0px 0px 10px 15px whitesmoke;
+        box-shadow: 0px 0px 10px 15px whitesmoke;
+    }
+    2% {
+        opacity:1;
+        background-color: 0px 0px 78px 18px whitesmoke;
+        -webkit-box-shadow: 0px 0px 10px 15px whitesmoke;
+        -moz-box-shadow: 0px 0px 10px 15px whitesmoke;
+        box-shadow: 0px 0px 10px 15px whitesmoke;
+    }
+    4% {
+        opacity:0.1;
+        background-color: 0px 0px 78px 18px whitesmoke;
+        -webkit-box-shadow: 0px 0px 10px 15px whitesmoke;
+        -moz-box-shadow: 0px 0px 10px 15px whitesmoke;
+        box-shadow: 0px 0px 10px 15px whitesmoke;
+    }
+    
+    8% {
+        opacity:1;
+        background-color: 0px 0px 78px 18px whitesmoke;
+        -webkit-box-shadow: 0px 0px 10px 15px whitesmoke;
+        -moz-box-shadow: 0px 0px 10px 15px whitesmoke;
+        box-shadow: 0px 0px 10px 15px whitesmoke;
+    }
+    70% {
+        opacity:0.7;
+        background-color: 0px 0px 78px 18px whitesmoke;
+        -webkit-box-shadow: 0px 0px 10px 15px whitesmoke;
+        -moz-box-shadow: 0px 0px 10px 15px whitesmoke;
+        box-shadow: 0px 0px 10px 15px whitesmoke;
+    }
+    100% {
+        opacity:1;
+        background-color: 0px 0px 78px 18px whitesmoke;
+        -webkit-box-shadow: 0px 0px 10px 15px whitesmoke;
+        -moz-box-shadow: 0px 0px 10px 15px whitesmoke;
+        box-shadow: 0px 0px 10px 15px whitesmoke;
+    }
+}
+
+/*  */
+
+.loadingMask {
+    height: 100vh;
+    width: 100vw;
+    color: rgba(255,255,255,.75);
+    font-family: 'Anonymous Pro';  
+    background: linear-gradient(8deg, rgba(26,26,26,0.2) 0%, rgba(25,25,25,1) 70%);
+}
+.spinner {
+    animation: spinner 2.5s ease infinite;
+    border: solid 5px transparent;
+    border-bottom-color: #cfd0d1;
+    border-left-color: #cfd0d1;
+    border-top-color: #cfd0d1;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.logoSpinner {
+    animation: reverse-spinner 3.5s linear infinite;
+    border: solid 4px transparent;
+    border-bottom-color: #cfd0d1;
+    border-right-color: #cfd0d1;
+    border-top-color: #cfd0d1;
+    border-radius: 50%;
+    height: 74px;
+    width: 74px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+.logo {
+    animation: glow 7s ease infinite;
+    font-family: 'Anonymous Pro';
+    font-size: 3em;
+    color: whitesmoke;
+    position: absolute;
+    top: 47%;
+    left: 48%;
+}
+
+.bg {
+    /* display: flex; */
+    animation: un-mask 3s ease;
+    background-image: url("../assets/3d-background.png");
+    margin: auto;
+    /* width: fit-content; */
+    /* min-width: 1130px; */
+    /* max-width: 1200px; */
+    /* min-width: 1195px; */
+    /* max-width: 1274px; */
+    /* max-width: 100vw; */
+    /* width: 100vw; */
+    width: 100%;
+    -webkit-backgound-size: cover;
+    -moz-backgound-size: cover;
+    background-size: cover;
+    text-align: center;
+}
+
+.projectsBackground {
+    /* padding-top: 4em; */
+    /* max-height: 100vh; */
+    /* min-height: 100%; */
+    /* min-height: 100vh; */
+    height: 100vh;
+    /* width: 100%; */
+    color: rgba(255,255,255,.75);
+    font-family: 'Anonymous Pro';
+    background: linear-gradient(0deg, rgba(26,26,26,0.5) 0%, rgba(25,25,25,1) 60%);
+}
+
+/*  */
+.newContainer {
+    height: 20px;
+    background: transparent;
+    /* border: 2px solid rgba(245, 245, 245, 0.4); */
+    border-radius: 5px;
+    -ms-overflow-style: none;
+    scrollbar-width: 0px;
+    /* max-height: 110vh; */
+    overflow: scroll;
+}
+.newContainer::-webkit-scrollbar {
+    display: none;
+}
+.newContainer.open {
+    animation: openContainer .9s ease-in;
+    /* height: 110vh; */
+    height: 90vh;
+}
+.newContainer.close {
+    animation: closeContainer .8s ease-in;
+    /* height: 20px; */
+}
+
+.border {
+    /* height: 107vh; */
+    min-height: 88vh;
+    max-height: 107vh;
+    width: 26px;
+    padding-top: 20px;
+    border-left: 4px solid;
+    border-image: linear-gradient(to top, rgba(160, 160, 160), rgb(26, 26, 26)) 100%;
+    border-right: 4px solid rgba(160, 160, 160);
+    background-color: rgb(26, 26, 26);
+    /* border-radius: 50%; */
+    /* -webkit-box-shadow: 0px 0px 500px 500px whitesmoke; */
+    /* -moz-box-shadow: 0px 0px 500px 500px whitesmoke; */
+    /* box-shadow: 0px 0px 500px 500px whitesmoke; */
+}
+
+.filler {
+    width: 1px;
+    margin: auto;
+    /* height: inherit; */
+    min-height: 88vh;
+    max-height: 107vh;
+    background-color: rgba(245, 245, 245);
+    /* border-left: 2px solid transparent; */
+    /* border-right: 2px solid transparent; */
+    background-color: 0px 0px 78px 18px whitesmoke;
+    -webkit-box-shadow: 0px 0px 10px 15px whitesmoke;
+    -moz-box-shadow: 0px 0px 10px 15px whitesmoke;
+    box-shadow: 0px 0px 10px 15px whitesmoke;
+}
+
+.flicker {
+    animation: border-flicker 2s linear;
+    animation-iteration-count: 2;
+}
+
+.carouselContainer {
+    margin: auto;
+    width: 1210px;
+    height: 20px;
+    /* padding: 2px; */
+    /* width: fit-content; */
+    /* overflow-y: scroll;
+    scrollbar-width: 0px;
+    -ms-overflow-style: none; */
+}
+/* .carouselContainer::-webkit-scrollbar {
+    display: none;
+} */
+/* .carouselContainer.open {
+    animation: openContainer 2s ease-in;
+    height: 100vh;
+}
+.carouselContainer.close {
+    animation: closeContainer .5s ease-in;
+    height: 20px;
+} */
+
+
+

@@ -1,0 +1,274 @@
+/* ======> {{ CAROUSEL COMPONENT }} <====== */
+
+/* Animations: */
+
+@keyframes flicker {
+    0%, 33%, 43%, 83%, 99% {color: rgba(24, 7, 7, 0.7);}
+    /* 0%, 3%, 31%, 41%, 49% {color: rgba(255,255,255,.3); -webkit-text-stroke-width: 1px; -webkit-text-stroke-color: rgb(0, 214, 25, .8);} */
+    /* 0%, 3%, 33%, 41%, 51%, 100% {opacity: 1} */
+    1%, 32%, 34%, 42%, 44%, 82%, 84%, 98%, 100% {color: rgba(255,255,255,.3);}
+    /* 1%, 4%, 32%, 42%, 50%, 100% {color:rgba(255,255,255,.3); -webkit-text-stroke-width: 0px; -webkit-text-stroke-color: transparent;} */
+    /* 1%, 4%, 32%, 40%, 50% {opacity: 0} */
+}
+
+/* subtle glow effect for interactive demo link */
+@keyframes glow {
+    0% { box-shadow: 0 0 5px 5px transparent; }
+    50% { box-shadow: 0 0 10px 0px rgba(0, 173, 17, 1); }
+    100% { box-shadow: 0 0 5px 5px transparent; }
+}
+
+/* image gallery animations */
+@keyframes expand {
+    from {height: 25px;}
+    to {height: 750px;} 
+}
+
+@keyframes contract {
+    from {height: 750px;}
+    to {height: 25px;}
+}
+
+@keyframes portrait {
+    from {height: 150px; width: 150px;}
+    to {height: 550px; width: 338px;}
+}
+
+@keyframes landscape {
+    from {height: 150px; width: 150px;}
+    to {height: 500px; width: 750px;}
+}
+
+@keyframes inactiveL {
+    from {height: 500px; width: 750px;}
+    to {height: 150px; width: 150px}
+}
+
+@keyframes inactiveP {
+    from {height: 550px; width: 338px;}
+    to {height: 150px; width: 150px}
+}
+
+/* Styles: */
+
+.carousel {
+    max-width: 1140px;
+    min-width: 1130px;
+    perspective: 2000px; 
+    transition: 0.5s ease-in;
+    /* height: inherit; */
+    /* border: 2px solid rgba(245, 245, 245, 0.4); */
+}
+
+.spinner { 
+    transform-style: preserve-3d; 
+    /* this creates the 3D "rotation" space */
+    transform-origin: 50% 0% -550px; 
+    transition: 0.8s ease-out; 
+    height: inherit;
+}
+
+.cardDiv {
+    transform-style: preserve-3d;
+    height: inherit;
+    position: absolute;
+    transform-origin: 50% 0% -550px;
+    /* border: 2px solid rgba(245, 245, 245, 0.4); */
+}
+
+/* Postiion cards around y-axis */
+.card0Div { transform: rotateY(0deg); }
+.card1Div { transform: rotateY(-90deg); }
+.card2Div { transform: rotateY(-180deg); }
+.card3Div { transform: rotateY(-270deg); }
+
+p {
+    margin: 0
+}
+
+.githubLink {
+    /* color: rgba(0, 143, 17); */
+    color: rgb(7, 204, 30);
+    /* color: rgba(123, 255, 139); */
+    font-family: helvetica;
+    font-size: 16pt;
+    border-radius: 50%;
+    margin: 1rem auto 2rem auto;
+}
+/* a:hover { color: whitesmoke; text-shadow: 1px 1px 1px rgba(245, 245, 245, 0.788); font-size: 14.5pt; cursor: pointer; } */
+
+.card { 
+    position: relative;
+    align-self: center;
+    width: 90vw;
+    max-width: 1140px;
+    min-width: 1130px;
+    margin: auto;
+    transform-style: preserve-3d;
+    /* ========= */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.cardFront {
+    /* width: 100%; */
+    width: inherit;
+    max-width: 1100px;
+    /* position: absolute; */
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background: linear-gradient(to bottom, #262626 0%, #262626 80%, transparent 100%);
+    /*  */
+    /* -ms-overflow-style: none; */
+    /* scrollbar-width: 0px; */
+    /* overflow: auto; */
+    /* max-height: inherit; */
+}
+
+.cardBack {
+    height: 2700px !important;
+    position: relative;
+    /* border: 4px solid #262626; */
+    /* border-radius: 6% / 5%; */
+    transform: translate3d(0, 0, -10px);
+    /* transform: translate3d(0, 0, -10px) rotateY(180deg); */
+    /* background-color: #262626; */
+    background: linear-gradient(to bottom, #262626 0%, #262626 80%, transparent 100%);
+}
+
+.interactiveDemo {
+    font-weight: bold;
+    padding: 8px 0;
+    background: linear-gradient(to right, transparent 0%, rgba(0, 173, 17, .1) 5%, rgba(0, 173, 17, 1) 40%, rgba(0, 173, 17, 1) 60%, rgba(0, 173, 17, .1) 95%, transparent 100%);
+    width: 90%;
+    margin: 0 auto 3rem auto;
+    border-radius: 10px;
+    font-size: 16pt;
+    cursor: pointer;
+    animation: glow 3s infinite ease;
+}
+.interactiveDemo:hover {
+    background-color: rgba(0, 173, 17, 1);
+    animation: none;
+    transition: .3s ease-in background-color;
+}
+
+.demo {
+    margin: 10px;
+    border: 1px solid black;
+    background-size: cover;
+    cursor: pointer;
+    transition: .5s linear ease-out;
+    height: 120px;
+    width: 120px;
+}
+
+.demoMask {
+    height: inherit;
+    width: inherit;
+    background-color: rgb(26, 26, 26, .6);
+    background-size: cover;
+}
+.demoMask:hover {
+    transition: .7s ease-in;
+    background-color: transparent;
+}
+
+.activeImgLandscape {
+    animation: landscape .7s ease-out;
+    height: 500px;
+    width: 750px;
+}
+.activeImgPortrait {
+    animation: portrait .7s ease-out;
+    height: 575px;
+    width: 338px;
+}
+
+.inactiveL {
+    animation: inactiveL .5s ease-in;
+}
+.inactiveP {
+    animation: inactiveP .5s ease-in;
+}
+
+.demoContainer {
+    min-height: 25px;
+}
+
+.expand {
+    animation: expand 1s ease-out;
+}
+.contract {
+    animation: contract 1s ease-in;
+}
+
+.header {
+    font-size: 24pt;
+    font-weight: bold;
+    letter-spacing: .25rem;
+    color: rgba(255,255,255,.3);
+    margin-bottom: 1rem;
+}
+
+.instruction {
+    font-family: helvetica;
+    font-size: 13pt;
+    margin-bottom: 2rem;
+}
+
+.responsiveLink {
+    font-weight: bold;
+    font-size: 11pt;
+    cursor: pointer;
+    color: rgba(255,255,255,.3);
+    background: linear-gradient(180deg, rgba(26,26,26,0.5) 0%, rgb(0, 214, 25) 45%, rgb(0, 214, 25) 55%, rgba(26,26,26,0.5) 100%);
+    -webkit-background-size: 18px 100px;
+    -moz-background-size: 18px 100px;
+    background-size: 18px 100px;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    background-repeat: no-repeat;
+    animation: shine 10s infinite ease-in-out;
+    animation-delay: 5s;
+}
+.responsiveLink strong {
+    font-size: 16pt;
+}
+.responsiveLink:hover {
+    transition: 1s ease-in;
+    color: whitesmoke;
+    font-size: 14.5pt;
+    animation: none;
+}
+
+.backTitle {
+    color: rgba(0, 143, 17, .9);
+    font-size: 2.25rem;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.projectLink {
+    display: flex;
+    flex-direction: column;
+    height: 70px;
+    min-width: 170px;
+    color: whitesmoke;
+}
+
+.left {
+    transform: rotateZ(0deg);
+    margin: 10px 20px 0 0;
+}
+
+.right {
+    transform: rotateZ(180deg);
+    margin:0 0 2px 20px;
+}
+
