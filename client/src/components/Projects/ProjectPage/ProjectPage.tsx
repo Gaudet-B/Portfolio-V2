@@ -195,15 +195,19 @@ const ProjectPage = (props: {
     setShowModal(false)
   }
 
-  const handleDemoClick = () => {
+  const handleDemoClick = (index: string | number) => {
     setShow(!show)
+    if (typeof index === 'number') {
+      if (showDraftDemo === index) setShowDraftDemo(-1)
+      else setShowDraftDemo(index)
+    }
   }
 
-  const handleDraftDemoClick = (index: number) => {
-    setShow(!show)
-    if (showDraftDemo === index) setShowDraftDemo(-1)
-    else setShowDraftDemo(index)
-  }
+  // const handleDraftDemoClick = (index: number) => {
+  //   setShow(!show)
+  //   if (showDraftDemo === index) setShowDraftDemo(-1)
+  //   else setShowDraftDemo(index)
+  // }
 
   const handleTabs = (index: number) => {
     setActiveTab(index)
@@ -248,12 +252,47 @@ const ProjectPage = (props: {
     )
   }
 
-  const renderDemoLink = (callback: () => void, action: string) => {
+  const renderDemoLink = (
+    callback: (any: any) => void,
+    action: string,
+    args?: any
+  ) => {
+    const handleClick = () => {
+      if (args) callback(args)
+      else callback('show')
+    }
     return (
       <StyledInstruction onClick={callback}>
         click to <strong>{action}</strong> demo
       </StyledInstruction>
     )
+  }
+
+  const renderDemoLinks = () => {
+    if (project.title === 'MyDraft Partner') {
+      return (
+        <>
+          {!show ? (
+            <StyledLinkContainer open={show}>
+              {renderDemoLink(handleDemoClick, 'open')}
+              {renderDemoLink(handleDemoClick, 'open')}
+            </StyledLinkContainer>
+          ) : (
+            <StyledLinkContainer open={show}>
+              {renderDemoLink(handleDemoClick, 'close')}
+            </StyledLinkContainer>
+          )}
+        </>
+      )
+    } else {
+      return (
+        <StyledLinkContainer open={show}>
+          {!show
+            ? renderDemoLink(handleDemoClick, 'open')
+            : renderDemoLink(handleDemoClick, 'close')}
+        </StyledLinkContainer>
+      )
+    }
   }
 
   const renderProjectdemo = () => {
@@ -279,7 +318,7 @@ const ProjectPage = (props: {
                       ? getActiveDimensions().width
                       : undefined
                   }
-                  onClick={() => handleDraftDemoClick(index)}
+                  onClick={() => handleDemoClick(index)}
                   getWindowHeight={getWindowHeight}
                   getWindowWidth={getWindowWidth}
                   demo
@@ -315,17 +354,15 @@ const ProjectPage = (props: {
     }
     return (
       <>
-        <StyledLinkContainer>
-          {!show
-            ? renderDemoLink(handleDemoClick, 'open')
-            : renderDemoLink(handleDemoClick, 'close')}
-          {project.title === 'chata' ||
-          project.title === 'P!ZZA' ||
-          project.title === 'MyDraft Partner'
-            ? renderDemoLink(restartDemo, 'restart')
-            : null}
-        </StyledLinkContainer>
+        {renderDemoLinks()}
         {renderDemoContent()}
+        {project.title === 'chata' ||
+        project.title === 'P!ZZA' ||
+        project.title === 'MyDraft Partner' ? (
+          <StyledLinkContainer open={show}>
+            {renderDemoLink(restartDemo, 'restart')}
+          </StyledLinkContainer>
+        ) : null}
       </>
     )
   }

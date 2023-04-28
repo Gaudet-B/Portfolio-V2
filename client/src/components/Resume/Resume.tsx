@@ -247,134 +247,112 @@ const Resume = () => {
               </h3>
 
               <div className="mx-5 my-4">
+                <div
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    width: '100%',
+                  }}
+                  className="pe-4 fs-5"
+                >
+                  <p>React.js, Next.js, Typescript</p>
+                  <p>AWS, Serverless, Vercel, Git</p>
+                  <p>Next.js, Python, SQL</p>
+                </div>
                 <p className="mb-5">
-                  JavaScript, Python, Java, React, Node.js, Express.js, jQuery,
-                  MySQL, MongoDB, Mongoose, Flask, Spring Boot, Socket.IO,
-                  Postman, Jinja2, AJAX, Bootstrap, React-Bootstrap, GitHub,
-                  Visual Studio Code, Sublime Text, Beautiful Soup, Selenium,
-                  bcrypt
+                  JavaScript, Java, Express.js, Flask, MongoDB, Mongoose, Spring
+                  Boot, Tailwind, Socket.IO, Postman, Jinja2, GitHub, Visual
+                  Studio Code, react-query, Beautiful Soup, Selenium, bcrypt
                 </p>
-              </div>
-
-              <h3 className="my-3 text-secondary">TECHNICAL PROJECTS</h3>
-              <div
-                className={
-                  windowWidth > 800
-                    ? 'mx-5 my-4 d-flex flex-row justify-content-between'
-                    : 'my-4 d-flex flex-row justify-content-between'
-                }
-              >
-                <div className="d-flex flex-column" style={{ minWidth: '18%' }}>
-                  <h5>MyDraft Partner</h5>
-                  <h6>Full Stack Developer</h6>
-                </div>
-
-                <div>
-                  <ul>
-                    <li>
-                      Deployed <strong>Selenium</strong> and{' '}
-                      <strong>Beautiful Soup</strong> to scrape for and parse
-                      through data, creating a <strong>MySQL</strong> database
-                      of over 500 NFL players.
-                    </li>
-                    <li>
-                      Compared expert rankings and player draft positions with{' '}
-                      <strong>custom-built Python algorithms</strong>.
-                    </li>
-                    <li>
-                      Used <strong>Jinja2</strong> and the{' '}
-                      <strong>Flask</strong> framework to take in user-defined
-                      settings and display custom recommendations.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div
-                className={
-                  windowWidth > 800
-                    ? 'mx-5 my-4 d-flex flex-row justify-content-between'
-                    : 'my-4 d-flex flex-row justify-content-between'
-                }
-              >
-                <div className="d-flex flex-column" style={{ minWidth: '18%' }}>
-                  <h5>P!ZZA</h5>
-                  <h6>Full Stack Developer</h6>
-                </div>
-
-                <div>
-                  <ul>
-                    <li>
-                      Utilized Square’s <strong>API</strong> for secure and
-                      frictionless payments.
-                    </li>
-                    <li>
-                      Leveraged <strong>MongoDB’s</strong> ease of setup and
-                      maintenance so users could maintain profiles, customize
-                      settings, and view their transaction history.
-                    </li>
-                    <li>
-                      Designed front-end with a focus on user experience, using{' '}
-                      <strong>React-Bootstrap</strong> for styling and
-                      functionality.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div
-                className={
-                  windowWidth > 800
-                    ? 'mx-5 my-4 d-flex flex-row justify-content-between'
-                    : 'my-4 d-flex flex-row justify-content-between'
-                }
-              >
-                <div className="d-flex flex-column" style={{ minWidth: '18%' }}>
-                  <h5 className="text-break">briangaudet.com</h5>
-                  <h6>Full Stack Developer</h6>
-                </div>
-
-                <div>
-                  <ul>
-                    <li>
-                      Wrote various custom CSS animations, including 3D
-                      transformations, to give the site a unique style that
-                      represents both my skills and personality.
-                    </li>
-                    <li>
-                      Built the site as a React app, not only to showcase my
-                      strengths, but in order to implement a content management
-                      system, allowing the site’s content to be updated
-                      regularly without altering the source code.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mx-5 border-top border-secondary my-4"></div>
-              <h3 className="mt-5 mb-3 text-secondary">EDUCATION</h3>
-
-              <div className="mx-4">
-                <ul>
-                  <li>
-                    <strong>Coding Dojo </strong> - San Jose, CA (online) -{' '}
-                    <strong> Full-Stack Developer Certificate - </strong>{' '}
-                    Python, MERN, Java - 2021
-                  </li>
-                  <li>
-                    <strong>Court of Master Sommeliers </strong> - Americas -{' '}
-                    <strong> Introductory Course Certification - </strong> 2017
-                  </li>
-                  <li>
-                    <strong>Salem State University </strong> - Salem, MA -{' '}
-                    <strong> B.S. Business Administration - </strong> 2010{' '}
-                  </li>
-                </ul>
               </div>
 
               <h3 className="mt-5 mb-3 text-secondary">
                 PROFESSIONAL EXPERIENCE
               </h3>
+
+              <div
+                className={
+                  windowWidth > 800
+                    ? 'mx-5 my-4 d-flex flex-row justify-content-between'
+                    : 'my-4 d-flex flex-row justify-content-between'
+                }
+              >
+                <div
+                  className="d-flex flex-column"
+                  style={
+                    windowWidth > 800 ? { width: '14%' } : { width: '24%' }
+                  }
+                >
+                  <h5>Border</h5>
+                  <h6>San Diego, CA</h6>
+                  <h6>2022 - present</h6>
+                </div>
+
+                <div
+                  className=""
+                  style={
+                    windowWidth > 800 ? { width: '85%' } : { width: '75%' }
+                  }
+                >
+                  <h5
+                    className={
+                      windowWidth > 800
+                        ? 'fw-normal fst-italic ms-4'
+                        : 'fw-normal fst-italic ms-5'
+                    }
+                  >
+                    Frontend Developer
+                  </h5>
+                  <ul>
+                    <li>???</li>
+                    <li>???</li>
+                    <li>???</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div
+                className={
+                  windowWidth > 800
+                    ? 'mx-5 my-4 d-flex flex-row justify-content-between'
+                    : 'my-4 d-flex flex-row justify-content-between'
+                }
+              >
+                <div
+                  className="d-flex flex-column"
+                  style={
+                    windowWidth > 800 ? { width: '14%' } : { width: '24%' }
+                  }
+                >
+                  <h5>Self-Employed</h5>
+                  <h6>Remote</h6>
+                  <h6>2021 - present</h6>
+                </div>
+
+                <div
+                  className=""
+                  style={
+                    windowWidth > 800 ? { width: '85%' } : { width: '75%' }
+                  }
+                >
+                  <h5
+                    className={
+                      windowWidth > 800
+                        ? 'fw-normal fst-italic ms-4'
+                        : 'fw-normal fst-italic ms-5'
+                    }
+                  >
+                    Freelance Software Developer
+                  </h5>
+                  <ul>
+                    <li>???</li>
+                    <li>???</li>
+                    <li>???</li>
+                  </ul>
+                </div>
+              </div>
+
               <div
                 className={
                   windowWidth > 800
@@ -423,90 +401,25 @@ const Resume = () => {
                 </div>
               </div>
 
-              <div
-                className={
-                  windowWidth > 800
-                    ? 'mx-5 my-4 d-flex flex-row justify-content-between'
-                    : 'my-4 d-flex flex-row justify-content-between'
-                }
-              >
-                <div
-                  className="d-flex flex-column"
-                  style={
-                    windowWidth > 800 ? { width: '14%' } : { width: '24%' }
-                  }
-                >
-                  <h5>Waterbar</h5>
-                  <h6>San Diego, CA</h6>
-                  <h6>2017 - 2019</h6>
-                </div>
+              <div className="mx-5 border-top border-secondary my-4"></div>
+              <h3 className="mt-5 mb-3 text-secondary">EDUCATION</h3>
 
-                <div
-                  className=""
-                  style={
-                    windowWidth > 800 ? { width: '85%' } : { width: '75%' }
-                  }
-                >
-                  <h5
-                    className={
-                      windowWidth > 800
-                        ? 'fw-normal fst-italic ms-4'
-                        : 'fw-normal fst-italic ms-5'
-                    }
-                  >
-                    Beverage Manager
-                  </h5>
-                  <ul>
-                    <li>
-                      Created and maintained a beverage program that averaged
-                      between $500,000 and $700,000 in monthly sales.
-                    </li>
-                  </ul>
-                </div>
-              </div>
-
-              <div
-                className={
-                  windowWidth > 800
-                    ? 'mx-5 my-4 d-flex flex-row justify-content-between'
-                    : 'my-4 d-flex flex-row justify-content-between'
-                }
-              >
-                <div
-                  className="d-flex flex-column"
-                  style={
-                    windowWidth > 800 ? { width: '14%' } : { width: '24%' }
-                  }
-                >
-                  <h5>Searsucker</h5>
-                  <h6>San Diego, CA</h6>
-                  <h6>2014 - 2016</h6>
-                </div>
-
-                <div
-                  className=""
-                  style={
-                    windowWidth > 800 ? { width: '85%' } : { width: '75%' }
-                  }
-                >
-                  <h5
-                    className={
-                      windowWidth > 800
-                        ? 'fw-normal fst-italic ms-4'
-                        : 'fw-normal fst-italic ms-5'
-                    }
-                  >
-                    General Manager
-                  </h5>
-                  <ul>
-                    <li>
-                      Focused on employee and leadership development in order to
-                      reduce turnover and build loyalty during a multi-year
-                      transition as a small corporation was acquired by a much
-                      larger one.
-                    </li>
-                  </ul>
-                </div>
+              <div className="mx-4">
+                <ul>
+                  <li>
+                    <strong>Coding Dojo </strong> - San Jose, CA (online) -{' '}
+                    <strong> Full-Stack Developer Certificate - </strong>{' '}
+                    Python, MERN, Java - 2021
+                  </li>
+                  <li>
+                    <strong>Court of Master Sommeliers </strong> - Americas -{' '}
+                    <strong> Introductory Course Certification - </strong> 2017
+                  </li>
+                  <li>
+                    <strong>Salem State University </strong> - Salem, MA -{' '}
+                    <strong> B.S. Business Administration - </strong> 2010{' '}
+                  </li>
+                </ul>
               </div>
 
               <div className="mx-5 border-top border-secondary my-4"></div>

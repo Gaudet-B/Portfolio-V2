@@ -129,7 +129,6 @@ export const StyledDemoTitle = styled.span`
 export const StyledInstruction = styled.span`
   font-family: helvetica;
   font-size: 13pt;
-  margin-bottom: 2rem;
   cursor: ${(props) => (props.noPointer ? 'not-allowed' : 'pointer')};
   > strong {
     color: ${styleGuide.colors.LabelGreen};
@@ -140,7 +139,8 @@ export const StyledLinkContainer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  gap: 2rem;
+  gap: 5rem;
+  padding: ${(props) => (props.open ? '1rem 0' : undefined)};
 `
 
 export const StyledProjectControls = styled.div`
