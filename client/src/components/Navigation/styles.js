@@ -22,8 +22,9 @@ export const StyledBackButton = styled.span`
   height: fit-content;
 `
 
+// width: ${(props) => (props.windowWidth > 800 ? '100%' : undefined)};
 export const StyledMainNav = styled.div`
-  width: ${(props) => (props.windowWidth > 800 ? '100%' : undefined)};
+  width: 100%;
   max-width: 1150px;
   display: flex;
   flex-direction: row;
@@ -31,7 +32,6 @@ export const StyledMainNav = styled.div`
   background-color: ${styleGuide.colors.SpaceBlack};
   padding: ${(props) =>
     props.windowWidth > 800 ? '20px 55px 0 55px' : '0 25px'};
-  padding: ${(props) => (props.noPadding ? '0' : undefined)};
 `
 
 export const StyledLogoContainer = styled.div`

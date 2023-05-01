@@ -230,10 +230,7 @@ const Navigation = (props: {
 
   return (
     <StyledNavWrapper windowWidth={props.windowWidth}>
-      <StyledMainNav
-        windowWidth={props.windowWidth}
-        noPadding={page === 'resume'}
-      >
+      <StyledMainNav windowWidth={props.windowWidth}>
         <StyledLogoContainer>
           {renderLogoLink()}
           {props.handleRefresh ? renderBackToMenu() : null}
