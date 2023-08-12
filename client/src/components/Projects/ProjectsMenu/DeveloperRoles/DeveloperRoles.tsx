@@ -1,4 +1,5 @@
 import Button from '../../../reuseable/Button'
+import { StyledRoleList } from './styles'
 
 const DeveloperRoles = (props: {
   projectType: string
@@ -18,7 +19,7 @@ const DeveloperRoles = (props: {
   } = props
 
   return (
-    <ul className={styles.developerRoles}>
+    <StyledRoleList className={styles.developerRoles}>
       {developerRoles.map((filter: string, index: number) => {
         return (
           <li
@@ -64,7 +65,7 @@ const DeveloperRoles = (props: {
           onClick={() => setDeveloperRole('All')}
         />
       </div>
-    </ul>
+    </StyledRoleList>
   )
 }
 

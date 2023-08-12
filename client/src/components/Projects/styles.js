@@ -55,7 +55,7 @@ export const StyledProjectsContainer = styled.div`
 export const StyledMenuContainer = styled.div`
   min-height: ${CLOSED_CONTAINER}px;
   max-height: ${CONTAINER_HEIGHT}vh;
-  width: 80%;
+  width: ${(props) => (props.responsive ? '90%' : '80%')};
   max-width: 1100px;
   margin: ${(props) => (props.responsive ? '5px auto 0 auto' : '0 auto')};
   border: 2px solid ${styleGuide.colors.GhostGray};

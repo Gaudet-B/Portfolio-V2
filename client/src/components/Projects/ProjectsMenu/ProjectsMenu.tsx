@@ -29,6 +29,7 @@ const ProjectsMenu = (props: {
   images: {
     [key: string]: string
   }
+  mobile: boolean
 }) => {
   const { projects, handleProjectClick, images } = props
 
@@ -136,7 +137,9 @@ const ProjectsMenu = (props: {
           handleFilterClick={handleFilterClick}
           handleCategorySelect={handleCategorySelect}
           chevronDirection={chevronDirection}
+          /** @TODO remove styles (replace them first... I think it's close) */
           styles={styles}
+          mobile={props.mobile}
         />
         <StyledProjectsListContainer>
           <StyledProjectsList>

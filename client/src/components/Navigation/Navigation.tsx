@@ -6,6 +6,10 @@ import Link from '../reuseable/Link'
 
 /* STYLES */
 import {
+  NavFonts,
+  StyledNavLink,
+  StyledSmallLink,
+  StyledNavMenu,
   StyledNavWrapper,
   StyledBackButton,
   StyledMainNav,
@@ -33,11 +37,10 @@ const { logo, burger } = IMAGES.icons
 const Navigation = (props: {
   windowWidth: number
   styles: any
+  // styles?: {}
   // showMenu?: boolean
   handleRefresh?: () => void
 }) => {
-  // const { windowWidth, handleRefresh, styles, showMenu } = props
-
   /** @NOTE REMOVE coordZ ??? */
   // state variables
   const [page, setPage] = useState<string>('')
@@ -49,7 +52,7 @@ const Navigation = (props: {
 
   const handleClick = (e: any) => {
     e.preventDefault()
-
+    console.log('click!')
     if (!show) {
       let linkP = document.getElementById('link-projects')
       if (linkP) {
@@ -79,14 +82,16 @@ const Navigation = (props: {
       setCoordY('0rem')
       // setCoordZ("10px")
       setScale('1.0')
-
+      console.log(`before: ${show}`)
       setShow(true)
+      console.log(`after: ${show}`)
     } else {
+      console.log(`else`)
       // setCoordZ("-10px")
       setCoordY('0rem')
       setCoordX('10rem')
       setScale('1.0')
-
+      setShow(false)
       setTimeout(() => {
         let linkM = document.getElementById('navMenu')
         if (linkM) {
@@ -112,8 +117,8 @@ const Navigation = (props: {
           linkC.style.margin = '0'
         }
 
-        setShow(false)
-      }, 500)
+        // setShow(false)
+      }, 200)
     }
   }
 
@@ -147,7 +152,7 @@ const Navigation = (props: {
         style={{
           display: 'flex',
           flexDirection: 'column',
-          marginTop: '.5rem',
+          margin: '.5rem 10px 0 0',
         }}
       >
         <a onClick={handleClick}>
@@ -158,6 +163,7 @@ const Navigation = (props: {
             alt="hamburger menu"
           />{' '}
         </a>
+        {renderMobileMenu()}
       </div>
     )
   }
@@ -180,44 +186,37 @@ const Navigation = (props: {
 
   const renderMobileMenu = () => {
     return (
-      <StyledMobileMenu>
-        <div
-          id="navMenu"
-          className={show ? props.styles.navMenu : ''}
-          style={{
-            transform: `perspective(50px) translate3d(${coordX}, ${coordY}, ${coordZ}) scale(${scale})`,
-            zIndex: '5',
-          }}
-        >
-          <a
-            id={'link-projects'}
-            href="/projects"
-            className={
-              page === 'projects'
-                ? props.styles.active + ' ' + props.styles.smallNav
-                : props.styles.smallNav
-            }
-          ></a>
-          <a
-            id={'link-resume'}
-            href="/resume"
-            className={
-              page === 'resume'
-                ? props.styles.active + ' ' + props.styles.smallNav
-                : props.styles.smallNav
-            }
-          ></a>
-          <a
-            id={'link-contact'}
-            href="/contact"
-            className={
-              page === 'contact'
-                ? props.styles.active + ' ' + props.styles.smallNav
-                : props.styles.smallNav
-            }
-          ></a>
-        </div>
-      </StyledMobileMenu>
+      <StyledNavMenu
+        id="navMenu"
+        show={show}
+        // can probably remove 'coordZ' here
+        transform={show ? `` : ``}
+        data-open={show}
+        // transform={
+        //   show
+        //     ? `perspective(50px) translate3d(${coordX}, ${coordY}, 0) scale(${scale})`
+        //     : `translateY(2rem)`
+        // }
+      >
+        <StyledSmallLink
+          id={'link-projects'}
+          href="/projects"
+          show={show}
+          data-active={page === 'projects'}
+        ></StyledSmallLink>
+        <StyledSmallLink
+          id={'link-resume'}
+          href="/resume"
+          show={show}
+          data-active={page === 'resume'}
+        ></StyledSmallLink>
+        <StyledSmallLink
+          id={'link-contact'}
+          href="/contact"
+          show={show}
+          data-active={page === 'contact'}
+        ></StyledSmallLink>
+      </StyledNavMenu>
     )
   }
 
@@ -229,16 +228,19 @@ const Navigation = (props: {
   }, [])
 
   return (
-    <StyledNavWrapper windowWidth={props.windowWidth}>
-      <StyledMainNav windowWidth={props.windowWidth}>
-        <StyledLogoContainer>
-          {renderLogoLink()}
-          {props.handleRefresh ? renderBackToMenu() : null}
-        </StyledLogoContainer>
-        {props.windowWidth < 800 ? renderMobileNav() : renderDesktopNav()}
-      </StyledMainNav>
-      {renderMobileMenu()}
-    </StyledNavWrapper>
+    <>
+      <NavFonts />
+      <StyledNavWrapper responsive={props.windowWidth < 800}>
+        <StyledMainNav responsive={props.windowWidth < 800}>
+          <StyledLogoContainer>
+            {renderLogoLink()}
+            {props.handleRefresh ? renderBackToMenu() : null}
+          </StyledLogoContainer>
+          {props.windowWidth < 800 ? renderMobileNav() : renderDesktopNav()}
+        </StyledMainNav>
+        {/* {renderMobileMenu()} */}
+      </StyledNavWrapper>
+    </>
   )
 }
 

@@ -65,6 +65,7 @@ const ProjectsWrapper = (props: {
   const renderMenu = () => {
     return (
       <ProjectsMenu
+        mobile={props.getWindowWidth() < 800}
         // projects={props.projects}
         projects={data}
         handleProjectClick={props.handleProjectClick}

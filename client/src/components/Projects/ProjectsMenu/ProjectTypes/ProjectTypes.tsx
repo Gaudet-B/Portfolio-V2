@@ -1,4 +1,5 @@
 import Button from '../../../reuseable/Button'
+import { StyledTypeList } from './styles'
 
 interface ProjectTypesProps {
   projectTypes: Array<string>
@@ -18,7 +19,7 @@ const ProjectTypes = (props: ProjectTypesProps) => {
   } = props
 
   return (
-    <ul className={styles.projectTypes}>
+    <StyledTypeList>
       {projectTypes.map((filter, index) => {
         return (
           <li
@@ -64,7 +65,7 @@ const ProjectTypes = (props: ProjectTypesProps) => {
           onClick={() => setProjectType('All')}
         />
       </div>
-    </ul>
+    </StyledTypeList>
   )
 }
 

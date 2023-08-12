@@ -6,7 +6,7 @@ const MAX_CONTAINER_WIDTH = `1200px`
 export const LandingFonts = createGlobalStyle`
     @font-face {
         font-family: 'Anonymous Pro';
-        src: url (${styleGuide.fonts.families.anonymousProNormal}) format('ttf');
+        src: url (${styleGuide.fonts.families.AnonymousPro}) format('ttf');
         font-display: swap;
     }
 `
@@ -56,8 +56,8 @@ export const StyledMainWrapper = styled.div`
     display: none;
   }
   min-height: ${(props) => (props.responsive ? '100vh' : undefined)};
-  padding-top: ${(props) => (props.responsive ? '100px' : undefined)};
-  padding-bottom: ${(props) => (props.responsive ? '200px' : undefined)};
+  padding-top: ${(props) => (props.responsive ? '50px' : undefined)};
+  padding-bottom: ${(props) => (props.responsive ? '100px' : undefined)};
 `
 
 export const StyledMainContainer = styled.div`
@@ -80,7 +80,7 @@ export const StyledButtonContainer = styled.div`
   display: flex;
   flex-direction: ${(props) => (props.responsive ? 'column' : 'row')};
   justify-content: space-evenly;
-  padding: ${(props) => (props.responsive ? '96px 12px 12px 12px' : undefined)};
+  padding: ${(props) => (props.responsive ? '56px 12px 12px 12px' : undefined)};
 `
 
 export const StyledSocialContainer = styled.div`
