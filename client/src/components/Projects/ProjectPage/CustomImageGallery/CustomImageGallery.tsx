@@ -1,4 +1,5 @@
 /* LOCAL */
+import { useState } from 'react'
 import DemoImg from '../DemoImg'
 import {
   StyledGalleryContainer,
@@ -8,9 +9,68 @@ import {
   StyledGalleryTab,
   StyledTabSeparator,
 } from './styles'
+import styleGuide from '../../../StyleGuide/StyleGuide'
 
 /* CONSTANTS */
 const TABS = ['version 1.0 (2021)', 'version 2.0 (2022)']
+
+const MobileTabs = (props: { handleTabs: (index: number) => void }) => {
+  const [activeTab, setActiveTab] = useState(0)
+  const handleTabs = (index: number) => {
+    setActiveTab(index)
+    props.handleTabs(index)
+  }
+  return (
+    <StyledGalleryTabs>
+      {activeTab === 1 ? (
+        <StyledTabSeparator onClick={() => handleTabs(0)}>
+          {'<'}
+        </StyledTabSeparator>
+      ) : (
+        <StyledTabSeparator> </StyledTabSeparator>
+      )}
+      {TABS.map((tab, idx) => {
+        return (
+          <>
+            {idx === activeTab && (
+              <StyledGalleryTab
+                key={tab}
+                // onClick={() => handleTabs(idx)}
+                data-active={idx === activeTab}
+              >
+                <div style={{}}>
+                  {tab.split(' ').map((word, idx) => {
+                    return (
+                      <>
+                        <span
+                          style={
+                            idx === 2
+                              ? { color: styleGuide.colors.GhostGray }
+                              : {}
+                          }
+                        >
+                          {word}
+                        </span>
+                        {idx === 1 ? <br /> : null}
+                      </>
+                    )
+                  })}
+                </div>
+              </StyledGalleryTab>
+            )}
+          </>
+        )
+      })}
+      {activeTab === 0 ? (
+        <StyledTabSeparator onClick={() => handleTabs(1)}>
+          {'>'}
+        </StyledTabSeparator>
+      ) : (
+        <StyledTabSeparator> </StyledTabSeparator>
+      )}
+    </StyledGalleryTabs>
+  )
+}
 
 /**
  * CustomImageGallery
@@ -32,6 +92,7 @@ const CustomImageGallery = (props: {
   redesign?: boolean
   handleTabs?: (index: number) => void
   activeTab?: number
+  responsive?: boolean
 }) => {
   const {
     project,
@@ -76,12 +137,10 @@ const CustomImageGallery = (props: {
   }
 
   const handleClick = (idx: number) => {
-    console.log(idx)
     if (idx === activeIndex) {
       props.setActiveIndex && props.setActiveIndex(-1)
       return
     }
-    console.log(idx)
     props.setActiveIndex && props.setActiveIndex(idx)
     props.handleModal && props.handleModal(getModalContent(idx))
   }
@@ -91,6 +150,7 @@ const CustomImageGallery = (props: {
   }
 
   const renderRedesignTabs = () => {
+    if (props.responsive) return <MobileTabs handleTabs={handleTabs} />
     return (
       <StyledGalleryTabs>
         {TABS.map((tab, idx) => {
@@ -103,7 +163,9 @@ const CustomImageGallery = (props: {
               >
                 {tab}
               </StyledGalleryTab>
-              {idx === 0 ? <StyledTabSeparator>|</StyledTabSeparator> : null}
+              {idx === 0 ? (
+                <StyledTabSeparator>{'|'}</StyledTabSeparator>
+              ) : null}
             </>
           )
         })}

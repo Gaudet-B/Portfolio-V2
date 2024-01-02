@@ -70,6 +70,7 @@ const DemoImg = (props: {
     <StyledDemoImg
       data-active={props.activeIndex === props.index}
       hideDemo={props.hideDemo}
+      responsive={props.getWindowWidth() < 800}
     >
       <StyledThumbnailContainer
         data-active={props.activeIndex === props.index}
@@ -80,6 +81,7 @@ const DemoImg = (props: {
         translateX={getXaxis()}
         maxHeight={getMaxSize()}
         hideScrollbar={props.hideScrollbar}
+        responsive={props.getWindowWidth() < 800}
       >
         <StyledImageContainer
           data-active={props.activeIndex === props.index}

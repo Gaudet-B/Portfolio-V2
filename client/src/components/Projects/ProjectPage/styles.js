@@ -29,14 +29,14 @@ export const StyledPageHeader = styled.header`
 `
 
 export const StyledTitle = styled.h1`
-  font-size: 4em;
+  font-size: ${(props) => (props.responsive ? '2em' : '4em')};
   font-weight: bold;
   margin: 18px 0px 14px 0px;
   letter-spacing: 0.4rem;
 `
 
 export const StyledProjectType = styled.h2`
-  font-size: 2rem;
+  font-size: ${(props) => (props.responsive ? '1.5rem' : '2rem')};
   font-weight: bold;
   margin: 2rem 0rem;
   color: rgba(0, 143, 17, 0.7);

@@ -66,6 +66,7 @@ import {
 /* TYPES */
 import { Project } from '../Projects'
 import ChevronButton from './ChevronButton'
+import ProjectDemo, { NoDemo } from './ProjectDemo'
 
 /**
  * @description - ProjectPage component - handles rendering all projects info
@@ -195,6 +196,7 @@ const ProjectPage = (props: {
     setShowModal(false)
   }
 
+  /** @TODO need to split this out into multiple functions and pass the right one to child components */
   const handleDemoClick = (index: string | number) => {
     setShow(!show)
     if (typeof index === 'number') {
@@ -244,128 +246,128 @@ const ProjectPage = (props: {
     )
   }
 
-  const renderNoDemo = () => {
-    return (
-      <StyledInstruction noPointer>
-        demo currently not available
-      </StyledInstruction>
-    )
-  }
+  // const renderNoDemo = () => {
+  //   return (
+  //     <StyledInstruction noPointer>
+  //       demo currently not available
+  //     </StyledInstruction>
+  //   )
+  // }
 
-  const renderDemoLink = (
-    callback: (any: any) => void,
-    action: string,
-    args?: any
-  ) => {
-    const handleClick = () => {
-      if (args) callback(args)
-      else callback('show')
-    }
-    return (
-      <StyledInstruction onClick={callback}>
-        click to <strong>{action}</strong> demo
-      </StyledInstruction>
-    )
-  }
+  // const renderDemoLink = (
+  //   callback: (any: any) => void,
+  //   action: string,
+  //   args?: any
+  // ) => {
+  //   const handleClick = () => {
+  //     if (args) callback(args)
+  //     else callback('show')
+  //   }
+  //   return (
+  //     <StyledInstruction onClick={callback}>
+  //       click to <strong>{action}</strong> demo
+  //     </StyledInstruction>
+  //   )
+  // }
 
-  const renderDemoLinks = () => {
-    if (project.title === 'MyDraft Partner') {
-      return (
-        <>
-          {!show ? (
-            <StyledLinkContainer open={show}>
-              {renderDemoLink(handleDemoClick, 'open')}
-              {renderDemoLink(handleDemoClick, 'open')}
-            </StyledLinkContainer>
-          ) : (
-            <StyledLinkContainer open={show}>
-              {renderDemoLink(handleDemoClick, 'close')}
-            </StyledLinkContainer>
-          )}
-        </>
-      )
-    } else {
-      return (
-        <StyledLinkContainer open={show}>
-          {!show
-            ? renderDemoLink(handleDemoClick, 'open')
-            : renderDemoLink(handleDemoClick, 'close')}
-        </StyledLinkContainer>
-      )
-    }
-  }
+  // const renderDemoLinks = () => {
+  //   if (project.title === 'MyDraft Partner') {
+  //     return (
+  //       <>
+  //         {!show ? (
+  //           <StyledLinkContainer open={show}>
+  //             {renderDemoLink(handleDemoClick, 'open')}
+  //             {renderDemoLink(handleDemoClick, 'open')}
+  //           </StyledLinkContainer>
+  //         ) : (
+  //           <StyledLinkContainer open={show}>
+  //             {renderDemoLink(handleDemoClick, 'close')}
+  //           </StyledLinkContainer>
+  //         )}
+  //       </>
+  //     )
+  //   } else {
+  //     return (
+  //       <StyledLinkContainer open={show}>
+  //         {!show
+  //           ? renderDemoLink(handleDemoClick, 'open')
+  //           : renderDemoLink(handleDemoClick, 'close')}
+  //       </StyledLinkContainer>
+  //     )
+  //   }
+  // }
 
-  const renderProjectdemo = () => {
-    const renderDemoContent = () => {
-      if (project.title === 'MyDraft Partner') {
-        const draftDemoGifs = [video || SOURCE, draftV2Demo]
-        return (
-          <StyledDraftDemoContainer>
-            {draftDemoGifs.map((gif, index) => {
-              return (
-                <DemoImg
-                  index={index}
-                  source={gif}
-                  project={project.title}
-                  activeIndex={showDraftDemo}
-                  activeHeight={
-                    index === showDraftDemo
-                      ? getActiveDimensions().height
-                      : undefined
-                  }
-                  activeWidth={
-                    index === showDraftDemo
-                      ? getActiveDimensions().width
-                      : undefined
-                  }
-                  onClick={() => handleDemoClick(index)}
-                  getWindowHeight={getWindowHeight}
-                  getWindowWidth={getWindowWidth}
-                  demo
-                  noMask
-                  hideDemo={showDraftDemo !== index && show}
-                />
-              )
-            })}
-          </StyledDraftDemoContainer>
-        )
-      }
-      return (
-        <DemoImg
-          index={!show ? 1 : 0}
-          source={video || SOURCE}
-          project={project.title}
-          activeIndex={0}
-          activeHeight={show ? getActiveDimensions().height : undefined}
-          activeWidth={
-            show && project.title === 'chata'
-              ? getActiveDimensions().width + 100
-              : !show
-              ? undefined
-              : getActiveDimensions().width
-          }
-          onClick={handleDemoClick}
-          getWindowHeight={getWindowHeight}
-          getWindowWidth={getWindowWidth}
-          demo
-          noMask
-        />
-      )
-    }
-    return (
-      <>
-        {renderDemoLinks()}
-        {renderDemoContent()}
-        {project.title === 'chata' ||
-        project.title === 'P!ZZA' ||
-        project.title === 'MyDraft Partner' ? (
-          <StyledLinkContainer open={show}>
-            {renderDemoLink(restartDemo, 'restart')}
-          </StyledLinkContainer>
-        ) : null}
-      </>
-    )
-  }
+  // const renderProjectdemo = () => {
+  //   const renderDemoContent = () => {
+  //     if (project.title === 'MyDraft Partner') {
+  //       const draftDemoGifs = [video || SOURCE, draftV2Demo]
+  //       return (
+  //         <StyledDraftDemoContainer>
+  //           {draftDemoGifs.map((gif, index) => {
+  //             return (
+  //               <DemoImg
+  //                 index={index}
+  //                 source={gif}
+  //                 project={project.title}
+  //                 activeIndex={showDraftDemo}
+  //                 activeHeight={
+  //                   index === showDraftDemo
+  //                     ? getActiveDimensions().height
+  //                     : undefined
+  //                 }
+  //                 activeWidth={
+  //                   index === showDraftDemo
+  //                     ? getActiveDimensions().width
+  //                     : undefined
+  //                 }
+  //                 onClick={() => handleDemoClick(index)}
+  //                 getWindowHeight={getWindowHeight}
+  //                 getWindowWidth={getWindowWidth}
+  //                 demo
+  //                 noMask
+  //                 hideDemo={showDraftDemo !== index && show}
+  //               />
+  //             )
+  //           })}
+  //         </StyledDraftDemoContainer>
+  //       )
+  //     }
+  //     return (
+  //       <DemoImg
+  //         index={!show ? 1 : 0}
+  //         source={video || SOURCE}
+  //         project={project.title}
+  //         activeIndex={0}
+  //         activeHeight={show ? getActiveDimensions().height : undefined}
+  //         activeWidth={
+  //           show && project.title === 'chata'
+  //             ? getActiveDimensions().width + 100
+  //             : !show
+  //             ? undefined
+  //             : getActiveDimensions().width
+  //         }
+  //         onClick={handleDemoClick}
+  //         getWindowHeight={getWindowHeight}
+  //         getWindowWidth={getWindowWidth}
+  //         demo
+  //         noMask
+  //       />
+  //     )
+  //   }
+  //   return (
+  //     <>
+  //       {renderDemoLinks()}
+  //       {renderDemoContent()}
+  //       {project.title === 'chata' ||
+  //       project.title === 'P!ZZA' ||
+  //       project.title === 'MyDraft Partner' ? (
+  //         <StyledLinkContainer open={show}>
+  //           {renderDemoLink(restartDemo, 'restart')}
+  //         </StyledLinkContainer>
+  //       ) : null}
+  //     </>
+  //   )
+  // }
 
   const getActiveDimensions = (): { height: number; width: number } => {
     const width = getWindowWidth()
@@ -375,6 +377,7 @@ const ProjectPage = (props: {
       if (width < 1000) return { height: 700, width: 450 }
       return { height: 900, width: 600 }
     }
+    if (width < 500) return { height: 230, width: width }
     if (width < 600) return { height: 300, width: 500 }
     if (width < 700) return { height: 300, width: 550 }
     if (width < 800) return { height: 350, width: 650 }
@@ -417,6 +420,7 @@ const ProjectPage = (props: {
           redesign={project.title === 'MyDraft Partner'}
           activeTab={activeTab}
           handleTabs={handleTabs}
+          responsive={responsive}
         />
         <div
           style={{
@@ -500,8 +504,11 @@ const ProjectPage = (props: {
     }
   }, [project])
 
+  const draftDemoGifs = [video || SOURCE, draftV2Demo]
+
   return (
     <>
+      {/** @TODO should this modal be rendered by default and hidden until opened? (display: none) */}
       {modalContent && (
         <ContentModal
           active={showModal}
@@ -512,9 +519,11 @@ const ProjectPage = (props: {
 
       <StyledPageContainer>
         <StyledPageHeader>
-          <StyledTitle>{project.title}</StyledTitle>
+          <StyledTitle responsive={responsive}>{project.title}</StyledTitle>
 
-          <StyledProjectType>{projectType}</StyledProjectType>
+          <StyledProjectType responsive={responsive}>
+            {projectType}
+          </StyledProjectType>
 
           {projectType === 'Personal Project'
             ? renderProjectSummary('personal')
@@ -553,9 +562,20 @@ const ProjectPage = (props: {
                 >
                   <StyledDemoTitle>Demo</StyledDemoTitle>
 
-                  {project.title === 'briangaudet.com'
-                    ? renderNoDemo()
-                    : renderProjectdemo()}
+                  {project.title === 'briangaudet.com' ? (
+                    <NoDemo />
+                  ) : (
+                    <ProjectDemo
+                      project={project}
+                      draftDemoGifs={draftDemoGifs}
+                      showDraftDemo={showDraftDemo}
+                      getActiveDimensions={getActiveDimensions}
+                      handleDemoClick={handleDemoClick}
+                      getWindowHeight={getWindowHeight}
+                      getWindowWidth={getWindowWidth}
+                      show={show}
+                    />
+                  )}
                 </StyledDemoContainer>
               </StyledDemoWrapper>
             </>

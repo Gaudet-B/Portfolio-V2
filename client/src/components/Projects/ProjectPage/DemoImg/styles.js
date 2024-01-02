@@ -10,8 +10,8 @@ const fadeIn = keyframes`
 `
 
 export const StyledDemoImg = styled.div`
-  height: 200px;
-  width: 200px;
+  height: ${(props) => (props.responsive ? '120px' : '200px')};
+  width: ${(props) => (props.responsive ? '120px' : '200px')};
   display: ${(props) => (props.hideDemo ? 'none' : 'flex')};
   flex-direction: column;
   justify-content: center;
@@ -24,8 +24,8 @@ export const StyledDemoImg = styled.div`
 
 export const StyledThumbnailContainer = styled.div`
   display: flex;
-  width: 150px;
-  height: 150px;
+  width: ${(props) => (props.responsive ? '100px' : '150px')};
+  height: ${(props) => (props.responsive ? '100px' : '150px')};
   transition: 0.5s ease-out;
   border: 0.5px solid ${styleGuide.colors.SpaceBlack};
   border-radius: 3px;

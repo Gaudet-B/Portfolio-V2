@@ -97,7 +97,8 @@ const ProjectsWrapper = (props: {
         projectsLength={data.length}
         images={props.images.projects[props.activeIndex]}
         heros={props.images.heros}
-        responsive={false}
+        // responsive={false}
+        responsive={props.getWindowWidth() < 800}
         card={getCard(props.activeIndex)}
         getWindowHeight={props.getWindowHeight}
         getWindowWidth={props.getWindowWidth}
@@ -113,9 +114,10 @@ const ProjectsWrapper = (props: {
 
   if (isLoading) {
     props.openContainer()
+    /** @TODO replace with styled component */
     return (
-      <div style={{ margin: '50px auto' }}>
-        <Loading size={'small'} />
+      <div style={{ margin: 'auto', height: '70vh' }}>
+        <Loading size={'large'} />
       </div>
     )
   }
@@ -128,6 +130,9 @@ const ProjectsWrapper = (props: {
       </div>
     )
   }
+
+  //
+  if (props.getWindowWidth() < 800) return renderPage()
 
   return renderActiveContent()
 }

@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react'
 
 import Navigation from '../Navigation'
 
-import styles from '../../styles/resume.style.module.css'
+import { StyledResumeContainer } from './styles'
+
+// import styles from '../../styles/resume.style.module.css'
 import navStyles from '../../styles/nav.style.module.css'
 
 import git from '../../assets/icons/GitHub.jpg'
 import linked from '../../assets/icons/LinkedIn.jpg'
 import email from '../../assets/icons/email-icon.png'
 import styleGuide from '../StyleGuide/StyleGuide'
+import { StyledBackground } from '../Projects/styles'
 
 const Resume = () => {
   // functions that track height and width of the window for responsive components
@@ -30,7 +33,7 @@ const Resume = () => {
   }
 
   useEffect(() => {
-    // add Bootstrap to document, remove when component unmounts (return statement - line 61)
+    // add Bootstrap to document, remove when component unmounts
     const link = document.createElement('link')
     link.href =
       'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css'
@@ -52,14 +55,9 @@ const Resume = () => {
   }, [])
 
   return (
-    <div className={styles.background}>
-      <div
-        className={`${styles.background} ${windowWidth > 900 ? 'px-5' : ''} ${
-          styles.mainContent
-        }`}
-      >
+    <StyledBackground>
+      <div className={`${windowWidth > 900 ? 'px-5' : ''}`}>
         <Navigation windowWidth={windowWidth} styles={navStyles} />
-
         <div
           className={`rounded text-light d-flex flex-column justify-content-center ${
             windowWidth > 500 ? 'm-5' : 'm-1'
@@ -70,8 +68,8 @@ const Resume = () => {
             margin: 'auto',
           }}
         >
-          <div
-            className={`border border-light rounded p-4 ${styles.resumeContainer}`}
+          <StyledResumeContainer
+            className={'border border-light rounded p-4'}
             style={{ backgroundColor: styleGuide.colors.GrayShadow }}
           >
             <div className="d-flex flex-row justify-content-between">
@@ -440,10 +438,10 @@ const Resume = () => {
                 download a printable copy of this resume
               </a>
             </div>
-          </div>
+          </StyledResumeContainer>
         </div>
       </div>
-    </div>
+    </StyledBackground>
   )
 }
 

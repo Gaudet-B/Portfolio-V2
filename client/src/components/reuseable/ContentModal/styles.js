@@ -14,7 +14,6 @@ export const StyledFullScreenMask = styled.div`
 export const StyledContent = styled.div`
   position: relative;
   z-index: 3;
-  width: 80%;
   height: 80%;
   margin: 5% 10%;
   display: flex;

@@ -13,17 +13,10 @@ const ContentModal = (props: {
 }) => {
   return (
     <StyledFullScreenMask active={props.active}>
-      {/* <StyledFullScreenMask active={props.active} onClick={props.handleClose}> */}
       <StyledContent>
-        {/* <div
-          style={{
-            width: 'fit-content',
-          }}
-        > */}
         <StyledCloseButton>
           <span onClick={props.handleClose}>x</span>
         </StyledCloseButton>
-        {/* </div> */}
         {props.content}
       </StyledContent>
     </StyledFullScreenMask>

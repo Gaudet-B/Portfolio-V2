@@ -1,50 +1,50 @@
 import anonymousProNormal from '../../assets/fonts/AnonymousPro-Regular.ttf'
 
-interface StyleGuide {
-  colors: {
-    [key: string]: string
-  }
-  fonts: {
-    [key: string]: {
-      [key: string]: string | number
-    }
-  }
+// interface StyleGuide {
+//   colors: {
+//     [key: string]: string
+//   }
+//   fonts: {
+//     [key: string]: {
+//       [key: string]: string | number
+//     }
+//   }
 
-  // COPILOT SUGGESTIONS
-  // fontSizes: {},
-  // fontWeights: {},
-  // lineHeights: {},
-  // letterSpacings: {},
-  // sizes: {},
-  // borders: {},
-  // radii: {},
-  // shadows: {},
-  // zIndices: {},
-  // breakpoints: {},
-  // space: {},
-  // transitions: {},
-  // buttons: {},
-  // text: {},
-  // links: {},
-  // forms: {},
-  // alerts: {},
-  // badges: {},
-  // cards: {},
-  // containers: {},
-  // images: {},
-  // lists: {},
-  // messages: {},
-  // navs: {},
-  // tables: {},
-  // tabs: {},
-  // styles: {},
-  // layout: {},
-  // variants: {},
-  // textStyles: {},
-  // buttons: {},
-}
+// COPILOT SUGGESTIONS
+// fontSizes: {},
+// fontWeights: {},
+// lineHeights: {},
+// letterSpacings: {},
+// sizes: {},
+// borders: {},
+// radii: {},
+// shadows: {},
+// zIndices: {},
+// breakpoints: {},
+// space: {},
+// transitions: {},
+// buttons: {},
+// text: {},
+// links: {},
+// forms: {},
+// alerts: {},
+// badges: {},
+// cards: {},
+// containers: {},
+// images: {},
+// lists: {},
+// messages: {},
+// navs: {},
+// tables: {},
+// tabs: {},
+// styles: {},
+// layout: {},
+// variants: {},
+// textStyles: {},
+// buttons: {},
+// }
 
-const styleGuide: StyleGuide = {
+const styleGuide = {
   colors: {
     BackgroundGray: '#f5f5f549', // 0.287 opacity rgba(245, 245, 245, 0.287)
     Black: '#000000', // -> standard black
