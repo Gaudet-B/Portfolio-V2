@@ -187,3 +187,9 @@ export const StyledButton = styled.button`
     color: whitesmoke;
   }
 `
+
+export const StyledTitle = styled.div`
+  font-size: 36pt;
+  margin: 0 0 32px 0;
+  text-shadow: 1px 1px 1px rgba(245, 245, 245, 0.3);
+`

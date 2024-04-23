@@ -13,9 +13,6 @@ import {
   StyledButton,
 } from './styles'
 
-// import styles from '../../styles/form.style.module.css'
-// import axios from 'axios'
-
 type Form = {
   name: string
   email: string
@@ -28,9 +25,6 @@ type FormErrors = {
 }
 
 const Form = (props: { windowWidth: number }) => {
-  // windowWidth passed down from parent
-  const { windowWidth } = props
-
   // initialize empty form
   const [formState, setFormState] = useState<Form>({
     name: '',
@@ -40,22 +34,6 @@ const Form = (props: { windowWidth: number }) => {
   })
   // input validation
   const [validState, setValidState] = useState<FormErrors | undefined>()
-
-  //
-  // const submitForm = () => {
-  //   fetch('http://localhost:8000/api/contact', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(formState),
-  //   }).then((res) => {
-  //     if (res.ok) {
-  //       return res.json()
-  //     }
-  //     throw new Error('Network response was not ok.')
-  //   })
-  // }
 
   const mutation = useMutation(
     (data: Form) => {
@@ -90,17 +68,6 @@ const Form = (props: { windowWidth: number }) => {
     }
   )
 
-  //
-  // const mutation = useMutation((data: Form) => {
-  //   return fetch('http://localhost:8000/api/contact', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(data),
-  //   })
-  // })
-
   // handler for form inputs
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormState({
@@ -117,16 +84,9 @@ const Form = (props: { windowWidth: number }) => {
 
   return (
     <div>
-      {/* <div style={(windowWidth > 800) ? { padding: "2em 0" } : { padding: "3em 0" }}> */}
       <StyledForm id={'contactForm'} onSubmit={handleSubmit}>
-        {/* <form
-        id="contactForm"
-        onSubmit={handleSubmit}
-        className={styles.mainForm}
-      > */}
         {/* NAME */}
         <StyledFormComponent>
-          {/* <div className={styles.formComponent}> */}
           <StyledLabel htmlFor="name">your name</StyledLabel>
           <StyledInput name="name" onChange={handleFormChange} type="text" />
         </StyledFormComponent>

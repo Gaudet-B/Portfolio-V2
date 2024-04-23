@@ -80,13 +80,13 @@ const ProjectPage = (props: {
   projectsLength: number
   images: string[] | [][]
   heros: { [key: string]: string }
-  responsive: boolean
+  mobile: boolean
   card: string
   getWindowHeight: () => number
   getWindowWidth: () => number
   handleNavigateProjects: (direction: number, length: number) => void
 }) => {
-  const { project, images, responsive, card, getWindowHeight, getWindowWidth } =
+  const { project, images, mobile, card, getWindowHeight, getWindowWidth } =
     props
 
   // show DemoGif
@@ -240,7 +240,7 @@ const ProjectPage = (props: {
       <ProjectDetails
         details={project.details}
         title={project.title}
-        responsive={responsive}
+        responsive={mobile}
         redesign={project.title === 'MyDraft Partner'}
       />
     )
@@ -420,7 +420,7 @@ const ProjectPage = (props: {
           redesign={project.title === 'MyDraft Partner'}
           activeTab={activeTab}
           handleTabs={handleTabs}
-          responsive={responsive}
+          responsive={mobile}
         />
         <div
           style={{
@@ -519,9 +519,9 @@ const ProjectPage = (props: {
 
       <StyledPageContainer>
         <StyledPageHeader>
-          <StyledTitle responsive={responsive}>{project.title}</StyledTitle>
+          <StyledTitle responsive={mobile}>{project.title}</StyledTitle>
 
-          <StyledProjectType responsive={responsive}>
+          <StyledProjectType responsive={mobile}>
             {projectType}
           </StyledProjectType>
 

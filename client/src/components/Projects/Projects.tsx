@@ -1,5 +1,6 @@
 /* GLOBAL */
 import { useState, useEffect } from 'react'
+import { debounce } from 'lodash'
 
 /* PROJECT */
 // import Loading from '../reuseable/Loading'
@@ -93,12 +94,12 @@ const Projects = () => {
   }
 
   // function to be added to the onResize event listener
-  const resizeWindow = () => {
+  const resizeWindow = debounce(() => {
     setWindowHeight(window.innerHeight)
     setWindowWidth(window.innerWidth)
     // console.log(windowHeight)
     // console.log(windowWidth)
-  }
+  }, 500)
 
   const openContainer = () => setContainerStatus('open')
 

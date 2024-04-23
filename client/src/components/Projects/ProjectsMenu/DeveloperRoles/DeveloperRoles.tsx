@@ -1,12 +1,15 @@
 import Button from '../../../reuseable/Button'
+import { DEVELOPER_ROLES } from '../ProjectsMenu'
 import { StyledRoleList } from './styles'
 
 const DeveloperRoles = (props: {
   projectType: string
-  developerRoles: string[]
-  developerRole: string
-  handleDeveloperRole: (filter: string) => void
-  setDeveloperRole: (type: string) => void
+  developerRoles: typeof DEVELOPER_ROLES
+  developerRole: (typeof DEVELOPER_ROLES)[number] | 'All'
+  handleDeveloperRole: (
+    filter: (typeof DEVELOPER_ROLES)[number] | 'All'
+  ) => void
+  setDeveloperRole: (type: (typeof DEVELOPER_ROLES)[number] | 'All') => void
   styles: CSSModuleClasses
 }) => {
   const {
@@ -20,7 +23,7 @@ const DeveloperRoles = (props: {
 
   return (
     <StyledRoleList className={styles.developerRoles}>
-      {developerRoles.map((filter: string, index: number) => {
+      {developerRoles.map((filter, index) => {
         return (
           <li
             id={`dev-role-${index}`}
