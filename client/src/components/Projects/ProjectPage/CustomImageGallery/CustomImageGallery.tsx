@@ -11,6 +11,15 @@ import {
 } from './styles'
 import styleGuide from '../../../StyleGuide/StyleGuide'
 
+// ================================= \\
+/**
+ * @TODO
+ * the image modal has problems:
+ *  1. the "left" and "right" buttons do not display as they are outside of the mobile view
+ *  2. the modal does not close when clicking outside of the modal
+ *  3. other things (mainly the rest of the thumbnails) on the page are not disabled when the modal is open
+ */
+
 /* CONSTANTS */
 const TABS = ['version 1.0 (2021)', 'version 2.0 (2022)']
 

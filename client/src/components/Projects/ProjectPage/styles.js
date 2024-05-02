@@ -42,6 +42,15 @@ export const StyledProjectType = styled.h2`
   color: rgba(0, 143, 17, 0.7);
 `
 
+export const StyledDetailsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+  transform: translateX(-30px);
+  padding: ${(props) => (props.responsive ? '12px' : '0')};
+`
+
 export const StyledSummaryContainer = styled.div`
   dsiplay: flex;
   justify-content: center;
@@ -202,7 +211,7 @@ export const StyledGalleryContainer = styled.div`
 
 export const StyledHeroContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: ${(props) => (props.responsive ? 'column' : 'row')};
   justify-content: center;
   align-items: center;
   gap: 24px;
@@ -218,13 +227,14 @@ export const StyledInfoContainer = styled.div`
   align-items: ${(props) => (props.redesign ? 'start' : 'center')};
   font-weight: ${(props) => (props.redesign ? 'bold' : undefined)};
   gap: 12px;
+  padding: ${(props) => (props.responsive ? '12px' : '0')};
 `
 // grid-template-rows: ${(props) => (props.redesign ? '1fr 2fr' : undefined)};
 // font-size: 18pt;
 // text-align: ${(props) => (props.redesign ? 'start' : 'center')};
 
 export const StyledHeroImage = styled.div`
-  width: 35%;
+  max-width: ${(props) => (props.responsive ? '50%' : '35%')};
 `
 
 export const StyledDraftDemoContainer = styled.div`

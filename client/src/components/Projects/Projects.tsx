@@ -3,10 +3,8 @@ import { useState, useEffect } from 'react'
 import { debounce } from 'lodash'
 
 /* PROJECT */
-// import Loading from '../reuseable/Loading'
 import Navigation from '../Navigation'
-// import ProjectPage from './ProjectPage'
-// import ProjectsMenu from './ProjectsMenu'
+import ProjectsWrapper from './ProjectsWrapper'
 
 /* SCRIPTS */
 import getImages from '../../scripts/images'
@@ -16,7 +14,6 @@ import { getSessionStorageOrDefault } from '../../scripts/basic'
 import background from '../../assets/3d-background.png'
 
 /* STYLES */
-import navStyles from '../../styles/nav.style.module.css'
 import {
   GlobalFonts,
   StyledBackground,
@@ -26,7 +23,6 @@ import {
 
 /* TYPES */
 import { Images } from '../Landing/Landing'
-import ProjectsWrapper from './ProjectsWrapper'
 export type Project = {
   title: string
   myRole: string
@@ -43,14 +39,6 @@ export type Project = {
 /* CONSTANTS */
 const IMAGES: Images = getImages()
 const ANIMATION_TIMING = 700
-
-// const Error = () => {
-//   return (
-//     <div style={{ margin: '50px 0', textAlign: 'center' }}>
-//       There was an error loading the projects.
-//     </div>
-//   )
-// }
 
 /**
  * @description - Main Projects component - renders the projects menu and displays the active project info
@@ -184,14 +172,8 @@ const Projects = () => {
       <GlobalFonts />
       <StyledProjectsContainer id="projectsContainer">
         <Navigation
-          // left="HOME"
-          // right="CONTACT"
           windowWidth={windowWidth || -1}
-          // menu={menu}
-          // setMenu={setMenu}
           handleRefresh={showMenu ? undefined : handleRefresh}
-          styles={navStyles}
-          // showMenu={showMenu}
         />
         <StyledMenuContainer
           id={'scrollable-container'}
@@ -202,8 +184,6 @@ const Projects = () => {
         >
           <ProjectsWrapper
             activeIndex={activeIndex}
-            // changeActiveIndex={changeActiveIndex}
-            // activeProject={activeProject && activeProject}
             images={IMAGES}
             handleProjectClick={handleProjectClick}
             openContainer={openContainer}
@@ -212,7 +192,6 @@ const Projects = () => {
             showMenu={showMenu}
             handleNavigateProjects={handleNavigateProjects}
           />
-          {/* {renderActiveContent()} */}
         </StyledMenuContainer>
       </StyledProjectsContainer>
     </StyledBackground>

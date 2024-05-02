@@ -13,11 +13,11 @@ export const NavFonts = createGlobalStyle`
 
 const expand = keyframes`
   from {height: 0px;}
-  to {height: 80px;}
+  to {height: 110px;}
 `
 
 const contract = keyframes`
-  from {height: 80px;}
+  from {height: 110px;}
   to {height: 0px;}
 `
 
@@ -47,6 +47,7 @@ export const StyledNavLink = styled.div`
 
 export const StyledSmallLink = styled.a`
   font-family: helvetica;
+  margin: 6px 0;
   text-shadow: 2px 2px 1px black;
   text-decoration: none;
   font-size: 1.4rem;
@@ -76,10 +77,11 @@ export const StyledNavMenu = styled.div`
   background-color: transparent;
   text-align: end;
   width: fit-content;
-  height: ${(props) => (props.show ? '80px' : '0px')};
+  height: ${(props) => (props.show ? '110px' : '0px')};
+  padding: ${(props) => (props.show ? '12px' : '0 12px')};
   overflow: scroll;
-  background-color: transparent;
-  transform: translate3d(-60px, 50px, 0);
+  background-color: rgb(26, 26, 26, 0.95);
+  transform: translate3d(-65px, 55px, 0);
   z-index: 5;
   scrollbar-width: 0px;
   &::-webkit-scrollbar {
@@ -212,4 +214,15 @@ export const StyledLinkWrapper = styled.div`
   }
 `
 
-export const StyledMobileMenu = styled.div``
+export const StyledMobileMenu = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 12px 0 0;
+`
+
+export const StyledHamburgerButton = styled.button`
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+`

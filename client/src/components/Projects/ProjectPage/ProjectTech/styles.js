@@ -15,17 +15,17 @@ export const StyledTechContainer = styled.h3`
 // max-width: 600px;
 
 export const StyledTechKey = styled.span`
-  padding: 12px 0;
+  padding: ${(props) => (props.responsive ? '12px' : '12px 0')};
   text-align: end;
-  font-size: 14pt;
+  font-size: 18px;
   font-weight: 500;
 `
 // text-decoration: underline;
 
 export const StyledTechValue = styled.span`
-  padding: 12px 0;
+  padding: ${(props) => (props.responsive ? '12px' : '12px 0')};
   text-align: start;
-  font-size: 14pt;
+  font-size: 18px;
   text-align: start;
 `
 // max-width: 60%;

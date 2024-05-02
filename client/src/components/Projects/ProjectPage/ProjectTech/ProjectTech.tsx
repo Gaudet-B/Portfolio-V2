@@ -2,7 +2,7 @@ import { StyledTechContainer, StyledTechKey, StyledTechValue } from './styles'
 
 const ProjectTech = (props: {
   tech: string
-  direction: string
+  mobile: boolean
   redesign?: boolean
 }) => {
   if (props.redesign) {
@@ -14,10 +14,18 @@ const ProjectTech = (props: {
       return (
         <>
           {/* <StyledTechContainer direction={props.direction}> */}
-          <StyledTechKey>Technologies Used:</StyledTechKey>
-          <StyledTechValue>{firstTech}</StyledTechValue>
-          <StyledTechKey>Frontend Redesign:</StyledTechKey>
-          <StyledTechValue>{secondTech}</StyledTechValue>
+          <StyledTechKey responsive={props.mobile}>
+            Technologies Used:
+          </StyledTechKey>
+          <StyledTechValue responsive={props.mobile}>
+            {firstTech}
+          </StyledTechValue>
+          <StyledTechKey responsive={props.mobile}>
+            Frontend Redesign:
+          </StyledTechKey>
+          <StyledTechValue responsive={props.mobile}>
+            {secondTech}
+          </StyledTechValue>
           {/* </StyledTechContainer> */}
         </>
       )
@@ -35,8 +43,10 @@ const ProjectTech = (props: {
   }
   return (
     <>
-      <StyledTechKey>Technologies Used:</StyledTechKey>
-      <StyledTechValue>{props.tech}</StyledTechValue>
+      <StyledTechKey responsive={props.mobile}>
+        Technologies Used:
+      </StyledTechKey>
+      <StyledTechValue responsive={props.mobile}>{props.tech}</StyledTechValue>
     </>
   )
 }

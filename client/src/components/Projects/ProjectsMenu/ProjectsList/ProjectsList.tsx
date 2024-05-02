@@ -1,6 +1,6 @@
 import { Project } from '../../Projects'
 import ProjectCard from '../ProjectCard'
-import { StyledProjectsList, StyledListItem } from './styles'
+import { StyledProjectsList, StyledListItem, StyledListTitle } from './styles'
 
 const _splitProjects = (projects: Array<Project>) => {
   const personal = projects.filter(
@@ -54,7 +54,6 @@ const ProjectsList = (props: {
         projects.map((project, index) => {
           if (checkProjectTags(project)) {
             return (
-              /** @TODO remove `styles` and replace with a StyledComponent */
               <StyledListItem key={`project-card-${index}`}>
                 <ProjectCard
                   handleProjectClick={handleProjectClick}
@@ -71,6 +70,8 @@ const ProjectsList = (props: {
   )
 }
 
+export default ProjectsList
+
 export const MobileProjectsList = (props: {
   projects: Array<Project>
   handleProjectClick: (index: number) => void
@@ -82,7 +83,7 @@ export const MobileProjectsList = (props: {
   const { personal, professional } = _splitProjects(projects)
   return (
     <StyledProjectsList>
-      <p>Professional Experience:</p>
+      <StyledListTitle>Professional Experience:</StyledListTitle>
       {professional.map((project, index) => (
         <StyledListItem key={`project-card-${index}`}>
           <ProjectCard
@@ -94,7 +95,7 @@ export const MobileProjectsList = (props: {
           />
         </StyledListItem>
       ))}
-      <p>Personal Projects:</p>
+      <StyledListTitle>Personal Projects:</StyledListTitle>
       {personal.map((project, index) => (
         <StyledListItem key={`project-card-${index}`}>
           <ProjectCard
@@ -109,5 +110,3 @@ export const MobileProjectsList = (props: {
     </StyledProjectsList>
   )
 }
-
-export default ProjectsList

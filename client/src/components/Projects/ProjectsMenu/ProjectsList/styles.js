@@ -9,9 +9,14 @@ export const StyledListItem = styled.div`
 
 export const StyledProjectsList = styled.ul`
   margin: 0;
-  padding: 0;
+  padding: 24px 0 0 0;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   list-style: none;
+`
+
+export const StyledListTitle = styled.h3`
+  margin: 36px 0 24px 0;
+  font-size: 24px;
 `

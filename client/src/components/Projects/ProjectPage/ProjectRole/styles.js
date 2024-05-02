@@ -18,8 +18,8 @@ export const StyledRoleContainer = styled.h3`
 export const StyledRoleKey = styled.span`
   padding: 12px 0;
   text-align: end;
-  font-size: 14pt;
-  white-space: nowrap;
+  font-size: 18px;
+  white-space: ${(props) => (props.responsive ? undefined : 'nowrap')};
   font-weight: 500;
 `
 // text-decoration: underline;
@@ -29,6 +29,6 @@ export const StyledRoleKey = styled.span`
 export const StyledRoleValue = styled.span`
   padding: 12px 0;
   text-align: start;
-  font-size: 14pt;
+  font-size: 18px;
 `
 // width: fit-content;

@@ -7,7 +7,7 @@ import Link from '../reuseable/Link'
 /* STYLES */
 import {
   NavFonts,
-  StyledNavLink,
+  // StyledNavLink,
   StyledSmallLink,
   StyledNavMenu,
   StyledNavWrapper,
@@ -17,6 +17,8 @@ import {
   StyledNavLinksLarge,
   StyledLinkWrapper,
   StyledMobileMenu,
+  StyledHamburgerButton,
+  // StyledMobileMenu,
 } from './styles'
 
 /* SCRIPTS */
@@ -36,13 +38,10 @@ const { logo, burger } = IMAGES.icons
  */
 const Navigation = (props: {
   windowWidth: number
-  styles: any
-  // styles?: {}
-  // showMenu?: boolean
   handleRefresh?: () => void
 }) => {
-  /** @NOTE REMOVE coordZ ??? */
   // state variables
+  /** @NOTE REMOVE coordZ ??? */
   const [page, setPage] = useState<string>('')
   const [coordX, setCoordX] = useState('10rem')
   const [coordY, setCoordY] = useState('0rem')
@@ -54,29 +53,29 @@ const Navigation = (props: {
     e.preventDefault()
     console.log('click!')
     if (!show) {
-      let linkP = document.getElementById('link-projects')
-      if (linkP) {
-        linkP.innerHTML = 'PROJECTS'
-        linkP.style.margin = '.2rem 0'
-      }
+      // let linkP = document.getElementById('link-projects')
+      // if (linkP) {
+      //   linkP.innerHTML = 'PROJECTS'
+      //   linkP.style.margin = '.2rem 0'
+      // }
 
-      let linkR = document.getElementById('link-resume')
-      if (linkR) {
-        linkR.innerHTML = 'RESUME'
-        linkR.style.margin = '.2rem 0'
-      }
+      // let linkR = document.getElementById('link-resume')
+      // if (linkR) {
+      //   linkR.innerHTML = 'RESUME'
+      //   linkR.style.margin = '.2rem 0'
+      // }
 
-      let linkC = document.getElementById('link-contact')
-      if (linkC) {
-        linkC.innerHTML = 'CONTACT'
-        linkC.style.margin = '.2rem 0'
-      }
+      // let linkC = document.getElementById('link-contact')
+      // if (linkC) {
+      //   linkC.innerHTML = 'CONTACT'
+      //   linkC.style.margin = '.2rem 0'
+      // }
 
-      let linkM = document.getElementById('navMenu')
-      if (linkM) {
-        linkM.style.padding = '1.2rem .6rem'
-        linkM.style.backgroundColor = 'rgb(26, 26, 26, .95)'
-      }
+      // let linkM = document.getElementById('navMenu')
+      // if (linkM) {
+      //   linkM.style.padding = '10px'
+      //   linkM.style.backgroundColor = 'rgb(26, 26, 26, .95)'
+      // }
 
       setCoordX('0rem')
       setCoordY('0rem')
@@ -93,30 +92,26 @@ const Navigation = (props: {
       setScale('1.0')
       setShow(false)
       setTimeout(() => {
-        let linkM = document.getElementById('navMenu')
-        if (linkM) {
-          linkM.style.padding = '0'
-          linkM.style.backgroundColor = 'transparent'
-        }
-
-        let linkP = document.getElementById('link-projects')
-        if (linkP) {
-          linkP.innerHTML = ''
-          linkP.style.margin = '0'
-        }
-
-        let linkR = document.getElementById('link-resume')
-        if (linkR) {
-          linkR.innerHTML = ''
-          linkR.style.margin = '0'
-        }
-
-        let linkC = document.getElementById('link-contact')
-        if (linkC) {
-          linkC.innerHTML = ''
-          linkC.style.margin = '0'
-        }
-
+        // let linkM = document.getElementById('navMenu')
+        // if (linkM) {
+        //   linkM.style.padding = '0'
+        //   linkM.style.backgroundColor = 'transparent'
+        // }
+        // let linkP = document.getElementById('link-projects')
+        // if (linkP) {
+        //   linkP.innerHTML = ''
+        //   linkP.style.margin = '0'
+        // }
+        // let linkR = document.getElementById('link-resume')
+        // if (linkR) {
+        //   linkR.innerHTML = ''
+        //   linkR.style.margin = '0'
+        // }
+        // let linkC = document.getElementById('link-contact')
+        // if (linkC) {
+        //   linkC.innerHTML = ''
+        //   linkC.style.margin = '0'
+        // }
         // setShow(false)
       }, 200)
     }
@@ -148,23 +143,53 @@ const Navigation = (props: {
 
   const renderMobileNav = () => {
     return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          margin: '.5rem 10px 0 0',
-        }}
-      >
-        <a onClick={handleClick}>
+      <StyledMobileMenu>
+        <StyledHamburgerButton onClick={handleClick}>
           {' '}
           <img
             src={burger}
             style={{ transform: 'scale(0.8)' }}
             alt="hamburger menu"
           />{' '}
-        </a>
-        {renderMobileMenu()}
-      </div>
+        </StyledHamburgerButton>
+        <StyledNavMenu
+          id="navMenu"
+          show={show}
+          // can probably remove 'coordZ' here
+          transform={show ? `` : ``}
+          data-open={show}
+          // transform={
+          //   show
+          //     ? `perspective(50px) translate3d(${coordX}, ${coordY}, 0) scale(${scale})`
+          //     : `translateY(2rem)`
+          // }
+        >
+          <StyledSmallLink
+            id={'link-projects'}
+            href="/projects"
+            show={show}
+            data-active={page === 'projects'}
+          >
+            PROJECTS
+          </StyledSmallLink>
+          <StyledSmallLink
+            id={'link-resume'}
+            href="/resume"
+            show={show}
+            data-active={page === 'resume'}
+          >
+            RESUME
+          </StyledSmallLink>
+          <StyledSmallLink
+            id={'link-contact'}
+            href="/contact"
+            show={show}
+            data-active={page === 'contact'}
+          >
+            CONTACT
+          </StyledSmallLink>
+        </StyledNavMenu>
+      </StyledMobileMenu>
     )
   }
 
@@ -181,42 +206,6 @@ const Navigation = (props: {
           <Link to={'/contact'}>CONTACT</Link>
         </StyledLinkWrapper>
       </StyledNavLinksLarge>
-    )
-  }
-
-  const renderMobileMenu = () => {
-    return (
-      <StyledNavMenu
-        id="navMenu"
-        show={show}
-        // can probably remove 'coordZ' here
-        transform={show ? `` : ``}
-        data-open={show}
-        // transform={
-        //   show
-        //     ? `perspective(50px) translate3d(${coordX}, ${coordY}, 0) scale(${scale})`
-        //     : `translateY(2rem)`
-        // }
-      >
-        <StyledSmallLink
-          id={'link-projects'}
-          href="/projects"
-          show={show}
-          data-active={page === 'projects'}
-        ></StyledSmallLink>
-        <StyledSmallLink
-          id={'link-resume'}
-          href="/resume"
-          show={show}
-          data-active={page === 'resume'}
-        ></StyledSmallLink>
-        <StyledSmallLink
-          id={'link-contact'}
-          href="/contact"
-          show={show}
-          data-active={page === 'contact'}
-        ></StyledSmallLink>
-      </StyledNavMenu>
     )
   }
 
@@ -238,7 +227,6 @@ const Navigation = (props: {
           </StyledLogoContainer>
           {props.windowWidth < 800 ? renderMobileNav() : renderDesktopNav()}
         </StyledMainNav>
-        {/* {renderMobileMenu()} */}
       </StyledNavWrapper>
     </>
   )

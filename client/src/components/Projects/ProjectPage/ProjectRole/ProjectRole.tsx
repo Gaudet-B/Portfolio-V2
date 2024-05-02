@@ -2,15 +2,15 @@ import { StyledRoleContainer, StyledRoleKey, StyledRoleValue } from './styles'
 
 const ProjectRole = (props: {
   role: string
-  direction: string
+  mobile: boolean
   professional?: boolean
 }) => {
   return (
     <>
-      <StyledRoleKey>
-        {props.professional ? 'Role / Position:' : 'My Role(s):'}
+      <StyledRoleKey responsive={props.mobile}>
+        {props.professional ? 'My Role:' : 'My Role(s):'}
       </StyledRoleKey>
-      <StyledRoleValue>{props.role}</StyledRoleValue>
+      <StyledRoleValue responsive={props.mobile}>{props.role}</StyledRoleValue>
     </>
   )
 }

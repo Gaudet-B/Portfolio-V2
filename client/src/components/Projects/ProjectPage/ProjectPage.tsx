@@ -61,6 +61,7 @@ import {
   StyledHeroImage,
   StyledDraftDemoContainer,
   StyledProjectLink,
+  StyledDetailsGrid,
 } from './styles'
 
 /* TYPES */
@@ -422,34 +423,22 @@ const ProjectPage = (props: {
           handleTabs={handleTabs}
           responsive={mobile}
         />
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '24px',
-            marginTop: '24px',
-            transform: 'translateX(-30px)',
-          }}
-        >
-          <ProjectRole
-            role={project.myRole}
-            direction={'row'}
-            // redesign={project.title === 'MyDraft Partner'}
-          />
+        <StyledDetailsGrid responsive={mobile}>
+          <ProjectRole role={project.myRole} mobile={mobile} />
           <ProjectTech
             tech={project.technologies}
-            direction={'row'}
+            mobile={mobile}
             redesign={project.title === 'MyDraft Partner'}
           />
-        </div>
+        </StyledDetailsGrid>
       </StyledGalleryContainer>
     )
   }
 
   const renderHeroImage = () => {
     return (
-      <StyledHeroContainer>
-        <StyledHeroImage>
+      <StyledHeroContainer responsive={mobile}>
+        <StyledHeroImage responsive={mobile}>
           <DemoImg
             index={-1}
             source={getHeroImage(project.title)}
@@ -462,10 +451,10 @@ const ProjectPage = (props: {
             hideScrollbar
           />
         </StyledHeroImage>
-        <StyledInfoContainer redesign>
-          <ProjectRole role={project.myRole} direction={'row'} professional />
-          <ProjectTech tech={project.technologies} direction={'row'} />
-          {project.externalLink ? (
+        <StyledInfoContainer redesign responsive={mobile}>
+          <ProjectRole role={project.myRole} mobile={mobile} professional />
+          <ProjectTech tech={project.technologies} mobile={mobile} />
+          {project.externalLink && !mobile ? (
             <>
               <div></div>
               <StyledProjectLink>
@@ -476,6 +465,13 @@ const ProjectPage = (props: {
             </>
           ) : null}
         </StyledInfoContainer>
+        {project.externalLink && mobile ? (
+          <StyledProjectLink>
+            <a href={project.externalLink} target={'_blank'}>
+              {project.externalLink}
+            </a>
+          </StyledProjectLink>
+        ) : null}
       </StyledHeroContainer>
     )
   }
@@ -591,16 +587,18 @@ const ProjectPage = (props: {
               <ChevronButton
                 direction={'left'}
                 noMargin
-                customHeight={62}
-                customWidth={45}
+                customHeight={mobile ? 40 : 62}
+                customWidth={mobile ? 24 : 45}
                 reverseHover
               />
               <StyledButtonText>
                 <span>previous</span>
                 <span>project</span>
-                <StyledButtonProjectText>
-                  {`{ ${props.prevProject} }`}
-                </StyledButtonProjectText>
+                {mobile ? null : (
+                  <StyledButtonProjectText>
+                    {`{ ${props.prevProject} }`}
+                  </StyledButtonProjectText>
+                )}
               </StyledButtonText>
             </StyledControlButton>
             <StyledControlButton
@@ -613,15 +611,17 @@ const ProjectPage = (props: {
               <StyledButtonText>
                 <span>next</span>
                 <span>project</span>
-                <StyledButtonProjectText>
-                  {`{ ${props.nextProject} }`}
-                </StyledButtonProjectText>
+                {mobile ? null : (
+                  <StyledButtonProjectText>
+                    {`{ ${props.nextProject} }`}
+                  </StyledButtonProjectText>
+                )}
               </StyledButtonText>
               <ChevronButton
                 direction={'right'}
                 noMargin
-                customHeight={62}
-                customWidth={45}
+                customHeight={mobile ? 40 : 62}
+                customWidth={mobile ? 24 : 45}
                 reverseHover
               />
             </StyledControlButton>
