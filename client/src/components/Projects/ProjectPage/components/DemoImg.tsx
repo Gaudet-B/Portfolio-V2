@@ -9,7 +9,7 @@ import {
   StyledImageControls,
   StyledLinkContainer,
 } from './styles'
-import { DemoLink } from '../ProjectDemo'
+import { DemoLink } from './ProjectDemo'
 
 export type ImgDimensionType = {
   mobile: {
@@ -33,7 +33,7 @@ export const DemoImg = ({
   containerDimensions,
   getWindowWidth,
   onClick,
-  demo,
+  // demo,
   noMask,
   handleImageBrowse,
   hideScrollbar,
@@ -54,7 +54,7 @@ export const DemoImg = ({
   containerDimensions?: ImgDimensionType
   getWindowWidth?: () => number
   onClick?: (i: number) => void
-  demo?: boolean
+  // demo?: boolean
   noMask?: boolean
   handleImageBrowse?: (index: number, direction: 'left' | 'right') => void
   hideScrollbar?: boolean

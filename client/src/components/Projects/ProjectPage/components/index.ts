@@ -1,5 +1,6 @@
 export * from './ChevronButton'
 export * from './DemoBanner'
+export * from './DemoImg'
 export * from './ExternalLink'
 export * from './GithubLink'
 export * from './HeroImage'

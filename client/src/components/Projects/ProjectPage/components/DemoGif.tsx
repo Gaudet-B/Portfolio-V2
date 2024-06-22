@@ -4,7 +4,7 @@ import styles from '../../../../styles/carousel.style.module.css'
  * @description - DemoGif component
  * @WARNING - this component is not currently in use
  */
-const DemoGif = (props: any) => {
+export const DemoGif = (props: any) => {
   const { card, width, source, closeDemo, restartDemo } = props
 
   return (
@@ -34,5 +34,3 @@ const DemoGif = (props: any) => {
     </div>
   )
 }
-
-export default DemoGif

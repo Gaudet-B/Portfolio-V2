@@ -55,7 +55,6 @@ export const ProjectDemoSection = ({
               getActiveDimensions={getActiveDimensions}
               handleDraftDemoClick={handleDraftDemoClick}
               restartDemo={restartDemo}
-              getWindowHeight={getWindowHeight}
               getWindowWidth={getWindowWidth}
               show={show}
               totalTime={getTotalTime(project.title)}

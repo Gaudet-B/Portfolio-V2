@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import DemoImg from '../DemoImg'
+import { DemoImg } from './DemoImg'
 import {
   StyledGalleryContainer,
   StyledGalleryHeader,
@@ -246,7 +246,6 @@ export const CustomImageGallery = (props: {
                 activeIndex={activeIndex}
                 onClick={handleClick}
                 handleImageBrowse={props.handleImageBrowse}
-                getWindowHeight={getWindowHeight}
                 getWindowWidth={getWindowWidth}
                 imgDimensions={imgDimensions}
                 containerDimensions={containerDimensions}

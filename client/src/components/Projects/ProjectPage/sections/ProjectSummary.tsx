@@ -1,4 +1,4 @@
-import { ProjectCaseStudy } from '../ProjectCaseStudy'
+import { ProjectCaseStudy } from './ProjectCaseStudy'
 import { Project } from '../../Projects'
 import {
   StyledProfessionalContainer,

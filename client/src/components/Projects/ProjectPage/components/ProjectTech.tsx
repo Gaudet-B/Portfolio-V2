@@ -1,4 +1,4 @@
-import { StyledTechContainer, StyledTechKey, StyledTechValue } from './styles'
+import { StyledTechKey, StyledTechValue } from './styles'
 
 export const ProjectTech = (props: {
   tech: string

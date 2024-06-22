@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { debounce } from 'lodash'
 import { ProjectPageBody, ProjectPageHeader } from './sections'
+import { DemoImg } from './components'
 import ContentModal from '../../reuseable/ContentModal'
-import DemoImg from './DemoImg'
 import { Project } from '../Projects'
 import { StyledPageContainer } from './styles'
 /* ASSETS */

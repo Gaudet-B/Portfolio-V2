@@ -1,17 +1,17 @@
 import { useCallback } from 'react'
-import DemoImg from '../../DemoImg'
+import { Bookend } from './Bookend'
 import { CaseStudyProps } from '../ProjectCaseStudy'
+import { DemoImg } from '../../../components'
 import {
   StyledCaseStudyContentContainer,
   StyledCaseStudyRow,
   StyledCaseStudyText,
   StyledCaseStudyTextContainer,
 } from '../styles'
-import viasat1 from '../../../../../assets/estimatica/before_01.PNG'
-import viasat2 from '../../../../../assets/estimatica/after_02.PNG'
-import { Bookend } from './Bookend'
+import mettel1 from '../../../../../../assets/estimatica/before_01.PNG'
+import mettel2 from '../../../../../../assets/estimatica/after_02.PNG'
 
-export const Viasat = ({
+export const MetTel = ({
   project,
   getWindowWidth,
   cancelScroll,
@@ -37,18 +37,16 @@ export const Viasat = ({
         ref={containerRef}
         onMouseOver={(e: React.MouseEvent) => scroll(e, 'cancel')}
         onMouseOut={(e: React.MouseEvent) => scroll(e, 'start')}
-        orientation={'left'}
-        mobile={getWindowWidth() < 800}
+        $mobile={getWindowWidth() < 800}
       >
         <Bookend />
         <StyledCaseStudyContentContainer>
           <DemoImg
-            source={viasat1}
+            source={mettel1}
             index={-1}
             project={project.title}
             activeIndex={-1}
             activeHeight={activeHeight}
-            getWindowHeight={() => 5000}
             getWindowWidth={getWindowWidth}
             activeWidth={activeWidth}
             hideScrollbar
@@ -57,41 +55,44 @@ export const Viasat = ({
           />
           <StyledCaseStudyTextContainer>
             <StyledCaseStudyText>
-              Viasat Inc. is a global communications company that believes
-              everyone and everything in the world can be connected. For more
-              than 30 years, Viasat has helped shape how consumers, businesses,
-              governments and militaries around the world communicate. Today,
-              the Company is developing the ultimate global communications
-              network to power high-quality, secure, affordable, fast
-              connections to impact people's lives anywhere they are—on the
-              ground, in the air or at sea.
+              MetTel is a leading provider of integrated digital communications
+              solutions for enterprise customers. By converging all
+              communications over a proprietary network, MetTel enables
+              enterprise companies to easily deploy and manage technology-driven
+              voice, data, wireless and cloud solutions nationwide.
             </StyledCaseStudyText>
           </StyledCaseStudyTextContainer>
         </StyledCaseStudyContentContainer>
         <StyledCaseStudyContentContainer>
           <StyledCaseStudyTextContainer>
             <StyledCaseStudyText>
-              Viasat, with its corporate headquarters in Carlsbad, California,
-              offers a diverse portfolio of high-quality, secure, affordable
-              broadband solutions and services with global reach that are
-              delivered through satellite and other wireless networks. Viasat is
-              a leader in high-speed satellite broadband services and secure
-              networking systems covering military and commercial markets.
+              MetTel’s comprehensive portfolio of customer solutions boosts
+              enterprise productivity, reduces costs and simplifies operations.
+              Combining customized and managed communication solutions with a
+              powerful platform of cloud-based software, the company’s MetTel
+              Portal® enables customers to manage their inventory, usage, spend
+              and repairs from one simple, user friendly interface.
             </StyledCaseStudyText>
           </StyledCaseStudyTextContainer>
           <DemoImg
-            source={viasat2}
+            source={mettel2}
             index={-1}
             project={project.title}
             activeIndex={-1}
             activeHeight={activeHeight}
-            getWindowHeight={() => 5000}
             getWindowWidth={getWindowWidth}
             activeWidth={activeWidth}
             hideScrollbar
             noMask
             hideLink
           />
+        </StyledCaseStudyContentContainer>
+        <StyledCaseStudyContentContainer>
+          <StyledCaseStudyTextContainer>
+            <StyledCaseStudyText>
+              MetTel is a PCI DSS V3.0 Level 1 compliant solution provider.
+            </StyledCaseStudyText>
+          </StyledCaseStudyTextContainer>
         </StyledCaseStudyContentContainer>
         <Bookend />
       </StyledCaseStudyRow>

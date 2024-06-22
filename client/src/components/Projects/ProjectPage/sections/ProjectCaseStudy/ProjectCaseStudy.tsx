@@ -5,10 +5,9 @@ import {
   useEffect,
   useMemo,
   useRef,
-  // useState,
 } from 'react'
 import _ from 'lodash'
-import { Project } from '../../Projects'
+import { Project } from '../../../Projects'
 import {
   StyledCaseStudyContainer,
   StyledCaseStudyGrid,

@@ -1,5 +1,5 @@
 import { Project } from '../../Projects'
-import DemoImg from '../DemoImg'
+import { DemoImg } from './DemoImg'
 import {
   StyledDraftDemoContainer,
   StyledInstruction,
@@ -56,7 +56,6 @@ export const ProjectDemo = ({
   getActiveDimensions,
   handleDraftDemoClick,
   restartDemo,
-  getWindowHeight,
   getWindowWidth,
   show,
   totalTime = 0,
@@ -69,7 +68,6 @@ export const ProjectDemo = ({
   getActiveDimensions: () => { height: number; width: number }
   handleDraftDemoClick: (index: number) => void
   restartDemo: () => void
-  getWindowHeight: () => number
   getWindowWidth: () => number
   show: boolean
   totalTime?: number
@@ -123,9 +121,8 @@ export const ProjectDemo = ({
                           : undefined
                       }
                       onClick={() => handleDraftDemoClick(index)}
-                      getWindowHeight={getWindowHeight}
                       getWindowWidth={getWindowWidth}
-                      demo
+                      // demo
                       noMask
                       hideDemo={showDraftDemo >= 0 && showDraftDemo !== index}
                       hideLink={index === 0}
@@ -157,9 +154,8 @@ export const ProjectDemo = ({
                 : getActiveDimensions().width
             }
             onClick={() => handleDemoClick()}
-            getWindowHeight={getWindowHeight}
             getWindowWidth={getWindowWidth}
-            demo
+            // demo
             noMask
             totalTime={totalTime}
             restartLink={project.title === 'chata' || project.title === 'P!ZZA'}

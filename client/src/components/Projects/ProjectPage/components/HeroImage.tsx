@@ -1,5 +1,5 @@
 import { Project } from '../../Projects'
-import DemoImg from '../DemoImg'
+import { DemoImg } from './DemoImg'
 import { StyledHeroImage } from '../styles'
 
 export const HeroImage = ({
@@ -26,7 +26,6 @@ export const HeroImage = ({
         activeIndex={-1}
         activeHeight={getActiveDimensions().height / 3}
         activeWidth={getActiveDimensions().width / 3}
-        getWindowHeight={getWindowHeight}
         getWindowWidth={getWindowWidth}
         hideScrollbar
         noMask

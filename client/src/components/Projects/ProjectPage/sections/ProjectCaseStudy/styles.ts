@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import styleGuide from '../../../StyleGuide/StyleGuide'
+import styleGuide from '../../../../StyleGuide/StyleGuide'
 
 const CONTENT_WIDTH = 400
 // const CONTENT_HEIGHT = 500
@@ -71,14 +71,17 @@ export const StyledScrollableContainer = styled.div`
   }
 `
 
-export const StyledCaseStudyRow = styled.div`
+export const StyledCaseStudyRow = styled.div<{
+  $mobile: boolean
+  $reverse?: boolean
+}>`
   scroll-snap-type: x mandatory;
   padding: 20px 0;
   display: flex;
   gap: 80px;
-  flex-direction: ${({ mobile, reverse }) => {
-    if (reverse) return 'column-reverse'
-    if (mobile) return 'column'
+  flex-direction: ${({ $mobile, $reverse }) => {
+    if ($reverse) return 'column-reverse'
+    if ($mobile) return 'column'
     return 'row'
   }};
   align-items: center;
