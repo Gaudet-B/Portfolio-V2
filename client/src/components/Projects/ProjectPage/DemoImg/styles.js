@@ -3,6 +3,16 @@ import styleGuide from '../../../StyleGuide/StyleGuide'
 
 const ANIMATION_DELAY = 0.3
 
+const getHoverHeight = (props) => {
+  console.log('hoverHeight', props.hoverHeight)
+  return props.portrait ? props.hoverHeight : undefined
+}
+
+const getHoverWidth = (props) => {
+  console.log('hoverWidth', props.hoverWidth)
+  return props.portrait ? undefined : props.hoverWidth
+}
+
 const fadeIn = keyframes`
     0% { opacity: 0; }
     90% { opacity: 0; }
@@ -10,8 +20,8 @@ const fadeIn = keyframes`
 `
 
 export const StyledDemoImg = styled.div`
-  height: ${(props) => (props.responsive ? '120px' : '200px')};
-  width: ${(props) => (props.responsive ? '120px' : '200px')};
+  height: ${(props) => props.$height};
+  width: ${(props) => props.$width};
   display: ${(props) => (props.hideDemo ? 'none' : 'flex')};
   flex-direction: column;
   justify-content: center;
@@ -23,12 +33,12 @@ export const StyledDemoImg = styled.div`
 `
 
 export const StyledThumbnailContainer = styled.div`
-  display: flex;
-  width: ${(props) => (props.responsive ? '100px' : '150px')};
-  height: ${(props) => (props.responsive ? '100px' : '150px')};
+  width: ${(props) => props.$width};
+  height: ${(props) => props.$height};
   transition: 0.5s ease-out;
   border: 0.5px solid ${styleGuide.colors.SpaceBlack};
   border-radius: 3px;
+  overflow: hidden;
   &[data-active='true'] {
     height: ${(props) => props.activeHeight}px;
     width: ${(props) => props.activeWidth}px;
@@ -76,9 +86,9 @@ export const StyledThumbnailContainer = styled.div`
         ? `${ANIMATION_DELAY}s ease-in ${ANIMATION_DELAY}s`
         : undefined};
     height: ${(props) =>
-      !props.activeHeight ? (props.portrait ? '200px' : undefined) : undefined};
+      !props.activeHeight ? getHoverHeight(props) : undefined};
     width: ${(props) =>
-      !props.activeHeight ? (props.portrait ? undefined : '200px') : undefined};
+      !props.activeHeight ? getHoverWidth(props) : undefined};
   }
 `
 
@@ -121,14 +131,14 @@ export const StyledImage = styled.div`
 
 export const StyledMask = styled.div`
   opacity: 1;
-  height: inherit;
-  width: inherit;
+  height: 100%;
+  width: 100%;
   background-color: rgb(26, 26, 26, 0.6);
-  background-size: cover;
+  background-size: ${(props) => (props.cropped ? 'contain' : 'cover')};
   background-position: center;
   &:hover {
     transition: ${ANIMATION_DELAY}s ease-in;
-    opacity: 0;
+    opacity: ${(props) => (props.showRestartLink ? '1' : '0')};
   }
   &[data-active='true'] {
     opacity: 0;
@@ -161,5 +171,23 @@ export const StyledImageControls = styled.div`
     position: absolute;
     animation: ${fadeIn} ${ANIMATION_DELAY}s ease-in;
     opacity: 1;
+  }
+`
+
+export const StyledLinkContainer = styled.div`
+  width: inherit;
+  text-align: center;
+  display: ${(props) => (props.hideLink ? 'none' : 'flex')};
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  opacity: 0;
+  &[data-active='true'] {
+    position: relative;
+    bottom: 54%;
+    opacity: 1;
+  }
+  & span {
+    font-size: ${styleGuide.fonts.sizes.large};
   }
 `

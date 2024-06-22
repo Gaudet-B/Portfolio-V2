@@ -1,4 +1,3 @@
-/* LOCAL */
 import { useState } from 'react'
 import DemoImg from '../DemoImg'
 import {
@@ -22,6 +21,67 @@ import styleGuide from '../../../StyleGuide/StyleGuide'
 
 /* CONSTANTS */
 const TABS = ['version 1.0 (2021)', 'version 2.0 (2022)']
+const CONTAINER_DIMENSIONS_SM = {
+  mobile: {
+    height: 120,
+    width: 120,
+  },
+  desktop: {
+    height: 220,
+    width: 210,
+  },
+}
+const CONTAINER_DIMENSIONS_MD = {
+  mobile: {
+    height: 140,
+    width: 140,
+  },
+  desktop: {
+    height: 270,
+    width: 250,
+  },
+}
+const CONTAINER_DIMENSIONS_LG = {
+  mobile: {
+    height: 160,
+    width: 160,
+  },
+  desktop: {
+    height: 360,
+    width: 320,
+  },
+}
+
+const IMG_DIMENSIONS_SM = {
+  mobile: {
+    height: 100,
+    width: 100,
+  },
+  desktop: {
+    height: 150,
+    width: 150,
+  },
+}
+const IMG_DIMENSIONS_MD = {
+  mobile: {
+    height: 120,
+    width: 120,
+  },
+  desktop: {
+    height: 190,
+    width: 190,
+  },
+}
+const IMG_DIMENSIONS_LG = {
+  mobile: {
+    height: 140,
+    width: 140,
+  },
+  desktop: {
+    height: 250,
+    width: 250,
+  },
+}
 
 const MobileTabs = (props: { handleTabs: (index: number) => void }) => {
   const [activeTab, setActiveTab] = useState(0)
@@ -81,13 +141,25 @@ const MobileTabs = (props: { handleTabs: (index: number) => void }) => {
   )
 }
 
+const _getContainerDimensions = (idx: number, items: number) => {
+  if (idx === 0 || idx === items - 1) return CONTAINER_DIMENSIONS_LG
+  else if (idx % 2 === 0) return CONTAINER_DIMENSIONS_MD
+  else return CONTAINER_DIMENSIONS_SM
+}
+
+const _getImgDimensions = (idx: number, items: number) => {
+  if (idx === 0 || idx === items - 1) return IMG_DIMENSIONS_LG
+  else if (idx % 2 === 0) return IMG_DIMENSIONS_MD
+  else return IMG_DIMENSIONS_SM
+}
+
 /**
  * CustomImageGallery
  * @description CustomImageGallery component - a stateless (controlled by parent) component that renders an array of images and displays them in a grid
  * @param props
  * @returns JSX.Element
  */
-const CustomImageGallery = (props: {
+export const CustomImageGallery = (props: {
   project: any
   images: string[]
   activeIndex: number | undefined
@@ -97,7 +169,8 @@ const CustomImageGallery = (props: {
   getWindowHeight: () => number
   getWindowWidth: () => number
   getActiveDimensions: () => any
-  getModalContent?: (index: number) => JSX.Element
+  getModalContent: (index: number, imgs: string[]) => JSX.Element
+  handleImageBrowse: (idx: number, direction: 'left' | 'right') => void
   redesign?: boolean
   handleTabs?: (index: number) => void
   activeTab?: number
@@ -113,45 +186,12 @@ const CustomImageGallery = (props: {
     getWindowWidth,
   } = props
 
-  const getModalContent = (index: number): JSX.Element => {
-    const Content = DemoImg
-    const contentProps = {
-      key: `${images[index]}-demo`,
-      index: index,
-      source: images[index],
-      project: project.title,
-      activeIndex: index,
-      activeHeight: props.getActiveDimensions().height,
-      activeWidth: props.getActiveDimensions().width,
-      handleImageBrowse: handleImageBrowse,
-      getWindowHeight: getWindowHeight,
-      getWindowWidth: getWindowWidth,
-      modal: true,
-    }
-    return <Content {...contentProps} />
-  }
-
-  const handleImageBrowse = (idx: number, direction: string) => {
-    console.log(idx, direction)
-    let newIndex
-    if (direction === 'left') {
-      if (idx === 0) newIndex = images.length - 1
-      else newIndex = idx - 1
-    } else {
-      if (idx === images.length - 1) newIndex = 0
-      else newIndex = idx + 1
-    }
-    props.setActiveIndex && props.setActiveIndex(newIndex)
-    props.handleModal && props.handleModal(getModalContent(newIndex))
-  }
-
   const handleClick = (idx: number) => {
-    if (idx === activeIndex) {
-      props.setActiveIndex && props.setActiveIndex(-1)
-      return
-    }
-    props.setActiveIndex && props.setActiveIndex(idx)
-    props.handleModal && props.handleModal(getModalContent(idx))
+    if (idx === activeIndex) return props.setActiveIndex?.(-1)
+    props.setActiveIndex?.(idx)
+    console.log('idx', idx)
+    console.log('images', images)
+    props.handleModal?.(props.getModalContent(idx, images))
   }
 
   const handleTabs = (index: number) => {
@@ -182,7 +222,7 @@ const CustomImageGallery = (props: {
     )
   }
 
-  /** @TODO make gallery image sizes asymetrical (some square, some rectangle, some small, medium, large, etc.) */
+  /** @TODO fix the "grow on hover" dimensions for meduim and large images */
 
   return (
     <StyledGalleryContainer>
@@ -191,6 +231,11 @@ const CustomImageGallery = (props: {
       {props.redesign ? renderRedesignTabs() : null}
       <StyledImageGrid>
         {images.map((img: string, idx: number) => {
+          const imgDimensions = _getImgDimensions(idx, images.length - 1)
+          const containerDimensions = _getContainerDimensions(
+            idx,
+            images.length - 1
+          )
           if (idx !== activeIndex)
             return (
               <DemoImg
@@ -200,9 +245,11 @@ const CustomImageGallery = (props: {
                 project={project.title}
                 activeIndex={activeIndex}
                 onClick={handleClick}
-                handleImageBrowse={handleImageBrowse}
+                handleImageBrowse={props.handleImageBrowse}
                 getWindowHeight={getWindowHeight}
                 getWindowWidth={getWindowWidth}
+                imgDimensions={imgDimensions}
+                containerDimensions={containerDimensions}
               />
             )
         })}
@@ -210,5 +257,3 @@ const CustomImageGallery = (props: {
     </StyledGalleryContainer>
   )
 }
-
-export default CustomImageGallery

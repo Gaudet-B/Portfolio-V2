@@ -31,6 +31,7 @@ const Link = (props: {
     <a
       href={to}
       onClick={!popOut ? handleClick : undefined}
+      /** @TODO add icon to communicate "new tab" to user (w3 might have SVG) */
       target={popOut ? '_blank' : undefined}
       style={linkStyles}
     >

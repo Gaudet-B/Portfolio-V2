@@ -3,34 +3,24 @@ import { useState, useEffect } from 'react'
 import Navigation from '../Navigation'
 
 import { StyledResumeContainer } from './styles'
-
-// import styles from '../../styles/resume.style.module.css'
-import navStyles from '../../styles/nav.style.module.css'
+import { StyledBackground } from '../Projects/styles'
 
 import git from '../../assets/icons/GitHub.jpg'
 import linked from '../../assets/icons/LinkedIn.jpg'
 import email from '../../assets/icons/email-icon.png'
 import styleGuide from '../StyleGuide/StyleGuide'
-import { StyledBackground } from '../Projects/styles'
 
 const Resume = () => {
   // functions that track height and width of the window for responsive components
-  const getWindowHeight = () => {
-    return window.innerHeight
-  }
   const getWindowWidth = () => {
     return window.innerWidth
   }
 
-  // height and width of window are stored in local state
-  const [windowHeight, setWindowHeight] = useState(getWindowHeight())
+  // width of window are stored in local state
   const [windowWidth, setWindowWidth] = useState(getWindowWidth())
 
   // function to be added to the onResize event listener
-  const resizeWindow = () => {
-    setWindowHeight(window.innerHeight)
-    setWindowWidth(window.innerWidth)
-  }
+  const resizeWindow = () => setWindowWidth(window.innerWidth)
 
   useEffect(() => {
     // add Bootstrap to document, remove when component unmounts
@@ -57,7 +47,7 @@ const Resume = () => {
   return (
     <StyledBackground>
       <div className={`${windowWidth > 900 ? 'px-5' : ''}`}>
-        <Navigation windowWidth={windowWidth} styles={navStyles} />
+        <Navigation windowWidth={windowWidth} />
         <div
           className={`rounded text-light d-flex flex-column justify-content-center ${
             windowWidth > 500 ? 'm-5' : 'm-1'
@@ -106,6 +96,7 @@ const Resume = () => {
                   <a
                     className="my-1 d-flex flex-row link link-light text-decoration-none"
                     href="http://linkedin.com/in/brian-f-gaudet"
+                    /** @TODO add icon to communicate "new tab" to user (w3 might have SVG) */
                     target="_blank"
                     style={{ width: 'fit-content' }}
                   >
@@ -134,6 +125,7 @@ const Resume = () => {
                   <a
                     className="my-1 d-flex flex-row link link-light text-decoration-none"
                     href="http://github.com/Gaudet-B"
+                    /** @TODO add icon to communicate "new tab" to user (w3 might have SVG) */
                     target="_blank"
                   >
                     <p className="mt-1">github.com/Gaudet-B</p>
@@ -162,6 +154,7 @@ const Resume = () => {
                 <a
                   className="my-1 d-flex flex-row link link-light text-decoration-none"
                   href="http://linkedin.com/in/brian-f-gaudet"
+                  /** @TODO add icon to communicate "new tab" to user (w3 might have SVG) */
                   target="_blank"
                   style={{ width: 'fit-content' }}
                 >
@@ -188,6 +181,7 @@ const Resume = () => {
                 <a
                   className="my-1 d-flex flex-row link link-light text-decoration-none"
                   href="http://github.com/Gaudet-B"
+                  /** @TODO add icon to communicate "new tab" to user (w3 might have SVG) */
                   target="_blank"
                 >
                   <p className="mt-1">github.com/Gaudet-B</p>
@@ -359,7 +353,7 @@ const Resume = () => {
               </div>
             </div>
 
-            <div
+            {/* <div
               className={
                 windowWidth > 900
                   ? 'mx-5 mt-4 mb-5 d-flex flex-row justify-content-between'
@@ -405,7 +399,7 @@ const Resume = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> */}
 
             <div className="mx-5 border-top border-secondary my-4"></div>
             <h3 className="mt-5 mb-3 text-secondary">EDUCATION</h3>

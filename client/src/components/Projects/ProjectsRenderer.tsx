@@ -8,9 +8,17 @@ import ProjectsMenu from './ProjectsMenu'
 
 /* TYPES */
 import { Images } from '../Landing/Landing'
+import { useEffect } from 'react'
+
+const fetchProjects = async () => {
+  const res = await fetch('http://localhost:8000/api/projects')
+  return res.json()
+}
 
 const Loader = (props: { openContainer: () => void }) => {
-  props.openContainer()
+  useEffect(() => {
+    props.openContainer()
+  }, [])
   return (
     <div style={{ margin: 'auto', height: '70vh' }}>
       <Loading size={'large'} />
@@ -19,8 +27,10 @@ const Loader = (props: { openContainer: () => void }) => {
 }
 
 const Error = (props: { error: unknown; openContainer: () => void }) => {
-  console.log(props.error)
-  props.openContainer()
+  useEffect(() => {
+    console.log(props.error)
+    props.openContainer()
+  }, [])
   return (
     <div style={{ margin: '50px 0', textAlign: 'center' }}>
       There was an error loading project data.
@@ -33,7 +43,7 @@ const Error = (props: { error: unknown; openContainer: () => void }) => {
  * @param props
  * @returns
  */
-const ProjectsWrapper = (props: {
+const ProjectsRenderer = (props: {
   showMenu: boolean
   activeIndex: number
   images: Images
@@ -43,10 +53,10 @@ const ProjectsWrapper = (props: {
   openContainer: () => void
   handleNavigateProjects: (direction: number, length: number) => void
 }) => {
-  const fetchProjects = async () => {
-    const res = await fetch('http://localhost:8000/api/projects')
-    return res.json()
-  }
+  // const fetchProjects = async () => {
+  //   const res = await fetch('http://localhost:8000/api/projects')
+  //   return res.json()
+  // }
 
   const { isLoading, data, error } = useQuery(['projects'], fetchProjects)
 
@@ -55,27 +65,27 @@ const ProjectsWrapper = (props: {
   if (error) return <Error openContainer={props.openContainer} error={error} />
 
   /** @TODO what to do with this??? */
-  const getCard = (index: number): string => {
-    switch (index) {
-      case 0:
-        return 'one'
-      case 1:
-        return 'two'
-      case 2:
-        return 'three'
-      case 3:
-        return 'four'
-      case 4:
-        return 'five'
-      case 5:
-        return 'six'
-      case 6:
-        return 'seven'
-      case 7:
-        return 'eight'
-    }
-    return 'error'
-  }
+  // const getCard = (index: number): string => {
+  //   switch (index) {
+  //     case 0:
+  //       return 'one'
+  //     case 1:
+  //       return 'two'
+  //     case 2:
+  //       return 'three'
+  //     case 3:
+  //       return 'four'
+  //     case 4:
+  //       return 'five'
+  //     case 5:
+  //       return 'six'
+  //     case 6:
+  //       return 'seven'
+  //     case 7:
+  //       return 'eight'
+  //   }
+  //   return 'error'
+  // }
 
   const mobile = props.getWindowWidth() < 800
 
@@ -104,7 +114,7 @@ const ProjectsWrapper = (props: {
     projectsLength: data.length,
     images: props.images.projects[props.activeIndex],
     heros: props.images.heros,
-    card: getCard(props.activeIndex),
+    // card: getCard(props.activeIndex),
     getWindowHeight: props.getWindowHeight,
     getWindowWidth: props.getWindowWidth,
     handleNavigateProjects: props.handleNavigateProjects,
@@ -117,4 +127,4 @@ const ProjectsWrapper = (props: {
   )
 }
 
-export default ProjectsWrapper
+export default ProjectsRenderer

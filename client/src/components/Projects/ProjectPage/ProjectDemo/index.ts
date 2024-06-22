@@ -1,4 +1,4 @@
-import ProjectDemo, { NoDemo } from './ProjectDemo'
+import ProjectDemo, { NoDemo, DemoLink } from './ProjectDemo'
 
-export { NoDemo }
+export { NoDemo, DemoLink }
 export default ProjectDemo

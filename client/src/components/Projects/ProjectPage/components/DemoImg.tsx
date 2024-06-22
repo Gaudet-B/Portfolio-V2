@@ -1,6 +1,5 @@
-// import { getWindowHeight } from '../../../../scripts/basic'
 import { useEffect, useState } from 'react'
-import { ChevronButton } from '../components'
+import { ChevronButton } from './ChevronButton'
 import {
   StyledDemoImg,
   StyledThumbnailContainer,
@@ -10,7 +9,6 @@ import {
   StyledImageControls,
   StyledLinkContainer,
 } from './styles'
-// import { StyledLinkContainer } from '../styles'
 import { DemoLink } from '../ProjectDemo'
 
 export type ImgDimensionType = {
@@ -24,7 +22,7 @@ export type ImgDimensionType = {
   }
 }
 
-const DemoImg = ({
+export const DemoImg = ({
   index,
   source,
   project,
@@ -33,7 +31,6 @@ const DemoImg = ({
   activeWidth,
   imgDimensions,
   containerDimensions,
-  getWindowHeight,
   getWindowWidth,
   onClick,
   demo,
@@ -55,7 +52,6 @@ const DemoImg = ({
   activeWidth?: number
   imgDimensions?: ImgDimensionType
   containerDimensions?: ImgDimensionType
-  getWindowHeight?: () => number
   getWindowWidth?: () => number
   onClick?: (i: number) => void
   demo?: boolean
@@ -71,38 +67,6 @@ const DemoImg = ({
 }) => {
   const [showRestartLink, setShowRestartLink] = useState(false)
   const [restartLinkTimeout, setRestartLinkTimeout] = useState<number>()
-
-  const getPlacement = () => {
-    const height = getWindowHeight?.()
-    if (!height) return '-500px'
-    if (height > 1000) return '-220px'
-    if (height > 850) return '-300px'
-    if (height > 780) return '-350px'
-    if (height > 650) return '-450px'
-    return '-500px'
-  }
-
-  const getYaxis = () => {
-    const height = getWindowHeight?.()
-    if (demo && height && height < 800) return '-1400px'
-    if (demo && project === 'P!ZZA') return '-1300px'
-    if (project === 'P!ZZA') return getPlacement()
-    if (demo) return '-1200px'
-    if (height && height < 800) return '-350px'
-    return ''
-  }
-
-  const getXaxis = () => {
-    const width = getWindowWidth?.()
-    if (demo && width) return `${width / 2 - 200}px`
-    if (demo) return '425px'
-    return ''
-  }
-
-  const getMaxSize = () => {
-    const height = getWindowHeight?.()
-    if (height && height < 700) return 15
-  }
 
   const handleBrowse = (index: number, direction: 'left' | 'right') => {
     if (handleImageBrowse) handleImageBrowse(index, direction)
@@ -140,67 +104,61 @@ const DemoImg = ({
     }
   }, [totalTime])
 
-  const hoverHeight = `${imgDimensions?.desktop.height}px`
-  const hoverWidth = `${imgDimensions?.desktop.width}px`
+  const getContainerHeight = () => {
+    const width = getWindowWidth?.()
+    if (width && width < 800) return containerDimensions?.mobile.height
+    else return containerDimensions?.desktop.height
+  }
+
+  const getContainerWidth = () => {
+    const width = getWindowWidth?.()
+    if (width && width < 800) return containerDimensions?.mobile.width
+    else return containerDimensions?.desktop.width
+  }
+
+  const getImgHeight = () => {
+    const width = getWindowWidth?.()
+    if (width && width < 800) return imgDimensions?.mobile.height
+    else return imgDimensions?.desktop.height
+  }
+
+  const getImgWidth = () => {
+    const width = getWindowWidth?.()
+    if (width && width < 800) return imgDimensions?.mobile.width
+    else return imgDimensions?.desktop.width
+  }
+
+  const hoverHeight = imgDimensions?.desktop.height
+  const hoverWidth = imgDimensions?.desktop.width
 
   return (
     <StyledDemoImg
       data-active={activeIndex === index}
-      hideDemo={hideDemo}
-      // responsive={getWindowWidth() < 800}
-      // height={getWindowWidth() < 800 ? '120px' : '200px'}
-      // width={getWindowWidth() < 800 ? '120px' : '200px'}
-      $height={() => {
-        const width = getWindowWidth?.()
-        if (width && width < 800) return `${imgDimensions?.mobile.height}px`
-        else return `${imgDimensions?.desktop.height}px`
-      }}
-      $width={() => {
-        const width = getWindowWidth?.()
-        if (width && width < 800) return `${imgDimensions?.mobile.width}px`
-        else return `${imgDimensions?.desktop.width}px`
-      }}
+      $hideDemo={hideDemo}
+      $height={getContainerHeight()}
+      $width={getContainerWidth()}
     >
       <StyledThumbnailContainer
         data-active={activeIndex === index}
-        portrait={project === 'P!ZZA'}
-        activeHeight={activeHeight}
-        activeWidth={activeWidth}
-        translateY={getYaxis()}
-        translateX={getXaxis()}
-        maxHeight={getMaxSize()}
-        hideScrollbar={hideScrollbar}
-        // responsive={getWindowWidth() < 800}
-        // height={getWindowWidth() < 800 ? '100px' : '150px'}
-        // width={getWindowWidth() < 800 ? '100px' : '150px'}
-        $height={() => {
-          const width = getWindowWidth?.()
-          if (width && width < 800)
-            return `${containerDimensions?.mobile.height}px`
-          else return `${containerDimensions?.desktop.height}px`
-        }}
-        $width={() => {
-          const width = getWindowWidth?.()
-          if (width && width < 800)
-            return `${containerDimensions?.mobile.width}px`
-          else return `${containerDimensions?.desktop.width}px`
-        }}
-        hoverHeight={hoverHeight}
-        hoverWidth={hoverWidth}
+        $portrait={project === 'P!ZZA'}
+        $activeHeight={activeHeight}
+        $activeWidth={activeWidth}
+        $hideScrollbar={hideScrollbar}
+        $height={getImgHeight()}
+        $width={getImgWidth()}
+        $hoverHeight={hoverHeight}
+        $hoverWidth={hoverWidth}
       >
-        <StyledImageContainer
-          data-active={activeIndex === index}
-          maxHeight={getMaxSize()}
-        >
+        <StyledImageContainer data-active={activeIndex === index}>
           <StyledImage
             onClick={(e: React.MouseEvent<HTMLDivElement>) =>
               handleClick(e, index)
             }
             style={{ backgroundImage: `url(${source})` }}
-            modal={modal}
+            $modal={!!modal}
           >
             {hideLink ? null : showRestartLink ? (
-              <StyledMask data-active={false} showRestartLink />
+              <StyledMask data-active={false} $showRestartLink />
             ) : noMask ? null : (
               <StyledMask data-active={activeIndex === index} />
             )}
@@ -221,7 +179,7 @@ const DemoImg = ({
         {showRestartLink && restartLink && (
           <StyledLinkContainer
             data-active={showRestartLink}
-            hideLink={hideLink}
+            $hideLink={!!hideLink}
           >
             <DemoLink
               callback={() => handleDemoLinkClick()}
@@ -233,5 +191,3 @@ const DemoImg = ({
     </StyledDemoImg>
   )
 }
-
-export default DemoImg

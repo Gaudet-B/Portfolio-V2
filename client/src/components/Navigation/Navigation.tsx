@@ -18,6 +18,7 @@ import {
   StyledLinkWrapper,
   StyledMobileMenu,
   StyledHamburgerButton,
+  StyledMobileLinkWrapper,
   // StyledMobileMenu,
 } from './styles'
 
@@ -164,7 +165,7 @@ const Navigation = (props: {
           //     : `translateY(2rem)`
           // }
         >
-          <StyledSmallLink
+          {/* <StyledSmallLink
             id={'link-projects'}
             href="/projects"
             show={show}
@@ -187,7 +188,16 @@ const Navigation = (props: {
             data-active={page === 'contact'}
           >
             CONTACT
-          </StyledSmallLink>
+          </StyledSmallLink> */}
+          <StyledMobileLinkWrapper active={page === 'projects'}>
+            <Link to={'/projects'}>PROJECTS</Link>
+          </StyledMobileLinkWrapper>
+          <StyledMobileLinkWrapper active={page === 'resume'}>
+            <Link to={'/resume'}>RESUME</Link>
+          </StyledMobileLinkWrapper>
+          <StyledMobileLinkWrapper active={page === 'contact'}>
+            <Link to={'/contact'}>CONTACT</Link>
+          </StyledMobileLinkWrapper>
         </StyledNavMenu>
       </StyledMobileMenu>
     )

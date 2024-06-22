@@ -8,7 +8,7 @@ import {
 
 export const NoDemo = () => {
   return (
-    <StyledInstruction noPointer>
+    <StyledInstruction $noPointer>
       demo currently not available
     </StyledInstruction>
   )
@@ -37,7 +37,7 @@ export const DemoLinks = ({
   show: boolean
 }) => {
   return (
-    <StyledLinkContainer open={show}>
+    <StyledLinkContainer $open={show}>
       {!show ? (
         <DemoLink callback={handleDemoClick} action={'open'} />
       ) : (
@@ -47,7 +47,7 @@ export const DemoLinks = ({
   )
 }
 
-const ProjectDemo = ({
+export const ProjectDemo = ({
   project,
   demoGif,
   draftDemoGifs,
@@ -172,5 +172,3 @@ const ProjectDemo = ({
     </>
   )
 }
-
-export default ProjectDemo

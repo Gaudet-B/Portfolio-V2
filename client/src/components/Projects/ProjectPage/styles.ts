@@ -28,38 +28,40 @@ export const StyledPageHeader = styled.header`
   max-width: 800px;
 `
 
-export const StyledTitle = styled.h1`
-  font-size: ${(props) => (props.responsive ? '2em' : '4em')};
+export const StyledTitle = styled.h1<{ $responsive: boolean }>`
+  font-size: ${({ $responsive }) => ($responsive ? '2em' : '4em')};
   font-weight: bold;
   margin: 18px 0px 14px 0px;
   letter-spacing: 0.4rem;
 `
 
-export const StyledProjectType = styled.h2`
-  font-size: ${(props) => (props.responsive ? '1.5rem' : '2rem')};
+export const StyledProjectType = styled.h2<{ $responsive: boolean }>`
+  font-size: ${({ $responsive }) => ($responsive ? '1.5rem' : '2rem')};
   font-weight: bold;
   margin: 2rem 0rem;
   color: rgba(0, 143, 17, 0.7);
 `
 
-export const StyledDetailsGrid = styled.div`
+export const StyledDetailsGrid = styled.div<{ $responsive: boolean }>`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   margin-top: 24px;
-  transform: translateX(-30px);
-  padding: ${(props) => (props.responsive ? '12px' : '0')};
+  transform: ${({ $responsive }) => ($responsive ? '' : 'translateX(-30px)')};
+  padding: ${({ $responsive }) => ($responsive ? '12px' : '0')};
 `
 
 export const StyledSummaryContainer = styled.div`
-  dsiplay: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   padding: 0 5%;
 `
 
-export const StyledProfessionalContainer = styled.div`
-  margin-bottom: ${(props) => (props.marginBottom ? '2rem' : undefined)};
+export const StyledProfessionalContainer = styled.div<{
+  $bottomMargin: boolean
+}>`
+  margin-bottom: ${({ $bottomMargin }) => ($bottomMargin ? '2rem' : undefined)};
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -88,6 +90,12 @@ export const StyledPageBody = styled.div`
   width: 100%;
 `
 
+export const StyledImgContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`
+
 export const StyledSeparator = styled.div`
   height: 0px;
   border: 1px solid ${styleGuide.colors.LabelGreen};
@@ -113,15 +121,17 @@ export const StyledDemoWrapper = styled.div`
   margin: 1rem auto;
 `
 
-export const StyledDemoContainer = styled.div`
+export const StyledDemoContainer = styled.div<{
+  $animation: 'expand' | 'contract'
+}>`
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: 25px;
-  animation: ${(props) =>
-      props.animation === 'expand'
+  animation: ${({ $animation }) =>
+      $animation === 'expand'
         ? expand
-        : props.animation === 'contract'
+        : $animation === 'contract'
         ? contract
         : undefined}
     0.5s ease-in-out;
@@ -135,21 +145,21 @@ export const StyledDemoTitle = styled.span`
   margin-bottom: 1rem;
 `
 
-export const StyledInstruction = styled.span`
+export const StyledInstruction = styled.span<{ $noPointer?: boolean }>`
   font-family: helvetica;
   font-size: 13pt;
-  cursor: ${(props) => (props.noPointer ? 'not-allowed' : 'pointer')};
+  cursor: ${({ $noPointer }) => ($noPointer ? 'not-allowed' : 'pointer')};
   > strong {
     color: ${styleGuide.colors.LabelGreen};
   }
 `
 
-export const StyledLinkContainer = styled.div`
+export const StyledLinkContainer = styled.div<{ $open: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   gap: 5rem;
-  padding: ${(props) => (props.open ? '1rem 0' : undefined)};
+  padding: ${({ $open }) => ($open ? '1rem 0' : undefined)};
 `
 
 export const StyledProjectControls = styled.div`
@@ -159,7 +169,7 @@ export const StyledProjectControls = styled.div`
   padding 1rem 2rem;
 `
 
-export const StyledControlButton = styled.button`
+export const StyledControlButton = styled.button<{ $positiveX?: boolean }>`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -175,13 +185,11 @@ export const StyledControlButton = styled.button`
   cursor: pointer;
   &:hover {
     opacity: 1;
-    transform: ${(props) =>
-      props.positiveX
-        ? 'translate3d(2px, -2px, 0)'
-        : 'translate3d(-2px, -2px, 0)'};
+    transform: ${({ $positiveX }) =>
+      $positiveX ? 'translate3d(2px, -2px, 0)' : 'translate3d(-2px, -2px, 0)'};
     border: 1px solid rgba(245, 245, 245, 0.3);
-    box-shadow: ${(props) =>
-      props.positiveX
+    box-shadow: ${({ $positiveX }) =>
+      $positiveX
         ? `-1px 2px 0 ${styleGuide.colors.GhostGray}`
         : `1px 2px 0 ${styleGuide.colors.GhostGray}`};
     transition: 0.4s ease-in;
@@ -209,32 +217,33 @@ export const StyledGalleryContainer = styled.div`
   gap: 12px;
 `
 
-export const StyledHeroContainer = styled.div`
+export const StyledHeroContainer = styled.div<{ $responsive: boolean }>`
   display: flex;
-  flex-direction: ${(props) => (props.responsive ? 'column' : 'row')};
+  flex-direction: ${({ $responsive }) => ($responsive ? 'column' : 'row')};
   justify-content: center;
   align-items: center;
   gap: 24px;
-  padding: 2rem 0;
+  padding: ${({ $responsive }) => ($responsive ? '2rem 0' : '2rem')};
   background-color: ${styleGuide.colors.MatteGray};
 `
 
-export const StyledInfoContainer = styled.div`
-  display: ${(props) => (props.redesign ? 'grid' : 'flex')};
-  flex-direction: ${(props) => (props.redesign ? undefined : 'column')};
-  grid-template-columns: ${(props) => (props.redesign ? '1fr 2fr' : undefined)};
+export const StyledInfoContainer = styled.div<{
+  $redesign: boolean
+  $responsive: boolean
+}>`
+  display: ${({ $redesign }) => ($redesign ? 'grid' : 'flex')};
+  flex-direction: ${({ $redesign }) => ($redesign ? undefined : 'column')};
+  grid-template-columns: ${({ $redesign }) =>
+    $redesign ? '1fr 2fr' : undefined};
   justify-content: space-evenly;
-  align-items: ${(props) => (props.redesign ? 'start' : 'center')};
-  font-weight: ${(props) => (props.redesign ? 'bold' : undefined)};
+  align-items: ${({ $redesign }) => ($redesign ? 'start' : 'center')};
+  font-weight: ${({ $redesign }) => ($redesign ? 'bold' : undefined)};
   gap: 12px;
-  padding: ${(props) => (props.responsive ? '12px' : '0')};
+  padding: ${({ $responsive }) => ($responsive ? '12px' : '0')};
 `
-// grid-template-rows: ${(props) => (props.redesign ? '1fr 2fr' : undefined)};
-// font-size: 18pt;
-// text-align: ${(props) => (props.redesign ? 'start' : 'center')};
 
-export const StyledHeroImage = styled.div`
-  max-width: ${(props) => (props.responsive ? '50%' : '35%')};
+export const StyledHeroImage = styled.div<{ $responsive: boolean }>`
+  max-width: ${({ $responsive }) => ($responsive ? '50%' : '35%')};
 `
 
 export const StyledDraftDemoContainer = styled.div`
@@ -252,4 +261,34 @@ export const StyledProjectLink = styled.div`
     font-size: ${styleGuide.fonts.sizes.medium};
     color: ${styleGuide.colors.LabelGreen};
   }
+`
+
+export const StyledDetailsContainer = styled.div``
+
+export const StyledDetailsKey = styled.span`
+  font-size: 16pt;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  text-decoration: underline;
+`
+
+export const StyledDetailsList = styled.ul<{ $responsive: boolean }>`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: ${({ $responsive }) => ($responsive ? '75%' : '825px')};
+  font-size: ${({ $responsive }) => ($responsive ? '11pt' : undefined)};
+  padding: ${({ $responsive }) =>
+    $responsive ? '0px 6px 0px 20px' : undefined};
+  margin: 2rem auto;
+  text-align: left;
+`
+
+export const StyledDetailItem = styled.li`
+  margin: '10px 0px';
+`
+
+export const StyledSingleDetail = styled.span`
+  width: 'fit-content';
+  margin: 'auto';
 `

@@ -6,7 +6,7 @@ export const StyledFullScreenMask = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 2;
+  z-index: 200;
   width: 100vw;
   height: 100vh;
   background-color: rgb(26, 26, 26, 0.8);

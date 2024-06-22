@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components'
 import background from '../../assets/3d-background.png'
+import styleGuide from '../StyleGuide/StyleGuide'
 
 const CONTAINER_HEIGHT = 80
 const CLOSED_CONTAINER = 90
@@ -59,8 +60,8 @@ export const StyledFormContainer = styled.div`
   padding-top: 2em;
   max-width: 1100px;
   margin: auto;
-  margin: 1rem auto;
-  border: 1px solid rgba(245, 245, 245, 0.4);
+  margin: 1rem 4px;
+  border: 1px solid ${styleGuide.colors.WhiteSmoke};
   border-radius: 5px;
   overflow: scroll;
   scrollbar-width: 0px;

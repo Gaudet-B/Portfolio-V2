@@ -1,7 +1,8 @@
 import styled, { keyframes, createGlobalStyle } from 'styled-components'
 import styleGuide from '../StyleGuide/StyleGuide'
 
-const BUTTON_INDENT = 25
+const BUTTON_INDENT = 24
+const BUTTON_SPACING_BOTTOM = 12
 
 export const NavFonts = createGlobalStyle`
   @font-face {
@@ -81,7 +82,7 @@ export const StyledNavMenu = styled.div`
   padding: ${(props) => (props.show ? '12px' : '0 12px')};
   overflow: scroll;
   background-color: rgb(26, 26, 26, 0.95);
-  transform: translate3d(-65px, 55px, 0);
+  transform: translate3d(-50px, 50px, 0);
   z-index: 5;
   scrollbar-width: 0px;
   &::-webkit-scrollbar {
@@ -94,6 +95,30 @@ export const StyledNavMenu = styled.div`
     animation: ${contract} 0.3s ease;
   }
 `
+export const StyledMobileLinkWrapper = styled.div`
+  font-family: helvetica;
+  text-decoration: none;
+  font-size: ${styleGuide.fonts.sizes.small};
+  > a {
+    color: ${(props) =>
+      props.active
+        ? styleGuide.colors.MatrixGreen
+        : styleGuide.colors.WhiteSmoke};
+    &:visited {
+      color: ${(props) =>
+        props.active
+          ? styleGuide.colors.MatrixGreen
+          : styleGuide.colors.WhiteSmoke};
+    }
+    &:hover {
+      color: ${(props) =>
+        props.active
+          ? styleGuide.colors.MatrixGreen
+          : styleGuide.colors.WhiteSmoke};
+    }
+  }
+`
+
 /* transform: ${(props) => props.transform}; */
 
 // .navMenu {
@@ -152,6 +177,7 @@ export const StyledBackButton = styled.span`
   font-size: ${styleGuide.fonts.sizes.medium};
   cursor: pointer;
   margin-left: ${BUTTON_INDENT}px;
+  margin-bottom: ${BUTTON_SPACING_BOTTOM}px;
   height: fit-content;
 `
 

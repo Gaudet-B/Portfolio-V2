@@ -1,29 +1,31 @@
 import { StyledChevronContainer, StyledChevron } from './styles'
 import arrow from '../../../../assets/icons/chevron-icon-light.png'
 
-const ChevronButton = (props: {
+export const ChevronButton = ({
+  direction,
+  noMargin,
+  customHeight,
+  customWidth,
+  reverseHover,
+  handleClick,
+}: {
   direction: 'left' | 'right'
-  handleClick?: () => void
   noMargin?: boolean
   customHeight?: number
   customWidth?: number
   reverseHover?: boolean
+  handleClick?: () => void
 }) => {
   return (
-    <StyledChevronContainer
-      direction={props.direction}
-      noMargin={props.noMargin}
-    >
+    <StyledChevronContainer $direction={direction} $noMargin={noMargin}>
       <StyledChevron
-        onClick={props.handleClick}
+        onClick={handleClick}
         src={arrow}
         alt={'chevron'}
-        height={props.customHeight || 40}
-        width={props.customWidth || 34}
-        reverseHover={props.reverseHover}
+        $height={customHeight || 40}
+        $width={customWidth || 34}
+        $reverseHover={reverseHover}
       />
     </StyledChevronContainer>
   )
 }
-
-export default ChevronButton

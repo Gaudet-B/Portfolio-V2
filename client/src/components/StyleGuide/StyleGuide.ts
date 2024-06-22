@@ -57,25 +57,25 @@ const styleGuide = {
     SpaceBlack: '#191919', // -> custom black
     White: '#FFFFFF', // -> standard white
     WhiteSmoke: '#F5F5F5', // -> standard white smoke
-  },
+  } as const,
   fonts: {
     families: {
       AnonymousPro: anonymousProNormal,
-    },
+    } as const,
     sizes: {
       extraSmall: '10pt',
       small: '12pt',
       medium: '16pt',
       large: '24pt',
       extraLarge: '32pt',
-    },
+    } as const,
     weights: {
       light: 300,
       regular: 400,
       medium: 500,
       bold: 700,
-    },
-  },
+    } as const,
+  } as const,
 }
 
 export default styleGuide

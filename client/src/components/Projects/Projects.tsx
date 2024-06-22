@@ -4,7 +4,7 @@ import { debounce } from 'lodash'
 
 /* PROJECT */
 import Navigation from '../Navigation'
-import ProjectsWrapper from './ProjectsWrapper'
+import ProjectsRenderer from './ProjectsRenderer'
 
 /* SCRIPTS */
 import getImages from '../../scripts/images'
@@ -170,6 +170,7 @@ const Projects = () => {
   return (
     <StyledBackground style={{ backgroundImage: `url(${background})` }}>
       <GlobalFonts />
+      {/* <StyledProjectsContainer id="projectsContainer" onScroll={handleScroll}> */}
       <StyledProjectsContainer id="projectsContainer">
         <Navigation
           windowWidth={windowWidth || -1}
@@ -182,7 +183,7 @@ const Projects = () => {
           responsive={windowWidth && windowWidth < 800}
           setByWindowHeight={windowHeight && windowHeight < 700}
         >
-          <ProjectsWrapper
+          <ProjectsRenderer
             activeIndex={activeIndex}
             images={IMAGES}
             handleProjectClick={handleProjectClick}
