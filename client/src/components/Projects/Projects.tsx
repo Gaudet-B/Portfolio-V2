@@ -180,8 +180,8 @@ const Projects = () => {
           id={'scrollable-container'}
           data-open={containerStatus === 'open'}
           data-closed={containerStatus === 'closed'}
-          responsive={windowWidth && windowWidth < 800}
-          setByWindowHeight={windowHeight && windowHeight < 700}
+          $responsive={windowWidth ? windowWidth < 800 : false}
+          $setByWindowHeight={windowHeight ? windowHeight < 700 : false}
         >
           <ProjectsRenderer
             activeIndex={activeIndex}

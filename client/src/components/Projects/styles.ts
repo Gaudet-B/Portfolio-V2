@@ -52,12 +52,15 @@ export const StyledProjectsContainer = styled.div`
   );
 `
 
-export const StyledMenuContainer = styled.div`
+export const StyledMenuContainer = styled.div<{
+  $responsive: boolean
+  $setByWindowHeight: boolean
+}>`
   min-height: ${CLOSED_CONTAINER}px;
   max-height: ${CONTAINER_HEIGHT}vh;
-  width: ${(props) => (props.responsive ? '90%' : '80%')};
+  width: ${({ $responsive }) => ($responsive ? '90%' : '80%')};
   max-width: 1100px;
-  margin: ${(props) => (props.responsive ? '5px auto 0 auto' : '0 auto')};
+  margin: ${({ $responsive }) => ($responsive ? '5px auto 0 auto' : '0 auto')};
   border: 2px solid ${styleGuide.colors.GhostGray};
   border-radius: 5px;
   overflow: scroll;
@@ -67,13 +70,13 @@ export const StyledMenuContainer = styled.div`
     display: none;
   }
   &[data-open='true'] {
-    animation: ${(props) =>
-        props.setByWindowHeight ? openSmallMenu : openMenu}
+    animation: ${({ $setByWindowHeight }) =>
+        $setByWindowHeight ? openSmallMenu : openMenu}
       ${ANIMATION_TIMING} ease-in;
   }
   &[data-closed='true'] {
-    animation: ${(props) =>
-        props.setByWindowHeight ? closeSmallMenu : closeMenu}
+    animation: ${({ $setByWindowHeight }) =>
+        $setByWindowHeight ? closeSmallMenu : closeMenu}
       ${ANIMATION_TIMING} ease-out;
     height: ${CLOSED_CONTAINER}px;
   }

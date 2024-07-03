@@ -6,6 +6,17 @@ import {
   StyledProjectSummary,
   StyledSummaryContainer,
 } from '../styles'
+import {
+  StyledCaseStudyContainer,
+  StyledCaseStudyGrid,
+  StyledCaseStudyHeader,
+} from './ProjectCaseStudy/styles'
+
+/** @TODO import some JSON for the case studies */
+export const CASE_STUDIES = {
+  MetTel: ['MetTel', 'MetTel'],
+  Viasat: ['Viasat', 'Viasat'],
+} as const
 
 export const ProjectSummary = ({
   type,
@@ -16,6 +27,11 @@ export const ProjectSummary = ({
   project: Project
   getWindowWidth: () => number
 }) => {
+  const hasCaseStudy = project.title === 'MetTel' || project.title === 'Viasat'
+  const caseStudies = hasCaseStudy
+    ? CASE_STUDIES[project.title as keyof typeof CASE_STUDIES]
+    : []
+
   const summary = project.summary?.slice() || ''
   const splitIndex = summary.indexOf('~')
   if (splitIndex > 0) {
@@ -30,10 +46,21 @@ export const ProjectSummary = ({
   }
   return (
     <StyledSummaryContainer>
-      {project.title === 'MetTel' || project.title === 'Viasat'
-        ? ProjectCaseStudy({ project, getWindowWidth })
-        : null}
-      <StyledProjectSummary>{project.summary || ''}</StyledProjectSummary>
+      {hasCaseStudy ? (
+        <StyledCaseStudyContainer>
+          <StyledCaseStudyHeader>
+            Primary Projects/Initiatives Contributed to:
+          </StyledCaseStudyHeader>
+          <StyledCaseStudyGrid>
+            {/** @TODO replace this `_` underscore with the actual case study data */}
+            {caseStudies.map((_, idx) => {
+              return ProjectCaseStudy({ idx, project, getWindowWidth })
+            })}
+          </StyledCaseStudyGrid>
+        </StyledCaseStudyContainer>
+      ) : (
+        <StyledProjectSummary>{project.summary || ''}</StyledProjectSummary>
+      )}
     </StyledSummaryContainer>
   )
 }

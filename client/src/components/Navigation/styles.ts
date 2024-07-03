@@ -69,17 +69,17 @@ export const StyledSmallLink = styled.a`
 //   color: rgba(0, 173, 17);
 // }
 
-export const StyledNavMenu = styled.div`
+export const StyledNavMenu = styled.div<{ $show: boolean }>`
   border-radius: 0px 0px 8px 8px;
-  display: ${(props) => (props.show ? 'flex' : 'flex')};
+  display: ${({ $show }) => ($show ? 'flex' : 'flex')};
   flex-direction: column;
   justify-content: space-evenly;
   position: absolute;
   background-color: transparent;
   text-align: end;
   width: fit-content;
-  height: ${(props) => (props.show ? '110px' : '0px')};
-  padding: ${(props) => (props.show ? '12px' : '0 12px')};
+  height: ${({ $show }) => ($show ? '110px' : '0px')};
+  padding: ${({ $show }) => ($show ? '12px' : '0 12px')};
   overflow: scroll;
   background-color: rgb(26, 26, 26, 0.95);
   transform: translate3d(-50px, 50px, 0);
@@ -95,26 +95,20 @@ export const StyledNavMenu = styled.div`
     animation: ${contract} 0.3s ease;
   }
 `
-export const StyledMobileLinkWrapper = styled.div`
+export const StyledMobileLinkWrapper = styled.div<{ $active: boolean }>`
   font-family: helvetica;
   text-decoration: none;
   font-size: ${styleGuide.fonts.sizes.small};
   > a {
-    color: ${(props) =>
-      props.active
-        ? styleGuide.colors.MatrixGreen
-        : styleGuide.colors.WhiteSmoke};
+    color: ${({ $active }) =>
+      $active ? styleGuide.colors.MatrixGreen : styleGuide.colors.WhiteSmoke};
     &:visited {
-      color: ${(props) =>
-        props.active
-          ? styleGuide.colors.MatrixGreen
-          : styleGuide.colors.WhiteSmoke};
+      color: ${({ $active }) =>
+        $active ? styleGuide.colors.MatrixGreen : styleGuide.colors.WhiteSmoke};
     }
     &:hover {
-      color: ${(props) =>
-        props.active
-          ? styleGuide.colors.MatrixGreen
-          : styleGuide.colors.WhiteSmoke};
+      color: ${({ $active }) =>
+        $active ? styleGuide.colors.MatrixGreen : styleGuide.colors.WhiteSmoke};
     }
   }
 `
@@ -161,15 +155,15 @@ export const StyledMobileLinkWrapper = styled.div`
 // `
 // =========================
 
-export const StyledNavWrapper = styled.div`
-  width: ${(props) => (props.responsive ? '100%' : undefined)};
-  height: ${(props) => (props.responsive ? '10vh' : 'fit-content')};
+export const StyledNavWrapper = styled.div<{ $responsive: boolean }>`
+  width: ${({ $responsive }) => ($responsive ? '100%' : undefined)};
+  height: ${({ $responsive }) => ($responsive ? '10vh' : 'fit-content')};
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: ${(props) => (props.responsive ? '0' : '20px 55px 0 55px')};
-  margin-bottom: ${(props) => (props.responsive ? undefined : '5px')};
+  padding: ${({ $responsive }) => ($responsive ? '0' : '20px 55px 0 55px')};
+  margin-bottom: ${({ $responsive }) => ($responsive ? undefined : '5px')};
   background-color: ${styleGuide.colors.SpaceBlack};
 `
 export const StyledBackButton = styled.span`
@@ -182,14 +176,14 @@ export const StyledBackButton = styled.span`
 `
 
 // width: ${(props) => (props.responsive ? undefined : '100%')};
-export const StyledMainNav = styled.div`
+export const StyledMainNav = styled.div<{ $responsive: boolean }>`
   width: 100%;
-  max-width: ${(props) => (props.responsive ? undefined : '1150px')};
+  max-width: ${({ $responsive }) => ($responsive ? undefined : '1150px')};
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   background-color: ${styleGuide.colors.SpaceBlack};
-  padding: ${(props) => (props.responsive ? '0' : '20px 55px 0 55px')};
+  padding: ${({ $responsive }) => ($responsive ? '0' : '20px 55px 0 55px')};
 `
 
 export const StyledLogoContainer = styled.div`
@@ -208,7 +202,7 @@ export const StyledNavLinksLarge = styled.div`
 `
 
 // 'visited' and 'hover' are used here to override bootstrap defaults on Resume page
-export const StyledLinkWrapper = styled.div`
+export const StyledLinkWrapper = styled.div<{ $active: boolean }>`
   font-family: helvetica;
   margin: 0px 2px;
   padding: 0;
@@ -221,21 +215,15 @@ export const StyledLinkWrapper = styled.div`
 
   border-radius: 5px 5px 0px 0px;
   > a {
-    color: ${(props) =>
-      props.active
-        ? styleGuide.colors.MatrixGreen
-        : styleGuide.colors.WhiteSmoke};
+    color: ${({ $active }) =>
+      $active ? styleGuide.colors.MatrixGreen : styleGuide.colors.WhiteSmoke};
     &:visited {
-      color: ${(props) =>
-        props.active
-          ? styleGuide.colors.MatrixGreen
-          : styleGuide.colors.WhiteSmoke};
+      color: ${({ $active }) =>
+        $active ? styleGuide.colors.MatrixGreen : styleGuide.colors.WhiteSmoke};
     }
     &:hover {
-      color: ${(props) =>
-        props.active
-          ? styleGuide.colors.MatrixGreen
-          : styleGuide.colors.WhiteSmoke};
+      color: ${({ $active }) =>
+        $active ? styleGuide.colors.MatrixGreen : styleGuide.colors.WhiteSmoke};
     }
   }
 `

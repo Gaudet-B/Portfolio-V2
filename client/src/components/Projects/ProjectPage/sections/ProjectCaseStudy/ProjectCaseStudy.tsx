@@ -9,9 +9,9 @@ import {
 import _ from 'lodash'
 import { Project } from '../../../Projects'
 import {
-  StyledCaseStudyContainer,
-  StyledCaseStudyGrid,
-  StyledCaseStudyHeader,
+  // StyledCaseStudyContainer,
+  // StyledCaseStudyGrid,
+  // StyledCaseStudyHeader,
   StyledScrollableContainer,
 } from './styles'
 import { MetTel, Viasat } from './case-studies'
@@ -19,6 +19,7 @@ import { MetTel, Viasat } from './case-studies'
 // import mettelLogo from '../../../assets/mettel-logo.png'
 
 const SCROLL_INTERVAL = 4000 // 4 seconds
+const ALTERNATING_DELAY = 2000 // 2 seconds
 
 const IMG_DIMENSIONS = {
   mobile: {
@@ -46,9 +47,11 @@ const CaseStudyContainer = ({ children }: PropsWithChildren) => (
 )
 
 export const ProjectCaseStudy = ({
+  idx,
   project,
   getWindowWidth,
 }: {
+  idx: number
   project: Project
   getWindowWidth: () => number
 }) => {
@@ -99,7 +102,16 @@ export const ProjectCaseStudy = ({
     const { scrollWidth, clientWidth } = container
     const steps = container.childElementCount - 2 // subtract 2 to account for the "bookends" that are empty divs
     const scrollStep = (scrollWidth - clientWidth) / steps
-    return setInterval(() => containerScroll(scrollStep), SCROLL_INTERVAL)
+    const timeout = idx % 2 === 0 ? 0 : ALTERNATING_DELAY
+    return new Promise<number>((resolve) =>
+      setTimeout(() => {
+        const interval = setInterval(
+          () => containerScroll(scrollStep),
+          SCROLL_INTERVAL
+        )
+        resolve(interval)
+      }, timeout)
+    )
   }, [scrollingRef.current])
 
   const cancelScroll = () => {
@@ -107,9 +119,9 @@ export const ProjectCaseStudy = ({
     scrollingRef.current = null
   }
 
-  const startScroll = () => {
+  const startScroll = async () => {
     if (scrollingRef.current) clearInterval(scrollingRef.current)
-    const interval = slowScroll()
+    const interval = await slowScroll()
     scrollingRef.current = interval
   }
 
@@ -131,20 +143,20 @@ export const ProjectCaseStudy = ({
   }
 
   return (
-    <StyledCaseStudyContainer>
-      <StyledCaseStudyHeader>
-        Primary Projects/Initiatives Contributed to:
-      </StyledCaseStudyHeader>
-      <StyledCaseStudyGrid>
-        <CaseStudyContainer>
-          {project.title === 'MetTel' && <MetTel {...{ ...args }} />}
-          {project.title === 'Viasat' && <Viasat {...{ ...args }} />}
-        </CaseStudyContainer>
-        <CaseStudyContainer>
-          {project.title === 'MetTel' && <MetTel {...{ ...args }} />}
-          {project.title === 'Viasat' && <Viasat {...{ ...args }} />}
-        </CaseStudyContainer>
-      </StyledCaseStudyGrid>
-    </StyledCaseStudyContainer>
+    // <StyledCaseStudyContainer>
+    //   <StyledCaseStudyHeader>
+    //     Primary Projects/Initiatives Contributed to:
+    //   </StyledCaseStudyHeader>
+    //   <StyledCaseStudyGrid>
+    <CaseStudyContainer>
+      {project.title === 'MetTel' && <MetTel {...{ ...args }} />}
+      {project.title === 'Viasat' && <Viasat {...{ ...args }} />}
+    </CaseStudyContainer>
+    // <CaseStudyContainer>
+    //   {project.title === 'MetTel' && <MetTel {...{ ...args }} />}
+    //   {project.title === 'Viasat' && <Viasat {...{ ...args }} />}
+    // </CaseStudyContainer>
+    //   </StyledCaseStudyGrid>
+    // </StyledCaseStudyContainer>
   )
 }
