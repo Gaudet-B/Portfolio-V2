@@ -24,6 +24,13 @@ const getHoverWidth = ({
   return $portrait ? undefined : $hoverWidth
 }
 
+const getTransformY = (height: number | undefined) => {
+  if (height === undefined) return 0
+  if (height === 240) return 40
+  if (height === 340) return -10
+  return -20
+}
+
 const fadeIn = keyframes`
     0% { opacity: 0; }
     90% { opacity: 0; }
@@ -131,22 +138,15 @@ export const StyledGalleryHeader = styled.h3`
   letter-spacing: 5px;
 `
 
-export const StyledImageGrid = styled.div`
+export const StyledImageGrid = styled.div<{ $portrait: boolean }>`
   width: 90%;
-  /* max-width: 1200px; */
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: ${({ $portrait }) => ($portrait ? 'self-start' : 'center')};
   flex-wrap: wrap;
-  gap: 1px;
-  /* display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-gap: 0px;
-  grid-auto-rows: 300px;
-  grid-auto-flow: dense;
-  justify-items: center;
-  align-items: center; */
+  gap: ${({ $portrait }) => ($portrait ? '12px' : '2px')};
+  row-gap: ${({ $portrait }) => ($portrait ? '0' : '12px')};
 `
 
 export const StyledGalleryTabs = styled.div`
@@ -182,9 +182,10 @@ export const StyledDemoImg = styled.div<{
   $hideDemo?: boolean
   $height?: number
   $width?: number
+  $portrait?: boolean
 }>`
-  height: ${({ $height }) => $height};
-  width: ${({ $width }) => $width};
+  height: ${({ $height }) => $height}px;
+  width: ${({ $width }) => $width}px;
   display: ${({ $hideDemo }) => ($hideDemo ? 'none' : 'flex')};
   flex-direction: column;
   justify-content: center;
@@ -193,6 +194,8 @@ export const StyledDemoImg = styled.div<{
     height: fit-content;
     width: fit-content;
   }
+  transform: ${({ $portrait, $height }) =>
+    $portrait ? `translateY(${getTransformY($height)}px)` : undefined};
 `
 
 export const StyledThumbnailContainer = styled.div<{
@@ -262,6 +265,13 @@ export const StyledThumbnailContainer = styled.div<{
         : undefined}px;
     width: ${({ $activeHeight, $hoverWidth, $portrait }) =>
       !$activeHeight ? getHoverWidth({ $hoverWidth, $portrait }) : undefined}px;
+    > div {
+      > div {
+        > div {
+          opacity: 0;
+        }
+      }
+    }
   }
 `
 

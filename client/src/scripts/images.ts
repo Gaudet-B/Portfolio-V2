@@ -64,7 +64,7 @@ import borderHero from '../assets/border/hero_02.PNG'
 import epochitHero from '../assets/epochit/hero_02.PNG'
 
 //
-const draftImages = [draft1, draft3, draft4, draft5, draft6, draft7]
+const draftImages = [draft1, draft3, draft4, draft5, draft6, draft7] as string[]
 const draftRedesign = [
   draftRedesign1,
   draftRedesign2,
@@ -75,13 +75,21 @@ const draftRedesign = [
   draftRedesign7,
   draftRedesign8,
 ]
-const pizzaImages = [pizza1, pizza2, pizza3, pizza4, pizza5, pizza6, pizza7]
-const portfolioImages = [portfolio1, portfolio2]
-const chatImages = [chat1, chat2, chat3, chat5, chat6, chat7]
-const vapyrImages = []
-const estimaticaImages = [estimatica2, estimatica1]
-const epochImages = []
-const borderImages = []
+const pizzaImages = [
+  pizza1,
+  pizza2,
+  pizza3,
+  pizza4,
+  pizza5,
+  pizza6,
+  pizza7,
+] as string[]
+const portfolioImages = [portfolio1, portfolio2] as string[]
+const chatImages = [chat1, chat2, chat3, chat5, chat6, chat7] as string[]
+const vapyrImages = [] as string[]
+const estimaticaImages = [estimatica2, estimatica1] as string[]
+const epochImages = [] as string[]
+const borderImages = [] as string[]
 
 //
 const projects = [
@@ -108,23 +116,29 @@ const icons = {
 
 //
 const heros = {
-  draft: draftHero,
-  pizza: pizzaHero,
-  portfolio: portfolioHero,
+  draft: draftHero as string,
+  pizza: pizzaHero as string,
+  portfolio: portfolioHero as string,
   chat: chataHero,
-  vapyr: vapyrHero,
-  estimatica: estimaticaHero,
-  epoch: epochitHero,
-  border: borderHero,
+  vapyr: vapyrHero as string,
+  estimatica: estimaticaHero as string,
+  epoch: epochitHero as string,
+  border: borderHero as string,
 }
 
 const getImages = () => {
   const object = {
-    projects: projects,
-    icons: icons,
-    heros: heros,
+    projects,
+    icons,
+    heros,
   }
   return object
+}
+
+export type Images = {
+  projects: typeof projects
+  icons: typeof icons
+  heros: typeof heros
 }
 
 export default getImages

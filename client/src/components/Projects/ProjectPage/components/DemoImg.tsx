@@ -12,14 +12,8 @@ import {
 import { DemoLink } from './ProjectDemo'
 
 export type ImgDimensionType = {
-  mobile: {
-    height: number
-    width: number
-  }
-  desktop: {
-    height: number
-    width: number
-  }
+  height: number
+  width: number
 }
 
 export const DemoImg = ({
@@ -106,37 +100,38 @@ export const DemoImg = ({
 
   const getContainerHeight = () => {
     const width = getWindowWidth?.()
-    if (width && width < 800) return containerDimensions?.mobile.height
-    else return containerDimensions?.desktop.height
+    if (width && width < 800) return containerDimensions?.height
+    else return containerDimensions?.height
   }
 
   const getContainerWidth = () => {
     const width = getWindowWidth?.()
-    if (width && width < 800) return containerDimensions?.mobile.width
-    else return containerDimensions?.desktop.width
+    if (width && width < 800) return containerDimensions?.width
+    else return containerDimensions?.width
   }
 
   const getImgHeight = () => {
     const width = getWindowWidth?.()
-    if (width && width < 800) return imgDimensions?.mobile.height
-    else return imgDimensions?.desktop.height
+    if (width && width < 800) return imgDimensions?.height
+    else return imgDimensions?.height
   }
 
   const getImgWidth = () => {
     const width = getWindowWidth?.()
-    if (width && width < 800) return imgDimensions?.mobile.width
-    else return imgDimensions?.desktop.width
+    if (width && width < 800) return imgDimensions?.width
+    else return imgDimensions?.width
   }
 
-  const hoverHeight = imgDimensions?.desktop.height
-  const hoverWidth = imgDimensions?.desktop.width
+  // const hoverHeight = imgDimensions?.desktop.height
+  // const hoverWidth = imgDimensions?.desktop.width
 
   return (
     <StyledDemoImg
       data-active={activeIndex === index}
       $hideDemo={hideDemo}
-      $height={getContainerHeight()}
-      $width={getContainerWidth()}
+      $height={project === 'P!ZZA' ? getContainerHeight() : undefined}
+      $width={project === 'P!ZZA' ? undefined : getContainerWidth()}
+      $portrait={project === 'P!ZZA'}
     >
       <StyledThumbnailContainer
         data-active={activeIndex === index}
@@ -146,8 +141,10 @@ export const DemoImg = ({
         $hideScrollbar={hideScrollbar}
         $height={getImgHeight()}
         $width={getImgWidth()}
-        $hoverHeight={hoverHeight}
-        $hoverWidth={hoverWidth}
+        // $hoverHeight={hoverHeight}
+        // $hoverWidth={hoverWidth}
+        $hoverHeight={getContainerHeight()}
+        $hoverWidth={getContainerWidth()}
       >
         <StyledImageContainer data-active={activeIndex === index}>
           <StyledImage

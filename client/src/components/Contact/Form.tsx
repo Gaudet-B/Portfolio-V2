@@ -69,7 +69,11 @@ const Form = (props: { windowWidth: number }) => {
   )
 
   // handler for form inputs
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFormChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormState({
       ...formState,
       [e.target.name]: e.target.value,
@@ -83,68 +87,61 @@ const Form = (props: { windowWidth: number }) => {
   }
 
   return (
-    <div>
-      <StyledForm id={'contactForm'} onSubmit={handleSubmit}>
-        {/* NAME */}
-        <StyledFormComponent>
-          <StyledLabel htmlFor="name">your name</StyledLabel>
-          <StyledInput name="name" onChange={handleFormChange} type="text" />
-        </StyledFormComponent>
-        {validState?.name ? (
-          <p className="text-danger"> {validState.name} </p>
-        ) : null}
+    <StyledForm id={'contactForm'} onSubmit={handleSubmit}>
+      {/* NAME */}
+      <StyledFormComponent>
+        <StyledLabel htmlFor="name">your name</StyledLabel>
+        <StyledInput name="name" onChange={handleFormChange} type="text" />
+      </StyledFormComponent>
+      {validState?.name ? (
+        <p className="text-danger"> {validState.name} </p>
+      ) : null}
 
-        {/* EMAIL */}
-        <StyledFormComponent>
-          <StyledLabel htmlFor="email">your email</StyledLabel>
-          <StyledInput name="email" onChange={handleFormChange} type="email" />
-        </StyledFormComponent>
-        {validState?.email ? (
-          <p className="text-danger"> {validState.email} </p>
-        ) : null}
+      {/* EMAIL */}
+      <StyledFormComponent>
+        <StyledLabel htmlFor="email">your email</StyledLabel>
+        <StyledInput name="email" onChange={handleFormChange} type="email" />
+      </StyledFormComponent>
+      {validState?.email ? (
+        <p className="text-danger"> {validState.email} </p>
+      ) : null}
 
-        {/* MESSAGE */}
-        <StyledFormComponent>
-          <StyledLabel htmlFor="message">message</StyledLabel>
-          <StyledTextArea
-            // <textarea
-            name="message"
-            onChange={handleFormChange}
-            rows={12}
-          />
-        </StyledFormComponent>
-        {validState?.message ? (
-          <p className="text-danger"> {validState.message} </p>
-        ) : null}
+      {/* MESSAGE */}
+      <StyledFormComponent>
+        <StyledLabel htmlFor="message">message</StyledLabel>
+        <StyledTextArea name="message" onChange={handleFormChange} rows={12} />
+      </StyledFormComponent>
+      {validState?.message ? (
+        <p className="text-danger"> {validState.message} </p>
+      ) : null}
 
-        {/* REASON */}
-        <StyledFormComponent>
-          <StyledLabel htmlFor="reason">reason for request</StyledLabel>
-          <StyledDropdown name="reason" onChange={handleFormChange}>
-            <StyledOption value='Just saying "hello."'>
-              Just saying "hello."
-            </StyledOption>
-            <StyledOption value="Business inquiry.">
-              Business inquiry.
-            </StyledOption>
-            <StyledOption value="Employment opportunity.">
-              Employment opportunity.
-            </StyledOption>
-            <StyledOption value="Looking to network.">
-              Looking to network.
-            </StyledOption>
-            <StyledOption value="Technical question.">
-              Technical question.
-            </StyledOption>
-          </StyledDropdown>
-        </StyledFormComponent>
-        <StyledButtonContainer>
-          <StyledButton id="button" type="submit">
-            send
-          </StyledButton>
-        </StyledButtonContainer>
-      </StyledForm>
-    </div>
+      {/* REASON */}
+      <StyledFormComponent>
+        <StyledLabel htmlFor="reason">reason for request</StyledLabel>
+        <StyledDropdown name="reason" onChange={handleFormChange}>
+          <StyledOption value='Just saying "hello."'>
+            Just saying "hello."
+          </StyledOption>
+          <StyledOption value="Business inquiry.">
+            Business inquiry.
+          </StyledOption>
+          <StyledOption value="Employment opportunity.">
+            Employment opportunity.
+          </StyledOption>
+          <StyledOption value="Looking to network.">
+            Looking to network.
+          </StyledOption>
+          <StyledOption value="Technical question.">
+            Technical question.
+          </StyledOption>
+        </StyledDropdown>
+      </StyledFormComponent>
+      <StyledButtonContainer>
+        <StyledButton id="button" type="submit">
+          send
+        </StyledButton>
+      </StyledButtonContainer>
+    </StyledForm>
   )
 }
 

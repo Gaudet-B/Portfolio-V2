@@ -25,7 +25,7 @@ export const ImageGallery = ({
   handleImageBrowse,
   getImagesToDisplay,
 }: {
-  images: string[] | [][]
+  images: string[] | string[][]
   mobile: boolean
   project: Project
   activeTab?: number

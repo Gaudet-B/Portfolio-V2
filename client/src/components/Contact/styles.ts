@@ -40,6 +40,9 @@ export const StyledBackground = styled.div`
 export const StyledContactContainer = styled.div`
   width: inherit;
   max-width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: rgba(255, 255, 255, 0.75);
   font-family: 'Anonymous Pro';
   background: linear-gradient(
@@ -59,7 +62,6 @@ export const StyledFormContainer = styled.div`
   );
   padding-top: 2em;
   max-width: 1100px;
-  margin: auto;
   margin: 1rem 4px;
   border: 1px solid ${styleGuide.colors.WhiteSmoke};
   border-radius: 5px;
@@ -79,10 +81,8 @@ export const StyledFormContainer = styled.div`
 
 export const StyledForm = styled.form`
   min-width: fit-content;
-  width: 100%;
-  height: 70%;
   margin: auto;
-  padding: 2em 0;
+  padding: 2em 4em;
   display: flex;
   flex-direction: column;
   background: radial-gradient(

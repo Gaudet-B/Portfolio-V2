@@ -22,11 +22,8 @@ import {
 /* SCRIPTS */
 import getImages from '../../scripts/images'
 
-/* TYPES */
-import { Images } from '../Landing/Landing'
-
 /* CONSTANTS */
-const IMAGES: Images = getImages()
+const IMAGES = getImages()
 const { logo, burger } = IMAGES.icons
 
 /**
@@ -43,17 +40,6 @@ const Navigation = (props: {
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    // console.log('click!')
-    // if (!show) {
-    //   console.log(`before: ${show}`)
-    //   setShow(true)
-    //   console.log(`after: ${show}`)
-    // } else {
-    //   console.log(`else`)
-    //   setShow(false)
-    //   setTimeout(() => {
-    //   }, 200)
-    // }
     setShow(!show)
   }
 

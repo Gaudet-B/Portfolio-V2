@@ -1,4 +1,5 @@
 /* GLOBAL */
+import { useEffect } from 'react'
 import { useQuery } from 'react-query/src'
 
 /* PROJECT */
@@ -7,8 +8,7 @@ import ProjectPage from './ProjectPage'
 import ProjectsMenu from './ProjectsMenu'
 
 /* TYPES */
-import { Images } from '../Landing/Landing'
-import { useEffect } from 'react'
+import { Images } from '../../scripts/images'
 
 const fetchProjects = async () => {
   const res = await fetch('http://localhost:8000/api/projects')
@@ -53,39 +53,11 @@ const ProjectsRenderer = (props: {
   openContainer: () => void
   handleNavigateProjects: (direction: number, length: number) => void
 }) => {
-  // const fetchProjects = async () => {
-  //   const res = await fetch('http://localhost:8000/api/projects')
-  //   return res.json()
-  // }
-
   const { isLoading, data, error } = useQuery(['projects'], fetchProjects)
 
   if (isLoading) return <Loader openContainer={props.openContainer} />
 
   if (error) return <Error openContainer={props.openContainer} error={error} />
-
-  /** @TODO what to do with this??? */
-  // const getCard = (index: number): string => {
-  //   switch (index) {
-  //     case 0:
-  //       return 'one'
-  //     case 1:
-  //       return 'two'
-  //     case 2:
-  //       return 'three'
-  //     case 3:
-  //       return 'four'
-  //     case 4:
-  //       return 'five'
-  //     case 5:
-  //       return 'six'
-  //     case 6:
-  //       return 'seven'
-  //     case 7:
-  //       return 'eight'
-  //   }
-  //   return 'error'
-  // }
 
   const mobile = props.getWindowWidth() < 800
 
@@ -114,7 +86,6 @@ const ProjectsRenderer = (props: {
     projectsLength: data.length,
     images: props.images.projects[props.activeIndex],
     heros: props.images.heros,
-    // card: getCard(props.activeIndex),
     getWindowHeight: props.getWindowHeight,
     getWindowWidth: props.getWindowWidth,
     handleNavigateProjects: props.handleNavigateProjects,

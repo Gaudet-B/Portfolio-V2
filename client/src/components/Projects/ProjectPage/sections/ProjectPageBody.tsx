@@ -12,7 +12,7 @@ import { StyledImgContainer, StyledPageBody, StyledSeparator } from '../styles'
 import { ProjectControls } from './ProjectControls'
 
 export type ImageProps = {
-  images: string[] | [][]
+  images: string[] | string[][]
   activeTab?: number
   activeIndex?: number
   handleTabs: (index: number) => void

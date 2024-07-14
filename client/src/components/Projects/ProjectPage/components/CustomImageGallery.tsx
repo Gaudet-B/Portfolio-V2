@@ -10,6 +10,9 @@ import {
 } from './styles'
 import styleGuide from '../../../StyleGuide/StyleGuide'
 
+/* TYPES */
+import { Project } from '../../Projects'
+
 // ================================= \\
 /**
  * @TODO
@@ -27,7 +30,7 @@ const CONTAINER_DIMENSIONS_SM = {
     width: 120,
   },
   desktop: {
-    height: 220,
+    height: 240,
     width: 210,
   },
 }
@@ -37,7 +40,7 @@ const CONTAINER_DIMENSIONS_MD = {
     width: 140,
   },
   desktop: {
-    height: 270,
+    height: 340,
     width: 250,
   },
 }
@@ -47,7 +50,7 @@ const CONTAINER_DIMENSIONS_LG = {
     width: 160,
   },
   desktop: {
-    height: 360,
+    height: 420,
     width: 320,
   },
 }
@@ -160,7 +163,7 @@ const _getImgDimensions = (idx: number, items: number) => {
  * @returns JSX.Element
  */
 export const CustomImageGallery = (props: {
-  project: any
+  project: Project
   images: string[]
   activeIndex: number | undefined
   setActiveIndex: (index: number) => void
@@ -229,7 +232,7 @@ export const CustomImageGallery = (props: {
       <StyledGalleryHeader>gallery</StyledGalleryHeader>
       <p className={styles.instruction}>click or tap on images to expand</p>
       {props.redesign ? renderRedesignTabs() : null}
-      <StyledImageGrid>
+      <StyledImageGrid $portrait={project.title === 'P!ZZA'}>
         {images.map((img: string, idx: number) => {
           const imgDimensions = _getImgDimensions(idx, images.length - 1)
           const containerDimensions = _getContainerDimensions(
@@ -247,8 +250,21 @@ export const CustomImageGallery = (props: {
                 onClick={handleClick}
                 handleImageBrowse={props.handleImageBrowse}
                 getWindowWidth={getWindowWidth}
-                imgDimensions={imgDimensions}
-                containerDimensions={containerDimensions}
+                imgDimensions={
+                  getWindowWidth() < 800
+                    ? imgDimensions.mobile
+                    : imgDimensions.desktop
+                }
+                containerDimensions={
+                  getWindowWidth() < 800
+                    ? containerDimensions.mobile
+                    : containerDimensions.desktop
+                }
+                // imgDimensions={_getImgDimensions(idx, images.length - 1)}
+                // containerDimensions={_getContainerDimensions(
+                //   idx,
+                //   images.length - 1
+                // )}
               />
             )
         })}

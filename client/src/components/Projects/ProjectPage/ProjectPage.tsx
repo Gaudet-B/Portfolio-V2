@@ -45,7 +45,7 @@ const ProjectPage = ({
   prevProject: string
   nextProject: string
   projectsLength: number
-  images: string[] | [][]
+  images: string[] | string[][]
   heros: { [key: string]: string }
   mobile: boolean
   getWindowHeight: () => number

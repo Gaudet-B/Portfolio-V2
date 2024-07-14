@@ -13,7 +13,7 @@ import {
 } from '../styles'
 
 /* TYPES */
-import { Images } from '../Landing'
+import { Images } from '../../../scripts/images'
 
 /**
  * @description - Displays all Landing Page content, outside of background and typewriter
@@ -27,12 +27,12 @@ const LandingButtons = (props: {
 }) => {
   const renderSocialLinks = () => {
     return (
-      <StyledSocialContainer id="social" responsive={props.windowWidth < 800}>
+      <StyledSocialContainer id="social" $responsive={props.windowWidth < 800}>
         <Link to={'http://linkedin.com/in/brian-f-gaudet'} popOut>
-          <StyledSocialImage img={props.images.icons.linkedIn} />
+          <StyledSocialImage $img={props.images.icons.linkedIn} />
         </Link>
         <Link to={'http://github.com/Gaudet-B'} popOut>
-          <StyledSocialImage img={props.images.icons.github} />
+          <StyledSocialImage $img={props.images.icons.github} />
         </Link>
       </StyledSocialContainer>
     )
@@ -83,7 +83,7 @@ const LandingButtons = (props: {
   }
 
   return (
-    <StyledButtonContainer responsive={props.windowWidth < 800}>
+    <StyledButtonContainer $responsive={props.windowWidth < 800}>
       {renderProjectButton()}
       {/* when component is in 'landscape' mode, display Contact in middle */}
       {props.windowWidth > 800 ? renderContactButton() : renderResumeButton()}
