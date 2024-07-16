@@ -251,7 +251,7 @@ export const StyledDraftDemoContainer = styled.div`
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
-  gap: 24px;
+  gap: 0;
 `
 export const StyledProjectLink = styled.div`
   display: flex;

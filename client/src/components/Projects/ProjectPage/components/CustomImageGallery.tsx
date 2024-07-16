@@ -31,7 +31,9 @@ const CONTAINER_DIMENSIONS_SM = {
   },
   desktop: {
     height: 240,
-    width: 210,
+    width: 240,
+    // height: 160,
+    // width: 160,
   },
 }
 const CONTAINER_DIMENSIONS_MD = {
@@ -41,7 +43,9 @@ const CONTAINER_DIMENSIONS_MD = {
   },
   desktop: {
     height: 340,
-    width: 250,
+    width: 340,
+    // height: 226,
+    // width: 226,
   },
 }
 const CONTAINER_DIMENSIONS_LG = {
@@ -51,7 +55,9 @@ const CONTAINER_DIMENSIONS_LG = {
   },
   desktop: {
     height: 420,
-    width: 320,
+    width: 420,
+    // height: 280,
+    // width: 280,
   },
 }
 

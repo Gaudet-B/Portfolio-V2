@@ -58,7 +58,7 @@ export const StyledMenuContainer = styled.div<{
 }>`
   min-height: ${CLOSED_CONTAINER}px;
   max-height: ${CONTAINER_HEIGHT}vh;
-  width: ${({ $responsive }) => ($responsive ? '90%' : '80%')};
+  width: ${({ $responsive }) => ($responsive ? '95%' : '90%')};
   max-width: 1100px;
   margin: ${({ $responsive }) => ($responsive ? '5px auto 0 auto' : '0 auto')};
   border: 2px solid ${styleGuide.colors.GhostGray};

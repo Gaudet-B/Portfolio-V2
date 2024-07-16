@@ -139,14 +139,15 @@ export const StyledGalleryHeader = styled.h3`
 `
 
 export const StyledImageGrid = styled.div<{ $portrait: boolean }>`
-  width: 90%;
+  /* width: 90%; */
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: ${({ $portrait }) => ($portrait ? 'self-start' : 'center')};
   flex-wrap: wrap;
-  gap: ${({ $portrait }) => ($portrait ? '12px' : '2px')};
+  align-items: ${({ $portrait }) => ($portrait ? 'self-start' : 'center')};
+  gap: ${({ $portrait }) => ($portrait ? '12px' : '0')};
   row-gap: ${({ $portrait }) => ($portrait ? '0' : '12px')};
+  padding: ${({ $portrait }) => ($portrait ? '0 2em' : '2em 0 0 0')};
 `
 
 export const StyledGalleryTabs = styled.div`

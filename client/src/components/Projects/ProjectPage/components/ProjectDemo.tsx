@@ -6,6 +6,27 @@ import {
   StyledLinkContainer,
 } from '../styles'
 
+const IMG_DIMENSIONS = {
+  mobile: {
+    height: 120,
+    width: 120,
+  },
+  desktop: {
+    height: 150,
+    width: 150,
+  },
+}
+const CONTAINER_DIMENSIONS = {
+  mobile: {
+    height: 120,
+    width: 120,
+  },
+  desktop: {
+    height: 240,
+    width: 240,
+  },
+}
+
 export const NoDemo = () => {
   return (
     <StyledInstruction $noPointer>
@@ -72,26 +93,6 @@ export const ProjectDemo = ({
   show: boolean
   totalTime?: number
 }) => {
-  const imgDimensions = {
-    mobile: {
-      height: 120,
-      width: 120,
-    },
-    desktop: {
-      height: 200,
-      width: 200,
-    },
-  }
-  const containerDimensions = {
-    mobile: {
-      height: 100,
-      width: 100,
-    },
-    desktop: {
-      height: 150,
-      width: 150,
-    },
-  }
   return (
     <>
       {project.title === 'MyDraft Partner' ? (
@@ -129,17 +130,36 @@ export const ProjectDemo = ({
                       totalTime={totalTime}
                       restartLink
                       restartDemo={restartDemo}
-                      imgDimensions={imgDimensions}
-                      containerDimensions={containerDimensions}
+                      imgDimensions={
+                        getWindowWidth() < 800
+                          ? IMG_DIMENSIONS.mobile
+                          : IMG_DIMENSIONS.desktop
+                      }
+                      containerDimensions={
+                        getWindowWidth() < 800
+                          ? IMG_DIMENSIONS.mobile
+                          : CONTAINER_DIMENSIONS.desktop
+                      }
                     />
                   </div>
                 )
             })}
         </StyledDraftDemoContainer>
       ) : (
-        <>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            height:
+              getWindowWidth() < 800
+                ? `${CONTAINER_DIMENSIONS.mobile.height + 25}px`
+                : `${CONTAINER_DIMENSIONS.desktop.height + 25}px`,
+          }}
+        >
           <DemoLinks handleDemoClick={handleDemoClick} show={show} />
-          <div style={{ height: '25px' }}></div>
+          {/* <div style={{ height: '25px' }}></div> */}
           <DemoImg
             index={0}
             source={demoGif}
@@ -160,10 +180,18 @@ export const ProjectDemo = ({
             totalTime={totalTime}
             restartLink={project.title === 'chata' || project.title === 'P!ZZA'}
             restartDemo={restartDemo}
-            imgDimensions={imgDimensions}
-            containerDimensions={containerDimensions}
+            imgDimensions={
+              getWindowWidth() < 800
+                ? IMG_DIMENSIONS.mobile
+                : IMG_DIMENSIONS.desktop
+            }
+            containerDimensions={
+              getWindowWidth() < 800
+                ? CONTAINER_DIMENSIONS.mobile
+                : CONTAINER_DIMENSIONS.desktop
+            }
           />
-        </>
+        </div>
       )}
     </>
   )
