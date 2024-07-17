@@ -21,13 +21,14 @@ export const CASE_STUDIES = {
 export const ProjectSummary = ({
   type,
   project,
+  hasCaseStudy,
   getWindowWidth,
 }: {
   type: string
   project: Project
+  hasCaseStudy: boolean
   getWindowWidth: () => number
 }) => {
-  const hasCaseStudy = project.title === 'MetTel' || project.title === 'Viasat'
   const caseStudies = hasCaseStudy
     ? CASE_STUDIES[project.title as keyof typeof CASE_STUDIES]
     : []

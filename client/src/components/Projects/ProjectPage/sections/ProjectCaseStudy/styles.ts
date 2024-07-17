@@ -4,7 +4,30 @@ import styleGuide from '../../../../StyleGuide/StyleGuide'
 const CONTENT_WIDTH = 400
 // const CONTENT_HEIGHT = 500
 
-const { colors } = styleGuide
+const { colors, fonts } = styleGuide
+
+export const StyledCompanySummaryContainer = styled.div`
+  margin: auto;
+  padding-top: 3em;
+  font-size: ${fonts.sizes.medium};
+  line-height: 22pt;
+  max-width: 550px;
+`
+
+export const StyledSummaryText = styled.span``
+
+export const StyledLogoImage = styled.img`
+  transform: translateY(6px);
+  margin-right: 4px;
+`
+
+export const StyledBoldText = styled.strong`
+  /* color: #ffc9c9; */
+  /* color: linear-gradient(90deg, #a5d8ff, #ffc9c9); */
+  background-image: linear-gradient(60deg, #a5d8ff, 40%, #ffc9c9);
+  color: transparent;
+  background-clip: text;
+`
 
 export const StyledBookend = styled.div`
   height: 100px;

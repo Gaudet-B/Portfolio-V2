@@ -7,7 +7,7 @@ import Navigation from '../Navigation'
 import ProjectsRenderer from './ProjectsRenderer'
 
 /* SCRIPTS */
-import getImages from '../../scripts/images'
+import getImages, { Images } from '../../scripts/images'
 import { getSessionStorageOrDefault } from '../../scripts/basic'
 
 /* ASSETS */
@@ -34,6 +34,8 @@ export type Project = {
   categories: Array<string>
   externalLink?: any
 }
+
+export type HeroImages = Images['heros']
 
 /* CONSTANTS */
 const IMAGES = getImages()

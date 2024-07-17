@@ -3,7 +3,7 @@ import { debounce } from 'lodash'
 import { ProjectPageBody, ProjectPageHeader } from './sections'
 import { DemoImg } from './components'
 import ContentModal from '../../reuseable/ContentModal'
-import { Project } from '../Projects'
+import { Project, HeroImages } from '../Projects'
 import { StyledPageContainer } from './styles'
 /* ASSETS */
 import draftHero from '../../../assets/draft/draft_hero.png'
@@ -46,7 +46,7 @@ const ProjectPage = ({
   nextProject: string
   projectsLength: number
   images: string[] | string[][]
-  heros: { [key: string]: string }
+  heros: HeroImages
   mobile: boolean
   getWindowHeight: () => number
   getWindowWidth: () => number
@@ -141,6 +141,7 @@ const ProjectPage = ({
     }
   }, 500)
 
+  /** @TODO refactor this into an object with keys matching project.title */
   const getHeroImage = (title: string) => {
     let image = heros.vapyr
     if (title === 'Estimatica Redesign') image = heros.estimatica
@@ -309,6 +310,7 @@ const ProjectPage = ({
             source: SOURCE,
             isPersonal: projectType === 'Personal Project',
             imageProps: {
+              heros,
               images,
               activeTab,
               activeIndex,

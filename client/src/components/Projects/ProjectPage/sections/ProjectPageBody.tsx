@@ -7,11 +7,15 @@ import {
   ImageGallery,
   ModalContent,
 } from '../components'
-import { Project } from '../../Projects'
+import { Project, HeroImages } from '../../Projects'
 import { StyledImgContainer, StyledPageBody, StyledSeparator } from '../styles'
 import { ProjectControls } from './ProjectControls'
+import { CompanySummary } from './ProjectCaseStudy'
+
+const CASE_STUDIES = ['MetTel', 'Viasat'] as const
 
 export type ImageProps = {
+  heros: HeroImages
   images: string[] | string[][]
   activeTab?: number
   activeIndex?: number
@@ -69,6 +73,9 @@ export const ProjectPageBody = ({
   demoProps: DemoProps
   controlsProps: ControlsProps
 }) => {
+  const title = project.title as (typeof CASE_STUDIES)[number]
+  const hasCaseStudy = CASE_STUDIES.includes(title)
+
   return (
     <StyledPageBody>
       {project.title === 'P!ZZA' ? (
@@ -99,6 +106,10 @@ export const ProjectPageBody = ({
         </StyledImgContainer>
       )}
 
+      {hasCaseStudy ? (
+        <CompanySummary title={title} logo={imageProps.heros.borderSm} />
+      ) : null}
+
       <StyledSeparator />
 
       {isPersonal ? (
@@ -112,6 +123,7 @@ export const ProjectPageBody = ({
         <ProjectSummary
           type={'professional'}
           project={project}
+          hasCaseStudy={hasCaseStudy}
           getWindowWidth={imageProps.getWindowWidth}
         />
       )}

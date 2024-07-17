@@ -53,6 +53,7 @@ import logo from '../assets/icons/BG_logo_icon_short_light.png'
 import burger from '../assets/icons/burger-menu-vector.png'
 // client\src\assets\icons\BG_logo_icon_short_light.png
 
+/** @TODO rename all these '.PNG' files to '.png' */
 //
 import draftHero from '../assets/draft/hero_02.PNG'
 import pizzaHero from '../assets/pizza/hero_01.PNG'
@@ -61,6 +62,7 @@ import portfolioHero from '../assets/portfolio/hero_02.PNG'
 import estimaticaHero from '../assets/estimatica/hero_01.PNG'
 import vapyrHero from '../assets/vapyr/hero_01.PNG'
 import borderHero from '../assets/border/hero_02.PNG'
+import borderHeroSm from '../assets/border/hero_01.PNG'
 import epochitHero from '../assets/epochit/hero_02.PNG'
 
 //
@@ -124,6 +126,7 @@ const heros = {
   estimatica: estimaticaHero as string,
   epoch: epochitHero as string,
   border: borderHero as string,
+  borderSm: borderHeroSm as string,
 }
 
 const getImages = () => {

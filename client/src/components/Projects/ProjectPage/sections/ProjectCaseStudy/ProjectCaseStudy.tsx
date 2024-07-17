@@ -1,25 +1,13 @@
-import {
-  MutableRefObject,
-  PropsWithChildren,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react'
+import { PropsWithChildren, useEffect, useMemo } from 'react'
 import _ from 'lodash'
 import { Project } from '../../../Projects'
-import {
-  // StyledCaseStudyContainer,
-  // StyledCaseStudyGrid,
-  // StyledCaseStudyHeader,
-  StyledScrollableContainer,
-} from './styles'
+import { StyledScrollableContainer } from './styles'
 import { MetTel, Viasat } from './case-studies'
+import useSlowScroll, {
+  ALTERNATING_DELAY,
+} from '../../../../../hooks/useSlowScroll'
 // import viasatLogo from '../../../assets/viasat-logo.png'
 // import mettelLogo from '../../../assets/mettel-logo.png'
-
-const SCROLL_INTERVAL = 4000 // 4 seconds
-const ALTERNATING_DELAY = 2000 // 2 seconds
 
 const IMG_DIMENSIONS = {
   mobile: {
@@ -73,90 +61,30 @@ export const ProjectCaseStudy = ({
     [windowWidth]
   )
 
-  const containerRef = useRef<HTMLDivElement>(null)
-  const scrollingRef: MutableRefObject<number | null> = useRef<number>(null)
-
-  const containerScroll = useCallback(
-    (scrollStep: number) => {
-      const container = containerRef.current
-      if (!container) return
-      const { clientWidth, scrollLeft, scrollWidth } = container
-      if (scrollLeft + clientWidth + scrollStep >= scrollWidth) {
-        container.scrollTo({
-          left: 0,
-          behavior: 'smooth',
-        })
-      } else {
-        container.scrollTo({
-          left: scrollLeft + scrollStep,
-          behavior: 'smooth',
-        })
-      }
-    },
-    [containerRef.current?.scrollLeft]
-  )
-
-  const slowScroll = useCallback(() => {
-    const container = containerRef.current
-    if (!container) return null
-    const { scrollWidth, clientWidth } = container
-    const steps = container.childElementCount - 2 // subtract 2 to account for the "bookends" that are empty divs
-    const scrollStep = (scrollWidth - clientWidth) / steps
-    const timeout = idx % 2 === 0 ? 0 : ALTERNATING_DELAY
-    return new Promise<number>((resolve) =>
-      setTimeout(() => {
-        const interval = setInterval(
-          () => containerScroll(scrollStep),
-          SCROLL_INTERVAL
-        )
-        resolve(interval)
-      }, timeout)
-    )
-  }, [scrollingRef.current])
-
-  const cancelScroll = () => {
-    if (scrollingRef.current) clearInterval(scrollingRef.current)
-    scrollingRef.current = null
-  }
-
-  const startScroll = async () => {
-    if (scrollingRef.current) clearInterval(scrollingRef.current)
-    const interval = await slowScroll()
-    scrollingRef.current = interval
-  }
+  const scroller = useSlowScroll()
 
   useEffect(() => {
-    startScroll()
+    const timeout = idx * ALTERNATING_DELAY // 2 second delay for each case study after the first
+    setTimeout(() => scroller.start(), timeout)
     return () => {
-      cancelScroll()
+      scroller.cancel()
     }
-  }, [])
+  }, [project])
 
   const args = {
     project,
     getWindowWidth,
-    cancelScroll,
-    startScroll,
-    containerRef,
+    cancelScroll: () => scroller.cancel(),
+    startScroll: () => scroller.start(),
+    containerRef: scroller.containerRef,
     activeWidth,
     activeHeight,
   }
 
   return (
-    // <StyledCaseStudyContainer>
-    //   <StyledCaseStudyHeader>
-    //     Primary Projects/Initiatives Contributed to:
-    //   </StyledCaseStudyHeader>
-    //   <StyledCaseStudyGrid>
-    <CaseStudyContainer>
+    <CaseStudyContainer key={`${project.title}-case-study-${idx}`}>
       {project.title === 'MetTel' && <MetTel {...{ ...args }} />}
       {project.title === 'Viasat' && <Viasat {...{ ...args }} />}
     </CaseStudyContainer>
-    // <CaseStudyContainer>
-    //   {project.title === 'MetTel' && <MetTel {...{ ...args }} />}
-    //   {project.title === 'Viasat' && <Viasat {...{ ...args }} />}
-    // </CaseStudyContainer>
-    //   </StyledCaseStudyGrid>
-    // </StyledCaseStudyContainer>
   )
 }
