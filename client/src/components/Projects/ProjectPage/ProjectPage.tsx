@@ -25,6 +25,9 @@ import draftV2Demo4 from '../../../assets/draft/v2-demo-04.gif'
 import draftV2Demo5 from '../../../assets/draft/v2-demo-05.gif'
 // import arrow from '../../../assets/icons/chevron-icon-light.png'
 
+const VIASAT_LOGO =
+  'https://viasat.brightspotgocdn.com/8e/d2/3de143f24cde8883c08fa2781180/int-vsat-tm-rgb-grd-72x24.svg'
+
 /**
  * @description - ProjectPage component - handles all logic related to
  * project info and renders the header and body of the project page
@@ -147,6 +150,7 @@ const ProjectPage = ({
     if (title === 'Estimatica Redesign') image = heros.estimatica
     if (title === 'Epoch IT Solutions') image = heros.epoch
     if (title === 'Border') image = heros.border
+    if (title === 'Viasat') image = heros.viasat
     return image
   }
 

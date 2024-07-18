@@ -59,12 +59,10 @@ export const CompanySummary = ({
       {title === 'Viasat' ? (
         <StyledSummaryText>
           Viasat Inc. is a global communications company that believes everyone
-          and everything in the world can be connected. For more than 30 years,
-          Viasat has helped shape how consumers, businesses, governments and
-          militaries around the world communicate. Today, the Company is
-          developing the ultimate global communications network to power
-          high-quality, secure, affordable, fast connections to impact people's
-          lives anywhere they are—on the ground, in the air or at sea.
+          and everything in the world can be connected. Viasat is developing the
+          ultimate global communications network to power high-quality, secure,
+          and affordable connections that impact people's lives anywhere they
+          are — on the ground, in the air or at sea.
         </StyledSummaryText>
       ) : null}
     </StyledCompanySummaryContainer>

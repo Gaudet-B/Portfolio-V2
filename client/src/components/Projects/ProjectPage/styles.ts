@@ -42,6 +42,12 @@ export const StyledProjectType = styled.h2<{ $responsive: boolean }>`
   color: rgba(0, 143, 17, 0.7);
 `
 
+export const StyledProjectHeroContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0 2em;
+`
+
 export const StyledDetailsGrid = styled.div<{ $responsive: boolean }>`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -52,10 +58,11 @@ export const StyledDetailsGrid = styled.div<{ $responsive: boolean }>`
 `
 
 export const StyledSummaryContainer = styled.div`
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 5%;
+  /* padding: 0 5%; */
 `
 
 export const StyledProfessionalContainer = styled.div<{
@@ -70,8 +77,8 @@ export const StyledProfessionalContainer = styled.div<{
 
 export const StyledProjectSummary = styled.span`
   font-size: 1.25rem;
-  margin: 0px 5px 20px;
-  max-width: 80%;
+  /* margin: 0px 5px 20px; */
+  max-width: 90%;
   line-height: 1.25;
 `
 
@@ -90,10 +97,16 @@ export const StyledPageBody = styled.div`
   width: 100%;
 `
 
-export const StyledImgContainer = styled.div`
-  width: 100%;
+export const StyledImgContainer = styled.div<{ $hasWhiteBackground: boolean }>`
+  flex: 1;
+  width: fit-content;
+  margin: 0 auto;
   display: flex;
   justify-content: center;
+  border-radius: ${({ $hasWhiteBackground }) =>
+    $hasWhiteBackground ? '3px' : undefined};
+  background-color: ${({ $hasWhiteBackground }) =>
+    $hasWhiteBackground ? styleGuide.colors.WhiteSmoke : undefined};
 `
 
 export const StyledSeparator = styled.div`
@@ -241,9 +254,11 @@ export const StyledInfoContainer = styled.div<{
   gap: 12px;
   padding: ${({ $responsive }) => ($responsive ? '12px' : '0')};
 `
-
+/** @TODO is this max-width necessary??? */
 export const StyledHeroImage = styled.div<{ $responsive: boolean }>`
-  max-width: ${({ $responsive }) => ($responsive ? '50%' : '35%')};
+  /* max-width: ${({ $responsive }) => ($responsive ? '50%' : '35%')}; */
+  display: flex;
+  align-items: center;
 `
 
 export const StyledDraftDemoContainer = styled.div`

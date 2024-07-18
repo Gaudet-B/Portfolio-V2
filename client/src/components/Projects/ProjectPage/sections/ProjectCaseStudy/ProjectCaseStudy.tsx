@@ -30,8 +30,13 @@ export type CaseStudyProps = {
   activeHeight: number
 }
 
-const CaseStudyContainer = ({ children }: PropsWithChildren) => (
-  <StyledScrollableContainer>{children}</StyledScrollableContainer>
+const CaseStudyContainer = ({
+  children,
+  hidden,
+}: PropsWithChildren<{ hidden: boolean }>) => (
+  <StyledScrollableContainer $hidden={hidden}>
+    {children}
+  </StyledScrollableContainer>
 )
 
 export const ProjectCaseStudy = ({
@@ -52,6 +57,7 @@ export const ProjectCaseStudy = ({
         : IMG_DIMENSIONS.desktop.width,
     [windowWidth]
   )
+  // const activeWidth = IMG_DIMENSIONS.desktop.width
 
   const activeHeight = useMemo(
     () =>
@@ -60,6 +66,7 @@ export const ProjectCaseStudy = ({
         : IMG_DIMENSIONS.desktop.height,
     [windowWidth]
   )
+  // const activeHeight = IMG_DIMENSIONS.desktop.height
 
   const scroller = useSlowScroll()
 
@@ -82,7 +89,10 @@ export const ProjectCaseStudy = ({
   }
 
   return (
-    <CaseStudyContainer key={`${project.title}-case-study-${idx}`}>
+    <CaseStudyContainer
+      key={`${project.title}-case-study-${idx}`}
+      hidden={project.title === 'Viasat' && idx === 1}
+    >
       {project.title === 'MetTel' && <MetTel {...{ ...args }} />}
       {project.title === 'Viasat' && <Viasat {...{ ...args }} />}
     </CaseStudyContainer>

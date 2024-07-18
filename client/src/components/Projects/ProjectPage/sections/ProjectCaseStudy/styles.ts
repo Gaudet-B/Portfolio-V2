@@ -46,14 +46,16 @@ export const StyledCaseStudyHeader = styled.h2`
 `
 
 export const StyledCaseStudyGrid = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   gap: 6px;
 `
-
-export const StyledScrollableContainer = styled.div`
-  max-width: 400px;
+/** @TODO set a max-width? */
+export const StyledScrollableContainer = styled.div<{ $hidden: boolean }>`
+  display: ${({ $hidden }) => ($hidden ? 'none' : 'block')};
+  /* max-width: 400px; */
   padding: 2px 4px;
   overflow: hidden;
   white-space: nowrap;

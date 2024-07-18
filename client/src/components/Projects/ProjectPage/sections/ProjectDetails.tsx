@@ -4,6 +4,7 @@ import {
   StyledDetailsList,
   StyledDetailItem,
   StyledSingleDetail,
+  StyledSeparator,
 } from '../styles'
 
 export const ProjectDetails = (props: {
@@ -46,6 +47,7 @@ export const ProjectDetails = (props: {
 
   return (
     <StyledDetailsContainer>
+      {/* <StyledSeparator /> */}
       <StyledDetailsKey>Application Details:</StyledDetailsKey>
       {props.redesign ? renderRedesignDetails(props.details.slice(0, 5)) : null}
       {props.redesign ? <StyledDetailsKey>Redesign:</StyledDetailsKey> : null}

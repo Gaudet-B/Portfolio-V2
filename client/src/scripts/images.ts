@@ -59,11 +59,12 @@ import draftHero from '../assets/draft/hero_02.PNG'
 import pizzaHero from '../assets/pizza/hero_01.PNG'
 import chataHero from '../assets/chata/sample_hero_1.png'
 import portfolioHero from '../assets/portfolio/hero_02.PNG'
-import estimaticaHero from '../assets/estimatica/hero_01.PNG'
 import vapyrHero from '../assets/vapyr/hero_01.PNG'
+import estimaticaHero from '../assets/estimatica/hero_01.PNG'
+import epochitHero from '../assets/epochit/hero_02.PNG'
 import borderHero from '../assets/border/hero_02.PNG'
 import borderHeroSm from '../assets/border/hero_01.PNG'
-import epochitHero from '../assets/epochit/hero_02.PNG'
+import viasatHero from '../assets/border/viasat_logo_default.png'
 
 //
 const draftImages = [draft1, draft3, draft4, draft5, draft6, draft7] as string[]
@@ -127,6 +128,7 @@ const heros = {
   epoch: epochitHero as string,
   border: borderHero as string,
   borderSm: borderHeroSm as string,
+  viasat: viasatHero,
 }
 
 const getImages = () => {
