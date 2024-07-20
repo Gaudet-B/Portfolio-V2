@@ -8,7 +8,9 @@ const { colors, fonts } = styleGuide
 
 export const StyledCompanySummaryContainer = styled.div`
   margin: auto;
-  padding-top: 3em;
+  display: flex;
+  align-items: center;
+  /* padding-top: 3em; */
   font-size: ${fonts.sizes.medium};
   line-height: 22pt;
   max-width: 550px;
@@ -157,11 +159,11 @@ export const StyledCaseStudyRow = styled.div<{
   }
 `
 
-export const StyledCaseStudyContentContainer = styled.div`
+export const StyledCaseStudyContentContainer = styled.div<{ reverse: boolean }>`
   scroll-snap-align: center;
   width: ${CONTENT_WIDTH}px;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${({ reverse }) => (reverse ? 'column' : 'column-reverse')};
   justify-content: center;
   align-items: center;
   gap: 20px;

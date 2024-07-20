@@ -1,24 +1,23 @@
-import { ProjectSummary } from './ProjectSummary'
 import { ProjectDetails } from './ProjectDetails'
 import { ProjectDemoSection } from './ProjectDemoSection'
-import {
-  DemoBanner,
-  HeroImage,
-  ImageGallery,
-  ModalContent,
-} from '../components'
+import { DemoBanner, ModalContent } from '../components'
 import { Project, HeroImages } from '../../Projects'
-import { StyledImgContainer, StyledPageBody, StyledSeparator } from '../styles'
+import { StyledPageBody, StyledSeparator } from '../styles'
 import { ProjectControls } from './ProjectControls'
-import { CompanySummary, ProjectCaseStudySection } from './ProjectCaseStudy'
+import { ProjectCaseStudySection } from './ProjectCaseStudy'
 import { ProjectHeroContent } from './ProjectHeroContent'
+import { getCaseStudy } from '../../../../scripts/getCaseStudy'
 
-// const CASE_STUDIES = ['MetTel', 'Viasat'] as const
-/** @TODO import some JSON for the case studies */
-export const CASE_STUDIES = {
-  MetTel: ['MetTel', 'MetTel'],
-  Viasat: ['Viasat', 'Viasat'],
-}
+const CASE_STUDIES = [
+  'MetTel',
+  'Viasat',
+  'Border',
+  'Epoch IT Solutions',
+  'Estimatica Redesign',
+  'Vapyr Analytics',
+]
+
+export type HasCaseStudy = (typeof CASE_STUDIES)[number]
 
 export type ImageProps = {
   heros: HeroImages
@@ -79,14 +78,10 @@ export const ProjectPageBody = ({
   demoProps: DemoProps
   controlsProps: ControlsProps
 }) => {
-  const title = project.title as keyof typeof CASE_STUDIES
-  // console.log('title:', title)
-  const hasCaseStudy = Object.keys(CASE_STUDIES).includes(title)
-  // console.log('hasCaseStudy:', hasCaseStudy)
+  const title = project.title as HasCaseStudy
+  const hasCaseStudy = CASE_STUDIES.includes(title)
 
-  const caseStudies = hasCaseStudy
-    ? CASE_STUDIES[project.title as keyof typeof CASE_STUDIES]
-    : []
+  const caseStudies = hasCaseStudy ? getCaseStudy(title) : undefined
 
   return (
     <StyledPageBody>
@@ -102,37 +97,13 @@ export const ProjectPageBody = ({
           mobile,
           project,
           isPersonal,
+          caseStudies,
           getHeroImage,
           imageProps,
           title,
           hasCaseStudy,
         }}
       />
-
-      {/* {isPersonal ? (
-        <ImageGallery
-          {...{
-            ...imageProps,
-            mobile,
-            project,
-          }}
-        />
-      ) : (
-        <StyledImgContainer $hasWhiteBackground={project.title === 'Viasat'}>
-          <HeroImage
-            mobile={mobile}
-            project={project}
-            getHeroImage={getHeroImage}
-            getActiveDimensions={imageProps.getActiveDimensions}
-            getWindowHeight={imageProps.getWindowHeight}
-            getWindowWidth={imageProps.getWindowWidth}
-          />
-        </StyledImgContainer>
-      )} */}
-
-      {/* {hasCaseStudy ? (
-        <CompanySummary title={title} logo={imageProps.heros.borderSm} />
-      ) : null} */}
 
       <StyledSeparator />
 
@@ -143,22 +114,6 @@ export const ProjectPageBody = ({
           project={project}
         />
       ) : null}
-
-      {/* {isPersonal ? (
-        <ProjectDetails
-          details={project.details}
-          title={project.title}
-          responsive={mobile}
-          redesign={project.title === 'MyDraft Partner'}
-        />
-      ) : (
-        <ProjectSummary
-          type={'professional'}
-          project={project}
-          hasCaseStudy={hasCaseStudy}
-          getWindowWidth={imageProps.getWindowWidth}
-        />
-      )} */}
 
       {isPersonal ? (
         <ProjectDetails

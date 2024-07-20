@@ -1,2 +1,1 @@
-export * from './MetTel'
-export * from './Viasat'
+export * from './ProjectCaseStudyContent'

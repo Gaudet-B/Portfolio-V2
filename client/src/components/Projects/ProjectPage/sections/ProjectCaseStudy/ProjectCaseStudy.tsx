@@ -2,10 +2,11 @@ import { PropsWithChildren, useEffect, useMemo } from 'react'
 import _ from 'lodash'
 import { Project } from '../../../Projects'
 import { StyledScrollableContainer } from './styles'
-import { MetTel, Viasat } from './case-studies'
+import { ProjectCaseStudyContent } from './case-studies'
 import useSlowScroll, {
   ALTERNATING_DELAY,
 } from '../../../../../hooks/useSlowScroll'
+import { CaseStudy } from '../../../../../scripts/getCaseStudy'
 // import viasatLogo from '../../../assets/viasat-logo.png'
 // import mettelLogo from '../../../assets/mettel-logo.png'
 
@@ -22,6 +23,7 @@ const IMG_DIMENSIONS = {
 
 export type CaseStudyProps = {
   project: Project
+  caseStudy: CaseStudy
   getWindowWidth: () => number
   cancelScroll: () => void
   startScroll: () => void
@@ -40,10 +42,12 @@ const CaseStudyContainer = ({
 )
 
 export const ProjectCaseStudy = ({
+  caseStudy,
   idx,
   project,
   getWindowWidth,
 }: {
+  caseStudy: CaseStudy
   idx: number
   project: Project
   getWindowWidth: () => number
@@ -57,8 +61,6 @@ export const ProjectCaseStudy = ({
         : IMG_DIMENSIONS.desktop.width,
     [windowWidth]
   )
-  // const activeWidth = IMG_DIMENSIONS.desktop.width
-
   const activeHeight = useMemo(
     () =>
       windowWidth < 800
@@ -66,7 +68,6 @@ export const ProjectCaseStudy = ({
         : IMG_DIMENSIONS.desktop.height,
     [windowWidth]
   )
-  // const activeHeight = IMG_DIMENSIONS.desktop.height
 
   const scroller = useSlowScroll()
 
@@ -80,6 +81,7 @@ export const ProjectCaseStudy = ({
 
   const args = {
     project,
+    caseStudy,
     getWindowWidth,
     cancelScroll: () => scroller.cancel(),
     startScroll: () => scroller.start(),
@@ -93,8 +95,10 @@ export const ProjectCaseStudy = ({
       key={`${project.title}-case-study-${idx}`}
       hidden={project.title === 'Viasat' && idx === 1}
     >
-      {project.title === 'MetTel' && <MetTel {...{ ...args }} />}
-      {project.title === 'Viasat' && <Viasat {...{ ...args }} />}
+      {/** @TODO need a generic component to render case studies... then delete these two... */}
+      {/* {project.title === 'MetTel' && <MetTel {...{ ...args }} />}
+      {project.title === 'Viasat' && <Viasat {...{ ...args }} />} */}
+      <ProjectCaseStudyContent {...{ ...args }} />
     </CaseStudyContainer>
   )
 }

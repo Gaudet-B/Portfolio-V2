@@ -1,34 +1,28 @@
-import { CASE_STUDIES, ImageProps } from './ProjectPageBody'
+import { ImageProps } from './ProjectPageBody'
 import { Project } from '../../Projects'
 import { HeroImage, ImageGallery } from '../components'
-import { StyledImgContainer, StyledProjectHeroContainer } from '../styles'
-import { CompanySummary } from './ProjectCaseStudy'
-import { ProjectDetails } from './ProjectDetails'
 import { ProjectSummary } from './ProjectSummary'
-
-// const CASE_STUDIES = ['MetTel', 'Viasat'] as const
+import { CaseStudies } from '../../../../scripts/getCaseStudy'
+import { StyledImgContainer, StyledProjectHeroContainer } from '../styles'
+import { StyledCompanySummaryContainer } from './ProjectCaseStudy/styles'
 
 export const ProjectHeroContent = ({
   mobile,
   project,
   isPersonal,
+  caseStudies,
   getHeroImage,
   imageProps,
-  title,
   hasCaseStudy,
 }: {
   mobile: boolean
   project: Project
   isPersonal: boolean
+  caseStudies?: CaseStudies
   getHeroImage: (title: string) => string
   imageProps: ImageProps
-  title: keyof typeof CASE_STUDIES
   hasCaseStudy: boolean
 }) => {
-  // const title = project.title as (typeof CASE_STUDIES)[number]
-  // console.log('title:', title)
-  // const hasCaseStudy = CASE_STUDIES.includes(title)
-  // console.log('hasCaseStudy:', hasCaseStudy)
   if (isPersonal) {
     return (
       <ImageGallery
@@ -41,15 +35,6 @@ export const ProjectHeroContent = ({
     )
   } else
     return (
-      // {isPersonal ? (
-      //     <ImageGallery
-      //       {...{
-      //         ...imageProps,
-      //         mobile,
-      //         project,
-      //       }}
-      //     />
-      //   ) : (
       <StyledProjectHeroContainer>
         <StyledImgContainer $hasWhiteBackground={project.title === 'Viasat'}>
           <HeroImage
@@ -61,37 +46,14 @@ export const ProjectHeroContent = ({
             getWindowWidth={imageProps.getWindowWidth}
           />
         </StyledImgContainer>
-        {/* )} */}
 
         {hasCaseStudy ? (
-          <CompanySummary title={title} logo={imageProps.heros.borderSm} />
+          <StyledCompanySummaryContainer>
+            {caseStudies?.summary}
+          </StyledCompanySummaryContainer>
         ) : (
-          <ProjectSummary
-            type={'professional'}
-            project={project}
-            // hasCaseStudy={hasCaseStudy}
-            getWindowWidth={imageProps.getWindowWidth}
-          />
+          <ProjectSummary type={'professional'} project={project} />
         )}
-
-        {/* <StyledSeparator /> */}
-
-        {/* {isPersonal ? (
-        <ProjectDetails
-          details={project.details}
-          title={project.title}
-          responsive={mobile}
-          redesign={project.title === 'MyDraft Partner'}
-        />
-      ) : (
-        <ProjectSummary
-          type={'professional'}
-          project={project}
-          hasCaseStudy={hasCaseStudy}
-          getWindowWidth={imageProps.getWindowWidth}
-        />
-      )} */}
-        {/* </> */}
       </StyledProjectHeroContainer>
     )
 }

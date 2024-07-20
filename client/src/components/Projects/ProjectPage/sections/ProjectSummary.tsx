@@ -1,4 +1,4 @@
-import { ProjectCaseStudy } from './ProjectCaseStudy'
+// import { ProjectCaseStudy } from './ProjectCaseStudy'
 import { Project } from '../../Projects'
 import {
   StyledProfessionalContainer,
@@ -6,11 +6,11 @@ import {
   StyledProjectSummary,
   StyledSummaryContainer,
 } from '../styles'
-import {
-  StyledCaseStudyContainer,
-  StyledCaseStudyGrid,
-  StyledCaseStudyHeader,
-} from './ProjectCaseStudy/styles'
+// import {
+//   StyledCaseStudyContainer,
+//   StyledCaseStudyGrid,
+//   StyledCaseStudyHeader,
+// } from './ProjectCaseStudy/styles'
 
 // /** @TODO import some JSON for the case studies */
 // export const CASE_STUDIES = {
@@ -21,13 +21,13 @@ import {
 export const ProjectSummary = ({
   type,
   project,
-  // hasCaseStudy,
-  getWindowWidth,
-}: {
+}: // hasCaseStudy,
+// getWindowWidth,
+{
   type: string
   project: Project
   // hasCaseStudy: boolean
-  getWindowWidth: () => number
+  // getWindowWidth: () => number
 }) => {
   // const caseStudies = hasCaseStudy
   //   ? CASE_STUDIES[project.title as keyof typeof CASE_STUDIES]

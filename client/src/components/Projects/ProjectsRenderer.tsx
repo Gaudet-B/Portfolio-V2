@@ -8,7 +8,7 @@ import ProjectPage from './ProjectPage'
 import ProjectsMenu from './ProjectsMenu'
 
 /* TYPES */
-import { Images } from '../../scripts/images'
+import { Images } from '../../scripts/getImages'
 
 const fetchProjects = async () => {
   const res = await fetch('http://localhost:8000/api/projects')

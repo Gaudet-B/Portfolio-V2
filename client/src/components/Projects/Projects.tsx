@@ -7,7 +7,7 @@ import Navigation from '../Navigation'
 import ProjectsRenderer from './ProjectsRenderer'
 
 /* SCRIPTS */
-import getImages, { Images } from '../../scripts/images'
+import getImages, { Images } from '../../scripts/getImages'
 import { getSessionStorageOrDefault } from '../../scripts/basic'
 
 /* ASSETS */

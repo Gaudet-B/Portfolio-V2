@@ -13,7 +13,7 @@ import {
 } from '../styles'
 
 /* TYPES */
-import { Images } from '../../../scripts/images'
+import { Images } from '../../../scripts/getImages'
 
 /**
  * @description - Displays all Landing Page content, outside of background and typewriter

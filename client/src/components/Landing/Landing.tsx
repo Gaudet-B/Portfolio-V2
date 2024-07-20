@@ -19,7 +19,7 @@ import {
   displayCopyright,
   displayBackground,
 } from '../../scripts/dynamic'
-import getImages from '../../scripts/images'
+import getImages from '../../scripts/getImages'
 
 /* STYLES */
 import {

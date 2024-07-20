@@ -5,13 +5,14 @@ import {
   StyledCaseStudyHeader,
 } from './styles'
 import { Project } from '../../../Projects'
+import { CaseStudies } from '../../../../../scripts/getCaseStudy'
 
 export const ProjectCaseStudySection = ({
   caseStudies,
   getWindowWidth,
   project,
 }: {
-  caseStudies: string[]
+  caseStudies?: CaseStudies
   getWindowWidth: () => number
   project: Project
 }) => {
@@ -21,10 +22,10 @@ export const ProjectCaseStudySection = ({
         Primary Projects/Initiatives Contributed to:
       </StyledCaseStudyHeader>
       <StyledCaseStudyGrid>
-        {/** @TODO replace this `_` underscore with the actual case study data */}
-        {caseStudies.map((_, idx) => {
-          return ProjectCaseStudy({ idx, project, getWindowWidth })
-        })}
+        {caseStudies &&
+          caseStudies.cases.map((caseStudy, idx) => {
+            return ProjectCaseStudy({ caseStudy, idx, project, getWindowWidth })
+          })}
       </StyledCaseStudyGrid>
     </StyledCaseStudyContainer>
   )

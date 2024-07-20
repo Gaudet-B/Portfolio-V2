@@ -20,7 +20,7 @@ import {
 } from './styles'
 
 /* SCRIPTS */
-import getImages from '../../scripts/images'
+import getImages from '../../scripts/getImages'
 
 /* CONSTANTS */
 const IMAGES = getImages()
