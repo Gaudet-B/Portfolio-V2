@@ -43,6 +43,7 @@ const ProjectPage = ({
   getWindowHeight,
   getWindowWidth,
   handleNavigateProjects,
+  handleProjectClick,
 }: {
   project: Project
   prevProject: string
@@ -54,6 +55,7 @@ const ProjectPage = ({
   getWindowHeight: () => number
   getWindowWidth: () => number
   handleNavigateProjects: (direction: number, length: number) => void
+  handleProjectClick: (index: number) => void
 }) => {
   // show DemoGif
   const [show, setShow] = useState(false)
@@ -349,6 +351,7 @@ const ProjectPage = ({
               mobile,
               handleShow: setShow,
               handleNavigateProjects,
+              handleProjectClick,
             },
           }}
         />

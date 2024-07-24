@@ -43,7 +43,16 @@ const Error = (props: { error: unknown; openContainer: () => void }) => {
  * @param props
  * @returns
  */
-const ProjectsRenderer = (props: {
+const ProjectsRenderer = ({
+  showMenu,
+  activeIndex,
+  images,
+  getWindowHeight,
+  getWindowWidth,
+  handleProjectClick,
+  openContainer,
+  handleNavigateProjects,
+}: {
   showMenu: boolean
   activeIndex: number
   images: Images
@@ -55,28 +64,26 @@ const ProjectsRenderer = (props: {
 }) => {
   const { isLoading, data, error } = useQuery(['projects'], fetchProjects)
 
-  if (isLoading) return <Loader openContainer={props.openContainer} />
+  if (isLoading) return <Loader openContainer={openContainer} />
 
-  if (error) return <Error openContainer={props.openContainer} error={error} />
+  if (error) return <Error openContainer={openContainer} error={error} />
 
-  const mobile = props.getWindowWidth() < 800
+  const mobile = getWindowWidth() < 800
 
   const menuProps = {
     mobile,
     projects: data,
-    handleProjectClick: props.handleProjectClick,
-    images: props.images.heros,
+    handleProjectClick,
+    images: images.heros,
   }
 
-  const activeProject = data[props.activeIndex]
+  const activeProject = data[activeIndex]
+
   const nextProject =
-    props.activeIndex === data.length - 1
-      ? data[0]
-      : data[props.activeIndex + 1]
+    activeIndex === data.length - 1 ? data[0] : data[activeIndex + 1]
+
   const prevProject =
-    props.activeIndex === 0
-      ? data[data.length - 1]
-      : data[props.activeIndex - 1]
+    activeIndex === 0 ? data[data.length - 1] : data[activeIndex - 1]
 
   const projectProps = {
     mobile,
@@ -84,14 +91,15 @@ const ProjectsRenderer = (props: {
     nextProject: nextProject.title,
     prevProject: prevProject.title,
     projectsLength: data.length,
-    images: props.images.projects[props.activeIndex],
-    heros: props.images.heros,
-    getWindowHeight: props.getWindowHeight,
-    getWindowWidth: props.getWindowWidth,
-    handleNavigateProjects: props.handleNavigateProjects,
+    images: images.projects[activeIndex],
+    heros: images.heros,
+    getWindowHeight,
+    getWindowWidth,
+    handleProjectClick,
+    handleNavigateProjects,
   }
 
-  return props.showMenu ? (
+  return showMenu ? (
     <ProjectsMenu {...{ ...menuProps }} />
   ) : (
     <ProjectPage {...{ ...projectProps }} />

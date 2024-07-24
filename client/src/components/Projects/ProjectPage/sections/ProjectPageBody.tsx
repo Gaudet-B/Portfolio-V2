@@ -57,6 +57,7 @@ export type ControlsProps = {
   mobile: boolean
   handleShow: (show: boolean) => void
   handleNavigateProjects: (direction: number, projectsLength: number) => void
+  handleProjectClick: (index: number) => void
 }
 
 export const ProjectPageBody = ({
@@ -102,6 +103,7 @@ export const ProjectPageBody = ({
           imageProps,
           title,
           hasCaseStudy,
+          handleProjectClick: controlsProps.handleProjectClick,
         }}
       />
 

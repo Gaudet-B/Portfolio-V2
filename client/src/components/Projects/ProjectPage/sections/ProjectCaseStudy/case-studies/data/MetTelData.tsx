@@ -1,34 +1,28 @@
-import {
-  StyledBoldText,
-  StyledLogoImage,
-  StyledSummaryText,
-} from '../../styles'
+import { StyledSummaryText } from '../../styles'
 import { CaseStudy } from '../../../../../../../scripts/getCaseStudy'
 /** @TODO really need an alias for this */
-import borderLogo from '../../../../../../../assets/border/hero_01.PNG'
 import ecommerce from '../../../../../../../assets/border/case-studies/mettel/ecommerce.png'
 import components from '../../../../../../../assets/border/case-studies/mettel/components-icon.svg'
 import typescript from '../../../../../../../assets/border/case-studies/mettel/typescript-icon.svg'
 import tests from '../../../../../../../assets/border/case-studies/mettel/unittests.webp'
+import BorderLogoLink from './BorderLogoLink'
 
-const NewParagraph = () => {
-  return (
-    <>
-      <br />
-      <br />
-    </>
-  )
-}
+// const NewParagraph = () => {
+//   return (
+//     <>
+//       <br />
+//       <br />
+//     </>
+//   )
+// }
 
-export const MetTelSummary = (
+export const MetTelSummary = (handleClick: (e: React.MouseEvent) => void) => (
   <StyledSummaryText>
     MetTel is a leading provider of integrated digital communications solutions
     for enterprise customers, as well as{' '}
-    <StyledLogoImage src={borderLogo} width={40} height={25} />
-    {/** @TODO add a click handler that switches to the Border project page */}
-    <StyledBoldText>Border</StyledBoldText>'s longest continuous client. I
-    maintained a relationship with this client for the entirety of my two year
-    tenure at Border.
+    <BorderLogoLink handleClick={handleClick} />
+    's longest continuous client. I maintained a relationship with this client
+    for the entirety of my two year tenure at Border.
   </StyledSummaryText>
 )
 

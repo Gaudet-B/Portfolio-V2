@@ -6,6 +6,8 @@ import { CaseStudies } from '../../../../scripts/getCaseStudy'
 import { StyledImgContainer, StyledProjectHeroContainer } from '../styles'
 import { StyledCompanySummaryContainer } from './ProjectCaseStudy/styles'
 
+const BORDER_INDEX = 7
+
 export const ProjectHeroContent = ({
   mobile,
   project,
@@ -14,6 +16,7 @@ export const ProjectHeroContent = ({
   getHeroImage,
   imageProps,
   hasCaseStudy,
+  handleProjectClick,
 }: {
   mobile: boolean
   project: Project
@@ -22,6 +25,7 @@ export const ProjectHeroContent = ({
   getHeroImage: (title: string) => string
   imageProps: ImageProps
   hasCaseStudy: boolean
+  handleProjectClick: (index: number) => void
 }) => {
   if (isPersonal) {
     return (
@@ -49,7 +53,7 @@ export const ProjectHeroContent = ({
 
         {hasCaseStudy ? (
           <StyledCompanySummaryContainer>
-            {caseStudies?.summary}
+            {caseStudies?.summary(() => handleProjectClick(BORDER_INDEX))}
           </StyledCompanySummaryContainer>
         ) : (
           <ProjectSummary type={'professional'} project={project} />

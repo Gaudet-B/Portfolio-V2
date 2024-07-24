@@ -16,19 +16,19 @@ export default {
     cases: [SecurityScorecard, ViasatTempPlaceholder],
   },
   Border: {
-    summary: <>{''}</>,
+    summary: () => <>{''}</>,
     cases: [],
   } as CaseStudies,
   Epoch: {
-    summary: <>{''}</>,
+    summary: () => <>{''}</>,
     cases: [],
   } as CaseStudies,
   Estimatica: {
-    summary: <>{''}</>,
+    summary: () => <>{''}</>,
     cases: [],
   } as CaseStudies,
   Vapyr: {
-    summary: <>{''}</>,
+    summary: () => <>{''}</>,
     cases: [],
   } as CaseStudies,
 }

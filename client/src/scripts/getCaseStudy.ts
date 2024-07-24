@@ -21,7 +21,7 @@ export type CaseStudy = {
 }
 
 export type CaseStudies = {
-  summary: JSX.Element
+  summary: (onClick: (e: React.MouseEvent) => void) => JSX.Element
   cases: Array<CaseStudy>
 }
 
