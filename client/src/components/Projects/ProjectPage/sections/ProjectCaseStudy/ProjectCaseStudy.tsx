@@ -27,9 +27,12 @@ export type CaseStudyProps = {
   getWindowWidth: () => number
   cancelScroll: () => void
   startScroll: () => void
+  pauseScroll: () => void
+  resumeScroll: () => void
   containerRef: React.RefObject<HTMLDivElement>
   activeWidth: number
   activeHeight: number
+  isPaused: boolean
 }
 
 const CaseStudyContainer = ({
@@ -69,7 +72,7 @@ export const ProjectCaseStudy = ({
     [windowWidth]
   )
 
-  const scroller = useSlowScroll()
+  const [scroller, isPaused] = useSlowScroll()
 
   useEffect(() => {
     const timeout = idx * ALTERNATING_DELAY // 2 second delay for each case study after the first
@@ -85,9 +88,12 @@ export const ProjectCaseStudy = ({
     getWindowWidth,
     cancelScroll: () => scroller.cancel(),
     startScroll: () => scroller.start(),
+    pauseScroll: () => scroller.pause(),
+    resumeScroll: () => scroller.resume(),
     containerRef: scroller.containerRef,
-    activeWidth,
     activeHeight,
+    activeWidth,
+    isPaused,
   }
 
   return (
@@ -95,9 +101,6 @@ export const ProjectCaseStudy = ({
       key={`${project.title}-case-study-${idx}`}
       hidden={project.title === 'Viasat' && idx === 1}
     >
-      {/** @TODO need a generic component to render case studies... then delete these two... */}
-      {/* {project.title === 'MetTel' && <MetTel {...{ ...args }} />}
-      {project.title === 'Viasat' && <Viasat {...{ ...args }} />} */}
       <ProjectCaseStudyContent {...{ ...args }} />
     </CaseStudyContainer>
   )

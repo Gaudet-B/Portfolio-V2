@@ -1,10 +1,28 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import styleGuide from '../../../../StyleGuide/StyleGuide'
 
 const CONTENT_WIDTH = 400
 // const CONTENT_HEIGHT = 500
 
 const { colors, fonts } = styleGuide
+
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`
+
+const fadeOut = keyframes`
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+`
 
 export const StyledCompanySummaryContainer = styled.div`
   margin: auto;
@@ -24,8 +42,6 @@ export const StyledLogoImage = styled.img`
 `
 
 export const StyledBoldText = styled.strong`
-  /* color: #ffc9c9; */
-  /* color: linear-gradient(90deg, #a5d8ff, #ffc9c9); */
   background-image: linear-gradient(60deg, #a5d8ff, 40%, #ffc9c9);
   color: transparent;
   background-clip: text;
@@ -38,6 +54,7 @@ export const StyledBookend = styled.div`
 export const StyledCaseStudyContainer = styled.div`
   width: 100%;
   max-width: 850px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,7 +74,7 @@ export const StyledCaseStudyGrid = styled.div`
 /** @TODO set a max-width? */
 export const StyledScrollableContainer = styled.div<{ $hidden: boolean }>`
   display: ${({ $hidden }) => ($hidden ? 'none' : 'block')};
-  /* max-width: 400px; */
+  width: 100%;
   padding: 2px 4px;
   overflow: hidden;
   white-space: nowrap;
@@ -94,6 +111,10 @@ export const StyledScrollableContainer = styled.div<{ $hidden: boolean }>`
           }
         }
       }
+      & > div {
+        opacity: 1;
+        transition: opacity 0.5s;
+      }
     }
   }
 `
@@ -103,7 +124,7 @@ export const StyledCaseStudyRow = styled.div<{
   $reverse?: boolean
 }>`
   scroll-snap-type: x mandatory;
-  padding: 20px 0;
+  height: 100%;
   display: flex;
   gap: 80px;
   flex-direction: ${({ $mobile, $reverse }) => {
@@ -159,14 +180,26 @@ export const StyledCaseStudyRow = styled.div<{
   }
 `
 
-export const StyledCaseStudyContentContainer = styled.div<{ reverse: boolean }>`
+export const StyledCaseStudyContentContainer = styled.div<{
+  $reverse: boolean
+}>`
+  padding: 20px 0;
   scroll-snap-align: center;
   width: ${CONTENT_WIDTH}px;
   display: flex;
-  flex-direction: ${({ reverse }) => (reverse ? 'column' : 'column-reverse')};
+  flex-direction: ${({ $reverse }) => ($reverse ? 'column-reverse' : 'column')};
   justify-content: center;
   align-items: center;
   gap: 20px;
+  & > div {
+    & > div {
+      & > div {
+        & > div {
+          cursor: default;
+        }
+      }
+    }
+  }
 `
 
 export const StyledCaseStudyTextContainer = styled.div`
@@ -176,5 +209,29 @@ export const StyledCaseStudyTextContainer = styled.div`
 `
 
 export const StyledCaseStudyText = styled.p`
-  width: ${CONTENT_WIDTH}px;
+  width: ${CONTENT_WIDTH - 20}px;
+  padding: 0 10px;
+`
+
+export const StyledControlButton = styled.div`
+  position: sticky;
+  top: 100%;
+  left: 42%;
+  transform: translateY(10px);
+  opacity: 0;
+  transition: opacity 0.5s;
+  cursor: pointer;
+  & > svg {
+    border-radius: 50% 50% 0 0;
+    background-color: ${colors.MatteGray};
+    box-shadow: 0 -8px 15px ${colors.SpaceBlack};
+  }
+`
+
+export const StyledImageRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
 `

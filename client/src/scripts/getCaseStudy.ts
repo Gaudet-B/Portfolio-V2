@@ -1,9 +1,18 @@
 import caseStudies from '../components/Projects/ProjectPage/sections/ProjectCaseStudy/case-studies/data/CaseStudiesData'
 
+export type CaseStudyImage = {
+  source?: string
+  alt?: string
+  height?: number
+  width?: number
+}
+
 export type CaseStudySection = {
-  type: 'default' | 'reverse' | 'no-image'
-  image?: string
+  type: 'default' | 'reverse' | 'no-image' | 'sandwich'
+  image?: CaseStudyImage
+  images?: Array<CaseStudyImage>
   text: JSX.Element
+  secondaryText?: JSX.Element
 }
 
 export type CaseStudy = {

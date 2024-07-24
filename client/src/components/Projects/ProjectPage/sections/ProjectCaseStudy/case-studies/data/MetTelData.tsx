@@ -3,9 +3,13 @@ import {
   StyledLogoImage,
   StyledSummaryText,
 } from '../../styles'
+import { CaseStudy } from '../../../../../../../scripts/getCaseStudy'
 /** @TODO really need an alias for this */
 import borderLogo from '../../../../../../../assets/border/hero_01.PNG'
-import { CaseStudy } from '../../../../../../../scripts/getCaseStudy'
+import ecommerce from '../../../../../../../assets/border/case-studies/mettel/ecommerce.png'
+import components from '../../../../../../../assets/border/case-studies/mettel/components-icon.svg'
+import typescript from '../../../../../../../assets/border/case-studies/mettel/typescript-icon.svg'
+import tests from '../../../../../../../assets/border/case-studies/mettel/unittests.webp'
 
 const NewParagraph = () => {
   return (
@@ -32,22 +36,22 @@ export const BruinAgileDev: CaseStudy = {
   title: 'Bruin Agile Development',
   sections: [
     {
-      type: 'default',
+      type: 'sandwich',
       /** @TODO need image */
-      image: '',
+      image: {
+        source: 'https://create-react-app.dev/img/logo.svg',
+        width: 150,
+        height: 150,
+        alt: 'create-react-app logo',
+      },
       text: (
         <StyledSummaryText>
           MetTel’s e-commerce and inventory management product - titled "Bruin"
-          - is a legacy React application built from \'create-react-app\'
+          - is a legacy React application built from 'create-react-app'
           scaffolding and written as mostly class components.
         </StyledSummaryText>
       ),
-    },
-    {
-      type: 'reverse',
-      /** @TODO need image */
-      image: '',
-      text: (
+      secondaryText: (
         <StyledSummaryText>
           Due to a problem that many full stack engineering teams face today - a
           lack of enthusiastic frontend engineers - I joined one of their agile
@@ -59,13 +63,18 @@ export const BruinAgileDev: CaseStudy = {
       ),
     },
     {
-      type: 'no-image',
-      // image: null,
+      type: 'default',
+      image: {
+        source: ecommerce,
+        width: 280,
+        height: 200,
+        alt: 'AI generated ecommerce UI design',
+      },
       text: (
         <StyledSummaryText>
           My most significant contribution to Bruin was participating in the
           final six months of development on and seeing the launch and
-          deployment of a \"create a new product\" feature that took nearly two
+          deployment of a "create a new product" feature that took nearly two
           years to complete. However, the most enjoyable and rewarding memories
           were easily the pair-coding and collaboration sessions with other
           developers.
@@ -79,32 +88,73 @@ export const BruinTechUpgrade: CaseStudy = {
   title: 'Bruin Technical Upgrade',
   sections: [
     {
-      type: 'no-image',
-      // image: null,
+      type: 'sandwich',
+      image: {
+        source: components,
+        width: 180,
+        height: 150,
+        alt: 'components icon by "icons.design" from Noun Project',
+      },
       text: (
         <StyledSummaryText>
           When MetTel began to prioritize some of its tech debt I was tapped to
           work directly with Martin Volerich (formerly Bloomberg, Meta), the new
           principal frontend engineer.
-          <NewParagraph />
-          After some deliberation, we chose to take a modular (conceptually
-          similar to a micro-frontend) approach. This allowed us to begin
-          refactoring our "Foundation" components into a coherent design system
-          one by one, and gave Bruin engineers the ability begin importing and
-          using the new components immediately from the npm registry.
+        </StyledSummaryText>
+      ),
+      secondaryText: (
+        <StyledSummaryText>
+          After some research and deliberation, we chose to take a modular
+          (conceptually similar to a micro-frontend) approach. This allowed us
+          to begin refactoring our "Foundation" components into a coherent
+          design system one by one, and gave Bruin engineers the ability begin
+          importing and using the new components immediately from the npm
+          registry.
         </StyledSummaryText>
       ),
     },
     {
-      type: 'default',
-      image: '',
+      type: 'reverse',
+      image: {
+        source: 'https://vitejs.dev/logo-with-shadow.png',
+        width: 200,
+        height: 200,
+        alt: '',
+      },
       text: (
         <StyledSummaryText>
           Additionally, working in a fresh repository made it possible for us to
           move away from the headaches of a 'create-react-app' application that
           was ejected many years ago, as well as eliminate any reliance on
           webpack by moving to Vite for our bundler.
-          <NewParagraph />
+        </StyledSummaryText>
+      ),
+    },
+    {
+      type: 'reverse',
+      images: [
+        {
+          source: typescript,
+          width: 120,
+          height: 120,
+          alt: 'typescript logo',
+        },
+        {
+          source: 'https://cdn.candycode.com/jotai/jotai-mascot.png',
+          width: 120,
+          height: 120,
+          alt: 'jotai logo',
+        },
+        {
+          source:
+            'https://tanstack.com/_build/assets/logo-color-600w-Bx4vtR8J.png',
+          width: 120,
+          height: 120,
+          alt: 'tanstack logo',
+        },
+      ],
+      text: (
+        <StyledSummaryText>
           Proper use of Typescript was essential to improving code standards and
           developer experience. Other technology choices included some of my
           favorite libraries from Tanner Linsley's Tanstack (react-query,
@@ -114,8 +164,13 @@ export const BruinTechUpgrade: CaseStudy = {
       ),
     },
     {
-      type: 'reverse',
-      image: '',
+      type: 'default',
+      image: {
+        source: tests,
+        width: 220,
+        height: 220,
+        alt: 'AI generated unit tests icon',
+      },
       text: (
         <StyledSummaryText>
           Lastly, as important as it was to modernize both Bruin itself and the

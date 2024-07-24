@@ -7,18 +7,21 @@ export const HeroImage = ({
   project,
   getHeroImage,
   getActiveDimensions,
-  getWindowHeight,
+  // getWindowHeight,
   getWindowWidth,
 }: {
   mobile: boolean
   project: Project
   getHeroImage: (title: string) => string
   getActiveDimensions: () => { height: number; width: number }
-  getWindowHeight: () => number
+  // getWindowHeight: () => number
   getWindowWidth: () => number
 }) => {
   return (
-    <StyledHeroImage $responsive={mobile}>
+    <StyledHeroImage
+      $responsive={mobile}
+      $hasWhiteBackground={project.title === 'Viasat'}
+    >
       <DemoImg
         index={-1}
         source={getHeroImage(project.title)}

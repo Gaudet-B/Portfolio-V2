@@ -285,7 +285,7 @@ export const StyledImageContainer = styled.div`
 export const StyledImage = styled.div<{ $modal: boolean }>`
   width: inherit;
   height: inherit;
-  border-radius: 2px;
+  border-radius: 3px;
   background-size: ${({ $modal }) => ($modal ? 'contain' : 'cover')};
   background-repeat: ${({ $modal }) => ($modal ? 'no-repeat' : undefined)};
   background-position: center;

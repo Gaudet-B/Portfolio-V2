@@ -8,6 +8,8 @@ type ScrollerType = {
   containerRef: React.RefObject<HTMLDivElement>
   cancel: () => void
   start: () => void
+  pause: () => void
+  resume: () => void
 }
 
 const containerScroll = (container: HTMLDivElement, scrollStep: number) => {
@@ -37,28 +39,44 @@ const slowScroll = (container: HTMLDivElement) => {
 
 export default () => {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isPaused, setIsPaused] = useState(false)
   const [scroller, setScroller] = useState<ScrollerType>({
     intervalId: [0],
     containerRef,
     cancel: () => cancelScroll(),
     start: () => startScroll(),
+    pause: () => pauseScroll(),
+    resume: () => resumeScroll(),
   })
 
   const cancelScroll = () => {
     const { intervalId } = scroller
     intervalId.forEach((i) => clearInterval(i))
+    // setIsScrolling(false)
   }
 
   const startScroll = () => {
     if (!containerRef.current) return
+    if (isPaused) return
     const { intervalId } = scroller
     const interval = slowScroll(containerRef.current)
     intervalId.push(interval)
+    // setIsScrolling(true)
     setScroller({
       ...scroller,
       intervalId,
     })
   }
 
-  return scroller
+  const pauseScroll = () => {
+    setIsPaused(true)
+    cancelScroll()
+  }
+
+  const resumeScroll = () => {
+    setIsPaused(false)
+    // startScroll()
+  }
+
+  return [scroller, isPaused] as const
 }

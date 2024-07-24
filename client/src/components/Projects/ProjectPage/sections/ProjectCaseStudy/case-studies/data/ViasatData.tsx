@@ -16,7 +16,7 @@ export const SecurityScorecard: CaseStudy = {
   sections: [
     {
       type: 'default',
-      image: '',
+      image: {},
       text: <>{''}</>,
     },
   ],

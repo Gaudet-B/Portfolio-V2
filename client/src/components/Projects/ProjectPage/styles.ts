@@ -97,16 +97,12 @@ export const StyledPageBody = styled.div`
   width: 100%;
 `
 
-export const StyledImgContainer = styled.div<{ $hasWhiteBackground: boolean }>`
-  flex: 1;
-  width: fit-content;
+export const StyledImgContainer = styled.div`
+  /* flex: 1; */
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: center;
-  border-radius: ${({ $hasWhiteBackground }) =>
-    $hasWhiteBackground ? '3px' : undefined};
-  background-color: ${({ $hasWhiteBackground }) =>
-    $hasWhiteBackground ? styleGuide.colors.WhiteSmoke : undefined};
 `
 
 export const StyledSeparator = styled.div`
@@ -255,10 +251,25 @@ export const StyledInfoContainer = styled.div<{
   padding: ${({ $responsive }) => ($responsive ? '12px' : '0')};
 `
 /** @TODO is this max-width necessary??? */
-export const StyledHeroImage = styled.div<{ $responsive: boolean }>`
+export const StyledHeroImage = styled.div<{
+  $responsive: boolean
+  $hasWhiteBackground: boolean
+}>`
   /* max-width: ${({ $responsive }) => ($responsive ? '50%' : '35%')}; */
   display: flex;
   align-items: center;
+  border-radius: ${({ $hasWhiteBackground }) =>
+    $hasWhiteBackground ? '3px' : undefined};
+  background-color: ${({ $hasWhiteBackground }) =>
+    $hasWhiteBackground ? styleGuide.colors.WhiteSmoke : undefined};
+  & > div {
+    & > div {
+      border: ${({ $hasWhiteBackground }) =>
+        $hasWhiteBackground
+          ? 'none'
+          : `0.5px solid ${styleGuide.colors.SpaceBlack}`};
+    }
+  }
 `
 
 export const StyledDraftDemoContainer = styled.div`

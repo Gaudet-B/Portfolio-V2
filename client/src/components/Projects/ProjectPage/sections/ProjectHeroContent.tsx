@@ -36,13 +36,13 @@ export const ProjectHeroContent = ({
   } else
     return (
       <StyledProjectHeroContainer>
-        <StyledImgContainer $hasWhiteBackground={project.title === 'Viasat'}>
+        <StyledImgContainer>
           <HeroImage
             mobile={mobile}
             project={project}
             getHeroImage={getHeroImage}
             getActiveDimensions={imageProps.getActiveDimensions}
-            getWindowHeight={imageProps.getWindowHeight}
+            // getWindowHeight={imageProps.getWindowHeight}
             getWindowWidth={imageProps.getWindowWidth}
           />
         </StyledImgContainer>
