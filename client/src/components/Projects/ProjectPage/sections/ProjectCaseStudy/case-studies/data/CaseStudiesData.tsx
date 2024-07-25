@@ -1,3 +1,4 @@
+import { BorderSummary, MetTelBruin, ViasatScorecard } from './BorderData'
 import { BruinAgileDev, BruinTechUpgrade, MetTelSummary } from './MetTelData'
 import {
   SecurityScorecard,
@@ -5,6 +6,7 @@ import {
   ViasatTempPlaceholder,
 } from './ViasatData'
 import { CaseStudies } from '../../../../../../../scripts/getCaseStudy'
+import { EpochCaseStudy, EpochSummary, EpochTempPlaceholder } from './EpochData'
 
 export default {
   MetTel: {
@@ -16,19 +18,19 @@ export default {
     cases: [SecurityScorecard, ViasatTempPlaceholder],
   },
   Border: {
-    summary: () => <>{''}</>,
-    cases: [],
-  } as CaseStudies,
+    summary: BorderSummary,
+    cases: [MetTelBruin, ViasatScorecard],
+  },
   Epoch: {
-    summary: () => <>{''}</>,
-    cases: [],
-  } as CaseStudies,
+    summary: EpochSummary,
+    cases: [EpochCaseStudy, EpochTempPlaceholder],
+  },
   Estimatica: {
-    summary: () => <>{''}</>,
-    cases: [],
-  } as CaseStudies,
+    summary: EpochSummary,
+    cases: [EpochCaseStudy, EpochTempPlaceholder],
+  },
   Vapyr: {
-    summary: () => <>{''}</>,
-    cases: [],
-  } as CaseStudies,
+    summary: EpochSummary,
+    cases: [EpochCaseStudy, EpochTempPlaceholder],
+  },
 }
