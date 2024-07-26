@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { CaseStudyProps } from '../ProjectCaseStudy'
 import { Bookend } from './Bookend'
 import { DemoImg } from '../../../components'
@@ -6,12 +6,18 @@ import PauseButton from '../../../../../StyleGuide/icons/PauseButton'
 import PlayButton from '../../../../../StyleGuide/icons/PlayButton'
 import {
   StyledCaseStudyContentContainer,
+  StyledCaseStudyImgContainer,
   StyledCaseStudyRow,
   StyledCaseStudyText,
   StyledCaseStudyTextContainer,
   StyledControlButton,
   StyledImageRow,
 } from '../styles'
+
+const CASE_STUDY_INDEXES = {
+  MetTel: 8,
+  Viasat: 9,
+} as const
 
 const ControlButton = ({
   isPaused,
@@ -41,11 +47,18 @@ export const ProjectCaseStudyContent = ({
   startScroll,
   pauseScroll,
   resumeScroll,
+  handleProjectClick,
   containerRef,
   activeWidth,
   activeHeight,
   isPaused,
 }: CaseStudyProps) => {
+  const title = useMemo(() => {
+    if (Object.keys(CASE_STUDY_INDEXES).includes(caseStudy.title)) {
+      return caseStudy.title as keyof typeof CASE_STUDY_INDEXES
+    } else return null
+  }, [caseStudy])
+
   const handleScroll = useCallback(
     (e: React.MouseEvent, action: 'cancel' | 'start') => {
       e.preventDefault()
@@ -67,6 +80,11 @@ export const ProjectCaseStudyContent = ({
     }
   }
 
+  const handleNavigateCaseStudies = () => {
+    if (!title) return
+    handleProjectClick(CASE_STUDY_INDEXES[title])
+  }
+
   return (
     <StyledCaseStudyRow
       ref={containerRef}
@@ -80,7 +98,11 @@ export const ProjectCaseStudyContent = ({
       }
       $mobile={getWindowWidth() < 800}
     >
-      <ControlButton isPaused={isPaused} handlePause={handlePause} />
+      {/* <WindowPanes /> */}
+
+      {!title ? (
+        <ControlButton isPaused={isPaused} handlePause={handlePause} />
+      ) : null}
 
       <Bookend />
 
@@ -89,7 +111,9 @@ export const ProjectCaseStudyContent = ({
           <StyledCaseStudyContentContainer
             /** @TODO use this 'key' syntax where each case study is mapped */
             key={`Case_Study_${caseStudy.title.replaceAll(' ', '_')}_${idx}`}
+            // $isClickable={!!title}
             $reverse={section.type === 'reverse' || section.type === 'sandwich'}
+            // onClick={!!title ? handleNavigateCaseStudies : undefined}
           >
             {section.secondaryText && (
               <StyledCaseStudyTextContainer>
@@ -99,24 +123,33 @@ export const ProjectCaseStudyContent = ({
               </StyledCaseStudyTextContainer>
             )}
             {section.image && (
-              <DemoImg
-                source={section.image?.source as string}
-                index={-1}
-                project={project.title}
-                activeIndex={-1}
-                activeHeight={section.image?.height || activeHeight}
-                getWindowWidth={getWindowWidth}
-                activeWidth={section.image?.width || activeWidth}
-                hideScrollbar
-                noMask
-                hideLink
-              />
+              <StyledCaseStudyImgContainer
+                $isClickable={!!title}
+                onClick={!!title ? handleNavigateCaseStudies : undefined}
+              >
+                <DemoImg
+                  source={section.image?.source as string}
+                  index={-1}
+                  project={project.title}
+                  activeIndex={-1}
+                  activeHeight={section.image?.height || activeHeight}
+                  getWindowWidth={getWindowWidth}
+                  activeWidth={section.image?.width || activeWidth}
+                  hideScrollbar
+                  noMask
+                  hideLink
+                />
+              </StyledCaseStudyImgContainer>
             )}
             {section.images && (
               <StyledImageRow>
-                {section.images.map((image) => {
+                {section.images.map((image, i) => {
                   return (
                     <DemoImg
+                      key={`Case_Study_${caseStudy.title.replaceAll(
+                        ' ',
+                        '_'
+                      )}_${idx}_Image_${i}`}
                       source={image.source as string}
                       index={-1}
                       project={project.title}

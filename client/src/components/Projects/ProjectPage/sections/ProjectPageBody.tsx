@@ -112,8 +112,9 @@ export const ProjectPageBody = ({
       {hasCaseStudy ? (
         <ProjectCaseStudySection
           caseStudies={caseStudies}
-          getWindowWidth={imageProps.getWindowWidth}
           project={project}
+          getWindowWidth={imageProps.getWindowWidth}
+          handleProjectClick={controlsProps.handleProjectClick}
         />
       ) : null}
 

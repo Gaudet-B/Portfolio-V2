@@ -10,7 +10,7 @@ export const VapyrSummary = () => {
   )
 }
 
-export const VapyrCaseStudy = {
+export const VapyrCaseStudy: CaseStudy = {
   title: 'Vapyr',
   sections: [],
 }

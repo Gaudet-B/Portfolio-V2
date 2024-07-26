@@ -2,9 +2,9 @@ import styled, { keyframes } from 'styled-components'
 import background from '../../assets/3d-background.png'
 import styleGuide from '../StyleGuide/StyleGuide'
 
-const CONTAINER_HEIGHT = 80
-const CLOSED_CONTAINER = 90
-const OPEN_CONTAINER = 700
+const CONTAINER_HEIGHT = 80 // 80vh
+const CLOSED_CONTAINER = 90 // 90px
+const OPEN_CONTAINER = 700 // 700px
 
 const open = keyframes`
   from {height: ${CLOSED_CONTAINER}px;}

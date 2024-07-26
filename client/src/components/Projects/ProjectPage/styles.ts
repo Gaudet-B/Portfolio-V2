@@ -1,6 +1,8 @@
 import styled, { keyframes } from 'styled-components'
 import styleGuide from '../../StyleGuide/StyleGuide'
 
+/** @TODO RE-DO FONT SIZES IN THIS FILE USING STYLE GUIDE */
+
 /** @NOTE - currently not using this as regular transform handles more smoothly */
 const expand = keyframes`
     from {height: 25px;}
@@ -77,6 +79,7 @@ export const StyledProfessionalContainer = styled.div<{
 
 export const StyledProjectSummary = styled.span`
   font-size: 1.25rem;
+  /* font-size: ${styleGuide.fonts.sizes.small}; */
   /* margin: 0px 5px 20px; */
   max-width: 90%;
   line-height: 1.25;

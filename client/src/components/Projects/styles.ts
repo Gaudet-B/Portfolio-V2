@@ -1,9 +1,9 @@
 import styled, { createGlobalStyle, keyframes } from 'styled-components'
 import styleGuide from '../StyleGuide/StyleGuide'
 
-const CONTAINER_HEIGHT = 80
-const CLOSED_CONTAINER = 22
-const OPEN_CONTAINER = 700
+const CONTAINER_HEIGHT = 90 // 90vh
+const CLOSED_CONTAINER = 22 // 22px
+const OPEN_CONTAINER = 700 // 700px
 const ANIMATION_TIMING = `0.7s`
 
 export const GlobalFonts = createGlobalStyle`

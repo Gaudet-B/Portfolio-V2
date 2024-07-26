@@ -153,6 +153,7 @@ const ProjectPage = ({
     if (title === 'Epoch IT Solutions') image = heros.epoch
     if (title === 'Border') image = heros.border
     if (title === 'Viasat') image = heros.viasat
+    if (title === 'MetTel') image = heros.mettel
     return image
   }
 

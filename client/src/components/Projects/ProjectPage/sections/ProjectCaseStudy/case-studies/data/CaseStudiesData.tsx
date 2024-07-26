@@ -5,8 +5,14 @@ import {
   ViasatSummary,
   ViasatTempPlaceholder,
 } from './ViasatData'
-import { CaseStudies } from '../../../../../../../scripts/getCaseStudy'
+// import { CaseStudies } from '../../../../../../../scripts/getCaseStudy'
 import { EpochCaseStudy, EpochSummary, EpochTempPlaceholder } from './EpochData'
+import {
+  EstimaticaCaseStudy,
+  EstimaticaSummary,
+  EstimaticaTempPlaceholder,
+} from './EstimaticaData'
+import { VapyrCaseStudy, VapyrSummary, VapyrTempPlaceholder } from './VapyrData'
 
 export default {
   MetTel: {
@@ -26,11 +32,11 @@ export default {
     cases: [EpochCaseStudy, EpochTempPlaceholder],
   },
   Estimatica: {
-    summary: EpochSummary,
-    cases: [EpochCaseStudy, EpochTempPlaceholder],
+    summary: EstimaticaSummary,
+    cases: [EstimaticaCaseStudy, EstimaticaTempPlaceholder],
   },
   Vapyr: {
-    summary: EpochSummary,
-    cases: [EpochCaseStudy, EpochTempPlaceholder],
+    summary: VapyrSummary,
+    cases: [VapyrCaseStudy, VapyrTempPlaceholder],
   },
 }

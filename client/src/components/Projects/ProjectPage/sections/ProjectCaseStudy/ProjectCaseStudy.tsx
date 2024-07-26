@@ -7,8 +7,6 @@ import useSlowScroll, {
   ALTERNATING_DELAY,
 } from '../../../../../hooks/useSlowScroll'
 import { CaseStudy } from '../../../../../scripts/getCaseStudy'
-// import viasatLogo from '../../../assets/viasat-logo.png'
-// import mettelLogo from '../../../assets/mettel-logo.png'
 
 const IMG_DIMENSIONS = {
   mobile: {
@@ -29,6 +27,7 @@ export type CaseStudyProps = {
   startScroll: () => void
   pauseScroll: () => void
   resumeScroll: () => void
+  handleProjectClick: (index: number) => void
   containerRef: React.RefObject<HTMLDivElement>
   activeWidth: number
   activeHeight: number
@@ -37,9 +36,9 @@ export type CaseStudyProps = {
 
 const CaseStudyContainer = ({
   children,
-  hidden,
-}: PropsWithChildren<{ hidden: boolean }>) => (
-  <StyledScrollableContainer $hidden={hidden}>
+  shouldRender,
+}: PropsWithChildren<{ shouldRender: boolean }>) => (
+  <StyledScrollableContainer $shouldRender={shouldRender}>
     {children}
   </StyledScrollableContainer>
 )
@@ -49,11 +48,13 @@ export const ProjectCaseStudy = ({
   idx,
   project,
   getWindowWidth,
+  handleProjectClick,
 }: {
   caseStudy: CaseStudy
   idx: number
   project: Project
   getWindowWidth: () => number
+  handleProjectClick: (index: number) => void
 }) => {
   const windowWidth = getWindowWidth()
 
@@ -82,7 +83,7 @@ export const ProjectCaseStudy = ({
     }
   }, [project])
 
-  const args = {
+  const args: CaseStudyProps = {
     project,
     caseStudy,
     getWindowWidth,
@@ -90,6 +91,7 @@ export const ProjectCaseStudy = ({
     startScroll: () => scroller.start(),
     pauseScroll: () => scroller.pause(),
     resumeScroll: () => scroller.resume(),
+    handleProjectClick,
     containerRef: scroller.containerRef,
     activeHeight,
     activeWidth,
@@ -99,7 +101,7 @@ export const ProjectCaseStudy = ({
   return (
     <CaseStudyContainer
       key={`${project.title}-case-study-${idx}`}
-      hidden={project.title === 'Viasat' && idx === 1}
+      shouldRender={caseStudy.title !== 'Placeholder - SHOULD NOT RENDER'}
     >
       <ProjectCaseStudyContent {...{ ...args }} />
     </CaseStudyContainer>

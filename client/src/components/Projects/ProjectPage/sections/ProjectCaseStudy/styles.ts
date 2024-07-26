@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components'
 import styleGuide from '../../../../StyleGuide/StyleGuide'
 
-const CONTENT_WIDTH = 400
+const CONTENT_MIN_WIDTH = 400
 // const CONTENT_HEIGHT = 500
 
 const { colors, fonts } = styleGuide
@@ -29,7 +29,7 @@ export const StyledCompanySummaryContainer = styled.div`
   display: flex;
   align-items: center;
   /* padding-top: 3em; */
-  font-size: ${fonts.sizes.medium};
+  font-size: ${fonts.sizes.schmedium};
   line-height: 22pt;
   max-width: 550px;
 `
@@ -71,10 +71,11 @@ export const StyledCaseStudyGrid = styled.div`
   /* flex-wrap: wrap; */
   gap: 6px;
 `
-/** @TODO set a max-width? */
-export const StyledScrollableContainer = styled.div<{ $hidden: boolean }>`
-  display: ${({ $hidden }) => ($hidden ? 'none' : 'block')};
+/** @TODO change max-width? */
+export const StyledScrollableContainer = styled.div<{ $shouldRender: boolean }>`
+  display: ${({ $shouldRender }) => ($shouldRender ? 'flex' : 'none')};
   width: 100%;
+  /* max-width: 700px; */
   padding: 2px 4px;
   overflow: hidden;
   white-space: nowrap;
@@ -121,17 +122,14 @@ export const StyledScrollableContainer = styled.div<{ $hidden: boolean }>`
 
 export const StyledCaseStudyRow = styled.div<{
   $mobile: boolean
-  $reverse?: boolean
 }>`
+  /* transform: translateX(-20px); */
+  /* width: ${CONTENT_MIN_WIDTH}px; */
   scroll-snap-type: x mandatory;
   height: 100%;
   display: flex;
   gap: 80px;
-  flex-direction: ${({ $mobile, $reverse }) => {
-    if ($reverse) return 'column-reverse'
-    if ($mobile) return 'column'
-    return 'row'
-  }};
+  flex-direction: ${({ $mobile }) => ($mobile ? 'column' : 'row')}};
   align-items: center;
   overflow: auto;
   &::-webkit-scrollbar {
@@ -147,7 +145,9 @@ export const StyledCaseStudyRow = styled.div<{
       &:horizontal {
         &:decrement {
           border-width: 5px 5px 5px 0;
-          border-color: transparent ${colors.GrayShadow} transparent transparent;
+          border-color: transparent ${
+            colors.GrayShadow
+          } transparent transparent;
           &:hover {
             border-color: transparent ${colors.MatrixGreen} transparent
               transparent;
@@ -155,7 +155,9 @@ export const StyledCaseStudyRow = styled.div<{
         }
         &:increment {
           border-width: 5px 0 5px 5px;
-          border-color: transparent transparent transparent ${colors.GrayShadow};
+          border-color: transparent transparent transparent ${
+            colors.GrayShadow
+          };
           &:hover {
             border-color: transparent transparent transparent
               ${colors.MatrixGreen};
@@ -185,7 +187,7 @@ export const StyledCaseStudyContentContainer = styled.div<{
 }>`
   padding: 20px 0;
   scroll-snap-align: center;
-  width: ${CONTENT_WIDTH}px;
+  width: ${CONTENT_MIN_WIDTH}px;
   display: flex;
   flex-direction: ${({ $reverse }) => ($reverse ? 'column-reverse' : 'column')};
   justify-content: center;
@@ -203,14 +205,20 @@ export const StyledCaseStudyContentContainer = styled.div<{
 `
 
 export const StyledCaseStudyTextContainer = styled.div`
-  width: ${CONTENT_WIDTH}px;
+  width: ${CONTENT_MIN_WIDTH}px;
   text-align: center;
   white-space: wrap;
 `
 
+export const StyledCaseStudyImgContainer = styled.div<{
+  $isClickable: boolean
+}>`
+  cursor: ${({ $isClickable }) => ($isClickable ? 'pointer' : 'default')};
+`
+
 export const StyledCaseStudyText = styled.p`
-  width: ${CONTENT_WIDTH - 20}px;
-  padding: 0 10px;
+  width: ${CONTENT_MIN_WIDTH - 40}px;
+  padding: 0 20px;
 `
 
 export const StyledControlButton = styled.div`
@@ -234,4 +242,26 @@ export const StyledImageRow = styled.div`
   gap: 20px;
   justify-content: center;
   align-items: center;
+`
+
+export const StyledLeftPane = styled.div`
+  position: sticky;
+  display: flex;
+  padding: 0 10px;
+  height: 100%;
+  width: 50px;
+  background-color: rgba(25, 25, 25, 0.4);
+  top: 0;
+  left: 0;
+`
+
+export const StyledRightPane = styled.div`
+  position: sticky;
+  display: flex;
+  padding: 0 10px;
+  height: 100%;
+  width: 50px;
+  background-color: rgba(25, 25, 25, 0.4);
+  top: 0;
+  left: 100%;
 `

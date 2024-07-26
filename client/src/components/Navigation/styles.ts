@@ -162,7 +162,7 @@ export const StyledNavWrapper = styled.div<{ $responsive: boolean }>`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: ${({ $responsive }) => ($responsive ? '0' : '20px 55px 0 55px')};
+  padding: ${({ $responsive }) => ($responsive ? '0' : '0')};
   margin-bottom: ${({ $responsive }) => ($responsive ? undefined : '5px')};
   background-color: ${styleGuide.colors.SpaceBlack};
 `

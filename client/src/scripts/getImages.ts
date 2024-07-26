@@ -65,6 +65,10 @@ import epochitHero from '../assets/epochit/hero_02.PNG'
 import borderHero from '../assets/border/hero_02.PNG'
 import borderHeroSm from '../assets/border/hero_01.PNG'
 import viasatHero from '../assets/border/viasat_logo_default.png'
+import mettelHero from '../assets/border/mettel-logo-default.svg'
+
+const mettelhero =
+  'https://www.mettel.net/wp-content/themes/mettel/dist/assets/images/logo-white.svg'
 
 //
 const draftImages = [draft1, draft3, draft4, draft5, draft6, draft7] as string[]
@@ -129,6 +133,7 @@ const heros = {
   border: borderHero as string,
   borderSm: borderHeroSm as string,
   viasat: viasatHero,
+  mettel: mettelHero,
 }
 
 const getImages = () => {

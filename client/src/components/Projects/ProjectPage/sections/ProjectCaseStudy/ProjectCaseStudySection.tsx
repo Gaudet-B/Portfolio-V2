@@ -9,12 +9,14 @@ import { CaseStudies } from '../../../../../scripts/getCaseStudy'
 
 export const ProjectCaseStudySection = ({
   caseStudies,
-  getWindowWidth,
   project,
+  getWindowWidth,
+  handleProjectClick,
 }: {
   caseStudies?: CaseStudies
-  getWindowWidth: () => number
   project: Project
+  getWindowWidth: () => number
+  handleProjectClick: (index: number) => void
 }) => {
   return (
     <StyledCaseStudyContainer>
@@ -24,7 +26,13 @@ export const ProjectCaseStudySection = ({
       <StyledCaseStudyGrid>
         {caseStudies &&
           caseStudies.cases.map((caseStudy, idx) => {
-            return ProjectCaseStudy({ caseStudy, idx, project, getWindowWidth })
+            return ProjectCaseStudy({
+              caseStudy,
+              idx,
+              project,
+              getWindowWidth,
+              handleProjectClick,
+            })
           })}
       </StyledCaseStudyGrid>
     </StyledCaseStudyContainer>

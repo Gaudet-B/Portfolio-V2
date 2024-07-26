@@ -1,49 +1,5 @@
 import anonymousProNormal from '../../assets/fonts/AnonymousPro-Regular.ttf'
 
-// interface StyleGuide {
-//   colors: {
-//     [key: string]: string
-//   }
-//   fonts: {
-//     [key: string]: {
-//       [key: string]: string | number
-//     }
-//   }
-
-// COPILOT SUGGESTIONS
-// fontSizes: {},
-// fontWeights: {},
-// lineHeights: {},
-// letterSpacings: {},
-// sizes: {},
-// borders: {},
-// radii: {},
-// shadows: {},
-// zIndices: {},
-// breakpoints: {},
-// space: {},
-// transitions: {},
-// buttons: {},
-// text: {},
-// links: {},
-// forms: {},
-// alerts: {},
-// badges: {},
-// cards: {},
-// containers: {},
-// images: {},
-// lists: {},
-// messages: {},
-// navs: {},
-// tables: {},
-// tabs: {},
-// styles: {},
-// layout: {},
-// variants: {},
-// textStyles: {},
-// buttons: {},
-// }
-
 const styleGuide = {
   colors: {
     BackgroundGray: '#f5f5f549', // 0.287 opacity rgba(245, 245, 245, 0.287)
@@ -65,7 +21,9 @@ const styleGuide = {
     sizes: {
       extraSmall: '10pt',
       small: '12pt',
+      schmedium: '14pt',
       medium: '16pt',
+      extraMedium: '18pt',
       large: '24pt',
       extraLarge: '32pt',
     } as const,
