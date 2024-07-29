@@ -31,12 +31,12 @@ export const StyledCardOverlay = styled.div`
   background-color: rgb(26, 26, 26, 0.2);
 `
 
-export const StyledCardMask = styled.div`
-  animation: ${(props) => (props.active ? expand : contract)} 0.3s
-    ${(props) => (props.active ? 'ease-in' : 'ease-out')};
-  border-radius: ${(props) => (props.active ? '5px' : undefined)};
-  height: ${(props) => (props.active ? 'inherit' : '0px')};
-  top: ${(props) => (props.active ? '0' : '50%')};
+export const StyledCardMask = styled.div<{ $active: boolean }>`
+  animation: ${({ $active }) => ($active ? expand : contract)} 0.3s
+    ${({ $active }) => ($active ? 'ease-in' : 'ease-out')};
+  border-radius: ${({ $active }) => ($active ? '5px' : undefined)};
+  height: ${({ $active }) => ($active ? 'inherit' : '0px')};
+  top: ${({ $active }) => ($active ? '0' : '50%')};
   position: relative;
   width: inherit;
   display: flex;
@@ -52,21 +52,21 @@ export const StyledCardMask = styled.div`
   }
 `
 
-export const StyledCardText = styled.span`
-  color: ${(props) =>
-    props.active ? styleGuide.colors.WhiteSmoke : 'transparent'};
+export const StyledCardText = styled.span<{ $active: boolean }>`
+  color: ${({ $active }) =>
+    $active ? styleGuide.colors.WhiteSmoke : 'transparent'};
   font-size: ${styleGuide.fonts.sizes.small};
 `
 
-export const StyledCardTitle = styled.h3`
-  color: ${(props) =>
-    props.active ? styleGuide.colors.MatrixGreen : 'transparent'};
+export const StyledCardTitle = styled.h3<{ $active: boolean }>`
+  color: ${({ $active }) =>
+    $active ? styleGuide.colors.MatrixGreen : 'transparent'};
   font-size: ${styleGuide.fonts.sizes.medium};
   font-weight: bold;
 `
 
-export const StyledCardlink = styled.span`
-  color: ${(props) =>
-    props.active ? styleGuide.colors.WhiteSmoke : 'transparent'};
+export const StyledCardlink = styled.span<{ $active: boolean }>`
+  color: ${({ $active }) =>
+    $active ? styleGuide.colors.WhiteSmoke : 'transparent'};
   font-size: ${styleGuide.fonts.sizes.extraSmall};
 `

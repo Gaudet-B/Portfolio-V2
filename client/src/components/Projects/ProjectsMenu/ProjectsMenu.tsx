@@ -16,6 +16,7 @@ import {
 /* TYPES */
 import { Project } from '../Projects'
 import ProjectsList, { MobileProjectsList } from './ProjectsList'
+import { HeroImages } from '../../../scripts/getImages'
 
 export const PROJECT_TYPES = [
   'Personal Project',
@@ -40,9 +41,7 @@ export const CATEGORY_FILTERS = [
 const ProjectsMenu = (props: {
   projects: Array<Project>
   handleProjectClick: (index: number) => void
-  images: {
-    [key: string]: string
-  }
+  images: HeroImages
   mobile: boolean
 }) => {
   const { projects, handleProjectClick, images } = props

@@ -1,12 +1,13 @@
 import { ProjectDetails } from './ProjectDetails'
 import { ProjectDemoSection } from './ProjectDemoSection'
 import { DemoBanner, ModalContent } from '../components'
-import { Project, HeroImages } from '../../Projects'
+import { Project } from '../../Projects'
 import { StyledPageBody, StyledSeparator } from '../styles'
 import { ProjectControls } from './ProjectControls'
 import { ProjectCaseStudySection } from './ProjectCaseStudy'
 import { ProjectHeroContent } from './ProjectHeroContent'
 import { getCaseStudy } from '../../../../scripts/getCaseStudy'
+import { HeroImages, ProjectImages } from '../../../../scripts/getImages'
 
 const CASE_STUDIES = [
   'MetTel',
@@ -21,7 +22,7 @@ export type HasCaseStudy = (typeof CASE_STUDIES)[number]
 
 export type ImageProps = {
   heros: HeroImages
-  images: string[] | string[][]
+  images: ProjectImages
   activeTab?: number
   activeIndex?: number
   handleTabs: (index: number) => void

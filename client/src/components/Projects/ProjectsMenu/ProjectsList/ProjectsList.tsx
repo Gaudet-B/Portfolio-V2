@@ -1,3 +1,4 @@
+import { HeroImages } from '../../../../scripts/getImages'
 import { Project } from '../../Projects'
 import ProjectCard from '../ProjectCard'
 import { StyledProjectsList, StyledListItem, StyledListTitle } from './styles'
@@ -14,9 +15,7 @@ const _splitProjects = (projects: Array<Project>) => {
 
 const ProjectsList = (props: {
   projects: Array<Project>
-  images: {
-    [key: string]: string
-  }
+  images: HeroImages
   categories: Array<
     'MERN' | 'React' | 'Java' | 'Javascript' | 'Python' | 'Bootstrap' | 'All'
   >
@@ -75,9 +74,7 @@ export default ProjectsList
 export const MobileProjectsList = (props: {
   projects: Array<Project>
   handleProjectClick: (index: number) => void
-  images: {
-    [key: string]: string
-  }
+  images: HeroImages
 }) => {
   const { projects, handleProjectClick, images } = props
   const { personal, professional } = _splitProjects(projects)

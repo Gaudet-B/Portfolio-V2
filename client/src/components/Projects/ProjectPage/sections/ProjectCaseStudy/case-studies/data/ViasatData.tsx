@@ -1,6 +1,6 @@
-import BorderLogoLink from './BorderLogoLink'
-import { StyledSummaryText } from '../../styles'
+import { StyledText } from './styles'
 import { CaseStudy } from '../../../../../../../scripts/getCaseStudy'
+import BorderLogoLink from './BorderLogoLink'
 import network from '../../../../../../../assets/border/case-studies/viasat/network-security-icon.svg'
 import startup from '../../../../../../../assets/border/case-studies/viasat/startup-icon.webp'
 
@@ -14,14 +14,14 @@ const NewParagraph = () => {
 }
 
 export const ViasatSummary = (handleClick: (e: React.MouseEvent) => void) => (
-  <StyledSummaryText>
+  <StyledText>
     One of <BorderLogoLink handleClick={handleClick} />
     's local enterprise clients, Viasat Inc. is a global communications company
     that believes everyone and everything in the world can be connected. Viasat
     is developing the ultimate global communications network to power
     high-quality, secure, and affordable connections that impact people's lives
     anywhere they are — on the ground, in the air or at sea.
-  </StyledSummaryText>
+  </StyledText>
 )
 
 export const SecurityScorecard: CaseStudy = {
@@ -36,14 +36,14 @@ export const SecurityScorecard: CaseStudy = {
         alt: 'network security icon by Candy Design from Noun Project',
       },
       text: (
-        <StyledSummaryText>
+        <StyledText>
           The nature of Viasat's business dictates they adhere to the strictest
           security standards. Border was contracted to work directly with the
           Security Engineering team, which led those engineers to architect new
           development environments that would soon be adopted company-wide.
           These "boxes" lived on EC2 instances, could be spun up fairly quickly,
           and were only accessible via SSH.
-        </StyledSummaryText>
+        </StyledText>
       ),
     },
     {
@@ -55,26 +55,26 @@ export const SecurityScorecard: CaseStudy = {
         alt: 'AI generated startup icon',
       },
       text: (
-        <StyledSummaryText>
+        <StyledText>
           Border's job was to architecht and maintain a modern frontend for an
           existing application that tracked compliance of all applications and
           systems company-wide, based on ISO/IEC standards.
-        </StyledSummaryText>
+        </StyledText>
       ),
       secondaryText: (
-        <StyledSummaryText>
+        <StyledText>
           I was added to the team to do something Border doesn't typically offer
           - full stack development. This allowed us (Border) to create a small
           "team within a team" in order to build complete features
           front-to-back, while still maintaining our principle of operating with
           startup-like speed.
-        </StyledSummaryText>
+        </StyledText>
       ),
     },
     {
       type: 'no-image',
       text: (
-        <StyledSummaryText>
+        <StyledText>
           In the 18 months I spent working with the Viasat Security Engineering
           team, large numbers of new users were on-boarded after a fairly public
           acquisition. This challenged us to find a balance between scaling
@@ -89,7 +89,7 @@ export const SecurityScorecard: CaseStudy = {
           tricky optimistic updates - was used to ensure a completely seemless
           user experience with zero loading screens or spinners after initial
           load.
-        </StyledSummaryText>
+        </StyledText>
       ),
     },
     {
@@ -118,12 +118,12 @@ export const SecurityScorecard: CaseStudy = {
         },
       ],
       text: (
-        <StyledSummaryText>
+        <StyledText>
           I worked on a wide variety of tasks, including React components (React
           18 + Typescript), HTML email services (MJML), automated tasks (Python
           lambdas + Terraform), data synchronization (Code DX + PostgreSQL +
           Redis), and a Python + Flask backend.
-        </StyledSummaryText>
+        </StyledText>
       ),
     },
   ],

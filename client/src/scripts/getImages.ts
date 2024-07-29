@@ -57,7 +57,7 @@ import burger from '../assets/icons/burger-menu-vector.png'
 //
 import draftHero from '../assets/draft/hero_02.PNG'
 import pizzaHero from '../assets/pizza/hero_01.PNG'
-import chataHero from '../assets/chata/sample_hero_1.png'
+import chataHero from '../assets/chata/register_1.PNG'
 import portfolioHero from '../assets/portfolio/hero_02.PNG'
 import vapyrHero from '../assets/vapyr/hero_01.PNG'
 import estimaticaHero from '../assets/estimatica/hero_01.PNG'
@@ -126,7 +126,7 @@ const heros = {
   draft: draftHero as string,
   pizza: pizzaHero as string,
   portfolio: portfolioHero as string,
-  chat: chataHero,
+  chat: chataHero as string,
   vapyr: vapyrHero as string,
   estimatica: estimaticaHero as string,
   epoch: epochitHero as string,
@@ -150,5 +150,9 @@ export type Images = {
   icons: typeof icons
   heros: typeof heros
 }
+
+export type ProjectImages = Images['projects'][number]
+
+export type HeroImages = Images['heros']
 
 export default getImages

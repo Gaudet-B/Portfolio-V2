@@ -75,7 +75,7 @@ export const StyledCaseStudyGrid = styled.div`
 export const StyledScrollableContainer = styled.div<{ $shouldRender: boolean }>`
   display: ${({ $shouldRender }) => ($shouldRender ? 'flex' : 'none')};
   width: 100%;
-  /* max-width: 700px; */
+  max-width: 700px;
   padding: 2px 4px;
   overflow: hidden;
   white-space: nowrap;

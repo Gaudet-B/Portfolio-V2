@@ -1,7 +1,7 @@
-import { StyledSummaryText } from '../../styles'
+import { StyledText } from './styles'
+import { CaseStudy } from '../../../../../../../scripts/getCaseStudy'
 import viasatLogo from '../../../../../../../assets/border/viasat_logo_default.png'
 import mettelLogo from '../../../../../../../assets/border/mettel-logo-default.svg'
-import { CaseStudy } from '../../../../../../../scripts/getCaseStudy'
 
 const NewParagraph = () => {
   return (
@@ -14,7 +14,7 @@ const NewParagraph = () => {
 
 export const BorderSummary = () => {
   return (
-    <StyledSummaryText>
+    <StyledText>
       Border, LLC is a team of design and dev innovators, thinkers, and
       changemakers focused on constructing modern web applications. They bring
       decades of startup thinking and big business understanding to help define,
@@ -23,7 +23,7 @@ export const BorderSummary = () => {
       Border's success has come from delivering modern web UX strategy, design,
       architecture, and development to enterprise clients with the agility and
       velocity of a startup.
-    </StyledSummaryText>
+    </StyledText>
   )
 }
 
@@ -39,11 +39,11 @@ export const MetTelBruin: CaseStudy = {
         alt: 'MetTel logo',
       },
       text: (
-        <StyledSummaryText>
+        <StyledText>
           MetTel is a leading provider of integrated digital communications
           solutions for enterprise customers.
           <NewParagraph />
-        </StyledSummaryText>
+        </StyledText>
       ),
     },
   ],
@@ -61,12 +61,12 @@ export const ViasatScorecard: CaseStudy = {
         alt: 'Viasat logo',
       },
       text: (
-        <StyledSummaryText>
+        <StyledText>
           Viasat Inc. is a global communications company that believes everyone
           and everything in the world can be connected.
           <NewParagraph />
           <NewParagraph />
-        </StyledSummaryText>
+        </StyledText>
       ),
     },
   ],

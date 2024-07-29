@@ -3,8 +3,9 @@ import { debounce } from 'lodash'
 import { ProjectPageBody, ProjectPageHeader } from './sections'
 import { DemoImg } from './components'
 import ContentModal from '../../reuseable/ContentModal'
-import { Project, HeroImages } from '../Projects'
+import { Project } from '../Projects'
 import { StyledPageContainer } from './styles'
+import { HeroImages, ProjectImages } from '../../../scripts/getImages'
 /* ASSETS */
 import draftHero from '../../../assets/draft/draft_hero.png'
 import pizzaHero from '../../../assets/pizza/pizza_hero.png'
@@ -49,7 +50,7 @@ const ProjectPage = ({
   prevProject: string
   nextProject: string
   projectsLength: number
-  images: string[] | string[][]
+  images: ProjectImages
   heros: HeroImages
   mobile: boolean
   getWindowHeight: () => number
