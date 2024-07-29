@@ -8,6 +8,13 @@ import {
 } from './styles'
 import { CaseStudy } from '../../../../../../../scripts/getCaseStudy'
 import styleGuide from '../../../../../../StyleGuide/StyleGuide'
+import codepen from '../../../../../../../assets/vapyr/codepen-react-17-inverse-data-flow.PNG'
+import graphs from '../../../../../../../assets/vapyr/graphs.svg'
+import appdesign from '../../../../../../../assets/vapyr/application-design.webp'
+import waterfall from '../../../../../../../assets/vapyr/react-waterfall.webp'
+import lifecycle from '../../../../../../../assets/vapyr/react-lifecycle-methods.png'
+// import useeffect from '../../../../../../../assets/vapyr/react-useeffect.jpg'
+import learnreact from '../../../../../../../assets/vapyr/learn-react.png'
 
 const List = ({ children }: PropsWithChildren) => {
   return <StyledList>{children}</StyledList>
@@ -59,12 +66,12 @@ export const VapyrCaseStudy: CaseStudy = {
   title: 'Vapyr',
   sections: [
     {
-      type: 'default',
+      type: 'reverse',
       image: {
-        source: 'https://via.placeholder.com/250x150',
-        width: 250,
-        height: 150,
-        alt: 'placeholder',
+        source: graphs,
+        width: 180,
+        height: 180,
+        alt: 'graphs and charts icons',
       },
       text: (
         <StyledText>
@@ -98,10 +105,10 @@ export const VapyrCaseStudy: CaseStudy = {
     {
       type: 'reverse',
       image: {
-        source: 'https://via.placeholder.com/300x250',
-        width: 300,
-        height: 250,
-        alt: 'placeholder',
+        source: appdesign,
+        width: 250,
+        height: 200,
+        alt: 'apllication design icon',
       },
       text: (
         <StyledText>
@@ -114,21 +121,21 @@ export const VapyrCaseStudy: CaseStudy = {
     {
       type: 'default',
       images: [
+        // {
+        //   source: 'https://via.placeholder.com/100x70',
+        //   width: 100,
+        //   height: 70,
+        //   alt: 'placeholder',
+        // },
         {
-          source: 'https://via.placeholder.com/100x70',
-          width: 100,
-          height: 70,
-          alt: 'placeholder',
+          source: lifecycle,
+          width: 180,
+          height: 100,
+          alt: 'React component lifecycle flowchart',
         },
         {
-          source: 'https://via.placeholder.com/120x50',
+          source: waterfall,
           width: 120,
-          height: 50,
-          alt: 'placeholder',
-        },
-        {
-          source: 'https://via.placeholder.com/100x100',
-          width: 100,
           height: 100,
           alt: 'placeholder',
         },
@@ -154,25 +161,14 @@ export const VapyrCaseStudy: CaseStudy = {
           </List>
         </StyledListText>
       ),
-      // secondaryText: (
-      //   <StyledText>
-      //     I won't weight in on the "smart vs. dummb components" debate, or the
-      //     "controlled vs. uncontrolled components" debate, but I will say what I
-      //     told them - "Settling on a code style is valuable, especially as the
-      //     application grows." And as far as components go - "Make sure they only
-      //     do one thing!" For example, if a component is supposed to render a
-      //     button, make sure that's all it does - it shouldn't also conditionally
-      //     render a link, or conditionally render plain text, etc.
-      //   </StyledText>
-      // ),
     },
     {
       type: 'reverse',
       image: {
-        source: 'https://via.placeholder.com/150x250',
-        width: 250,
-        height: 200,
-        alt: 'placeholder',
+        source: codepen,
+        width: 300,
+        height: 220,
+        alt: 'React code sample from CodePen',
       },
       text: (
         <StyledText>
@@ -190,7 +186,6 @@ export const VapyrCaseStudy: CaseStudy = {
     },
     {
       type: 'reverse',
-      // image: {},
       text: (
         <StyledText>
           <StyledText>
@@ -218,10 +213,10 @@ export const VapyrCaseStudy: CaseStudy = {
     {
       type: 'default',
       image: {
-        source: 'https://via.placeholder.com/250x150',
+        source: learnreact,
         width: 250,
         height: 150,
-        alt: 'placeholder',
+        alt: 'image of a "data waterfall"',
       },
       text: (
         <StyledListText>

@@ -1,11 +1,11 @@
 import { StyledText } from './styles'
 import { CaseStudy } from '../../../../../../../scripts/getCaseStudy'
+import BorderLogoLink from './BorderLogoLink'
 /** @TODO really need an alias for this */
 import ecommerce from '../../../../../../../assets/border/case-studies/mettel/ecommerce.png'
 import components from '../../../../../../../assets/border/case-studies/mettel/components-icon.svg'
 import typescript from '../../../../../../../assets/border/case-studies/mettel/typescript-icon.svg'
 import tests from '../../../../../../../assets/border/case-studies/mettel/unittests.webp'
-import BorderLogoLink from './BorderLogoLink'
 
 export const MetTelSummary = (handleClick: (e: React.MouseEvent) => void) => (
   <StyledText>
