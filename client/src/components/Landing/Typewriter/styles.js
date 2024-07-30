@@ -31,7 +31,6 @@ export const StyledTypewriterText = styled.h1`
     props.heading ? styleGuide.colors.White : styleGuide.colors.MatrixGreen};
   font-size: ${(props) => (props.heading ? '4em' : '2.5em')};
   font-size: ${(props) => (props.responsive ? '2.5em' : undefined)};
-  font-size: ${(props) => (props.responsiveSubtext ? '2em' : undefined)};
   text-align: center;
   white-space: nowrap;
   overflow: hidden;

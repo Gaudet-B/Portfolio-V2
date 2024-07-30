@@ -38,3 +38,12 @@ export const StyledProjectsListContainer = styled.div`
   justify-content: space-evenly;
   padding-bottom: 40px;
 `
+
+export const StyledProjectsList = styled.ul`
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  list-style: none;
+`
