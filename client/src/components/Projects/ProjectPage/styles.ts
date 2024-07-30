@@ -44,9 +44,11 @@ export const StyledProjectType = styled.h2<{ $responsive: boolean }>`
   color: rgba(0, 143, 17, 0.7);
 `
 
-export const StyledProjectHeroContainer = styled.div`
+export const StyledProjectHeroContainer = styled.div<{ $mobile: boolean }>`
   display: flex;
+  flex-direction: ${({ $mobile }) => ($mobile ? 'column' : 'row')};
   justify-content: space-evenly;
+  gap: ${({ $mobile }) => ($mobile ? '24px' : undefined)};
   padding: 0 2em;
 `
 

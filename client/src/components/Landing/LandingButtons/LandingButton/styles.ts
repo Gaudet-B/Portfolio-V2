@@ -14,11 +14,11 @@ export const StyledMask = styled.div`
   padding: 0px;
 `
 
-export const StyledButton = styled.div`
+export const StyledButton = styled.div<{ $img: string; $mobile: boolean }>`
   border: 6px double ${styleGuide.colors.Black};
   border-radius: 20%;
   animation: ${fadeIn} 3s;
-  background-image: url('${(props) => props.img || undefined}');
+  background-image: url('${({ $img }) => $img || undefined}');
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
@@ -27,8 +27,10 @@ export const StyledButton = styled.div`
   height: 200px;
   margin: 0px;
   padding: 0px;
-  transform: perspective(750px) translate3d(0px, 0px, -250px) rotateX(27deg)
-    scale(0.9, 0.9);
+  transform: ${({ $mobile }) =>
+    $mobile
+      ? undefined
+      : 'perspective(750px) translate3d(0px, 0px, -250px) rotateX(27deg) scale(0.9, 0.9)'};
   box-shadow: 0 70px 40px -20px rgba(245, 245, 245, 0.1);
   background-color: ${styleGuide.colors.WhiteSmoke};
   animation: ${fadeIn} 3s;
@@ -44,13 +46,14 @@ export const StyledButton = styled.div`
   }
 `
 
-export const StyledLabel = styled.div`
+export const StyledLabel = styled.div<{ $mobile: boolean }>`
   display: flex;
   flex-direction: column;
   text-align: center;
   color: ${styleGuide.colors.LabelGreen};
   font-size: 18pt;
   padding-top: 12px;
+  margin-bottom: ${({ $mobile }) => ($mobile ? '12px' : undefined)};
   animation: ${fadeIn} 3s;
   > p {
     margin: 0px;

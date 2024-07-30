@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect, ReactNode } from 'react'
 import { debounce } from 'lodash'
 import { ProjectPageBody, ProjectPageHeader } from './sections'
 import { DemoImg } from './components'
@@ -76,7 +76,7 @@ const ProjectPage = ({
 
   // state variables that handle the carousel image modal
   const [showModal, setShowModal] = useState<boolean>(false)
-  const [modalContent, setModalContent] = useState<typeof React.Children>()
+  const [modalContent, setModalContent] = useState<ReactNode>()
 
   // timeout IDs stored in array so they can be cancelled
   const [timeouts, setTimeouts] = useState<number[]>([])
@@ -294,7 +294,7 @@ const ProjectPage = ({
       {modalContent && (
         <ContentModal
           active={showModal}
-          content={modalContent}
+          children={modalContent}
           activeIndex={activeIndex}
           handleClose={handleCloseModal}
           handleImageBrowse={handleImageBrowse}
@@ -306,7 +306,7 @@ const ProjectPage = ({
           project={project}
           projectType={projectType}
           mobile={mobile}
-          getWindowWidth={getWindowWidth}
+          // getWindowWidth={getWindowWidth}
         />
 
         <ProjectPageBody

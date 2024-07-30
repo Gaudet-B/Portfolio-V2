@@ -42,20 +42,12 @@ export const EstimaticaCaseStudy: CaseStudy = {
   sections: [
     {
       type: 'default',
-      images: [
-        // {
-        //   source: 'https://via.placeholder.com/150x100',
-        //   width: 150,
-        //   height: 100,
-        //   alt: '',
-        // },
-        {
-          source: wplogo,
-          width: 120,
-          height: 120,
-          alt: '',
-        },
-      ],
+      image: {
+        source: wplogo,
+        width: 120,
+        height: 120,
+        alt: '',
+      },
       text: (
         <StyledText>
           Narrow Land was dealing with some turmoil in the Wordpress developer

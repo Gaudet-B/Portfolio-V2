@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 import StyleGuide from '../../StyleGuide/StyleGuide'
 
-export const StyledFullScreenMask = styled.div`
-  display: ${(props) => (props.active ? undefined : 'none')};
+export const StyledFullScreenMask = styled.div<{ $active: boolean }>`
+  display: ${({ $active }) => ($active ? undefined : 'none')};
   position: fixed;
   top: 0;
   left: 0;

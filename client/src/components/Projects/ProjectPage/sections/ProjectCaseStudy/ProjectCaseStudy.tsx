@@ -1,8 +1,8 @@
 import { PropsWithChildren, useEffect, useMemo } from 'react'
 import _ from 'lodash'
 import { Project } from '../../../Projects'
-import { StyledScrollableContainer } from './styles'
-import { ProjectCaseStudyContent } from './case-studies'
+import { StyledMobileContainer, StyledScrollableContainer } from './styles'
+import { MobileCaseStudyContent, ProjectCaseStudyContent } from './case-studies'
 import useSlowScroll, {
   ALTERNATING_DELAY,
 } from '../../../../../hooks/useSlowScroll'
@@ -17,6 +17,22 @@ const IMG_DIMENSIONS = {
     height: 200,
     width: 400,
   },
+}
+
+/** @TODO this is TEMPORARY - don't need two separate types */
+export type MobileCaseStudyProps = {
+  project: Project
+  caseStudy: CaseStudy
+  getWindowWidth: () => number
+  // cancelScroll: () => void
+  // startScroll: () => void
+  // pauseScroll: () => void
+  // resumeScroll: () => void
+  handleProjectClick: (index: number) => void
+  // containerRef: React.RefObject<HTMLDivElement>
+  activeWidth: number
+  activeHeight: number
+  // isPaused: boolean
 }
 
 export type CaseStudyProps = {
@@ -105,5 +121,69 @@ export const ProjectCaseStudy = ({
     >
       <ProjectCaseStudyContent {...{ ...args }} />
     </CaseStudyContainer>
+  )
+}
+
+const MobileCaseStudyContainer = ({
+  children,
+  shouldRender,
+}: PropsWithChildren<{ shouldRender: boolean }>) => (
+  <StyledMobileContainer $shouldRender={shouldRender}>
+    {children}
+  </StyledMobileContainer>
+)
+
+export const MobileCaseStudy = ({
+  caseStudy,
+  idx,
+  project,
+  getWindowWidth,
+  handleProjectClick,
+}: {
+  caseStudy: CaseStudy
+  idx: number
+  project: Project
+  getWindowWidth: () => number
+  handleProjectClick: (index: number) => void
+}) => {
+  const windowWidth = getWindowWidth()
+
+  const activeWidth = useMemo(
+    () =>
+      windowWidth < 800
+        ? IMG_DIMENSIONS.mobile.width
+        : IMG_DIMENSIONS.desktop.width,
+    [windowWidth]
+  )
+  const activeHeight = useMemo(
+    () =>
+      windowWidth < 800
+        ? IMG_DIMENSIONS.mobile.height
+        : IMG_DIMENSIONS.desktop.height,
+    [windowWidth]
+  )
+
+  const args: MobileCaseStudyProps = {
+    project,
+    caseStudy,
+    getWindowWidth,
+    // cancelScroll: _.noop,
+    // startScroll: _.noop,
+    // pauseScroll: _.noop,
+    // resumeScroll: _.noop,
+    handleProjectClick,
+    // containerRef: { current: null },
+    activeHeight,
+    activeWidth,
+    // isPaused: false,
+  }
+
+  return (
+    <MobileCaseStudyContainer
+      key={`${project.title}-case-study-${idx}`}
+      shouldRender={caseStudy.title !== 'Placeholder - SHOULD NOT RENDER'}
+    >
+      <MobileCaseStudyContent {...{ ...args }} />
+    </MobileCaseStudyContainer>
   )
 }

@@ -1,17 +1,21 @@
 import React, { useCallback, useMemo } from 'react'
-import { CaseStudyProps } from '../ProjectCaseStudy'
+import { CaseStudyProps, MobileCaseStudyProps } from '../ProjectCaseStudy'
 import { Bookend } from './Bookend'
 import { DemoImg } from '../../../components'
 import PauseButton from '../../../../../StyleGuide/icons/PauseButton'
 import PlayButton from '../../../../../StyleGuide/icons/PlayButton'
 import {
+  StyledCaseStudyColumn,
   StyledCaseStudyContentContainer,
-  StyledCaseStudyImgContainer,
+  StyledCaseStudyImageContainer,
   StyledCaseStudyRow,
   StyledCaseStudyText,
   StyledCaseStudyTextContainer,
   StyledControlButton,
   StyledImageRow,
+  StyledMobileContentContainer,
+  StyledMobileText,
+  StyledMobileTextContainer,
 } from '../styles'
 
 const CASE_STUDY_INDEXES = {
@@ -96,7 +100,7 @@ export const ProjectCaseStudyContent = ({
       onMouseOut={
         isPaused ? undefined : (e: React.MouseEvent) => handleScroll(e, 'start')
       }
-      $mobile={getWindowWidth() < 800}
+      // $mobile={getWindowWidth() < 800}
     >
       {/* <WindowPanes /> */}
 
@@ -123,7 +127,7 @@ export const ProjectCaseStudyContent = ({
               </StyledCaseStudyTextContainer>
             )}
             {section.image && (
-              <StyledCaseStudyImgContainer
+              <StyledCaseStudyImageContainer
                 $isClickable={!!title}
                 onClick={!!title ? handleNavigateCaseStudies : undefined}
               >
@@ -139,7 +143,7 @@ export const ProjectCaseStudyContent = ({
                   noMask
                   hideLink
                 />
-              </StyledCaseStudyImgContainer>
+              </StyledCaseStudyImageContainer>
             )}
             {section.images && (
               <StyledImageRow>
@@ -169,6 +173,111 @@ export const ProjectCaseStudyContent = ({
               <StyledCaseStudyText>{section.text}</StyledCaseStudyText>
             </StyledCaseStudyTextContainer>
           </StyledCaseStudyContentContainer>
+        )
+      })}
+
+      <Bookend />
+    </StyledCaseStudyRow>
+  )
+}
+
+export const MobileCaseStudyContent = ({
+  project,
+  caseStudy,
+  getWindowWidth,
+  // cancelScroll,
+  // startScroll,
+  // pauseScroll,
+  // resumeScroll,
+  handleProjectClick,
+  // containerRef,
+  activeWidth,
+  activeHeight,
+}: // isPaused,
+MobileCaseStudyProps) => {
+  const title = useMemo(() => {
+    if (Object.keys(CASE_STUDY_INDEXES).includes(caseStudy.title)) {
+      return caseStudy.title as keyof typeof CASE_STUDY_INDEXES
+    } else return null
+  }, [caseStudy])
+
+  const handleNavigateCaseStudies = () => {
+    if (!title) return
+    handleProjectClick(CASE_STUDY_INDEXES[title])
+  }
+
+  return (
+    <StyledCaseStudyRow $mobile={getWindowWidth() < 800}>
+      <Bookend />
+
+      {caseStudy.sections.map((section, idx) => {
+        return (
+          <StyledMobileContentContainer
+            /** @TODO use this 'key' syntax where each case study is mapped */
+            key={`Case_Study_${caseStudy.title.replaceAll(' ', '_')}_${idx}`}
+            // $isClickable={!!title}
+            $reverse={section.type === 'reverse' || section.type === 'sandwich'}
+            // onClick={!!title ? handleNavigateCaseStudies : undefined}
+          >
+            {section.secondaryText && (
+              <StyledMobileTextContainer>
+                <StyledMobileText>{section.secondaryText}</StyledMobileText>
+              </StyledMobileTextContainer>
+            )}
+            {section.image && (
+              <StyledCaseStudyImageContainer
+                $isClickable={!!title}
+                $mobile={getWindowWidth() < 800}
+                onClick={!!title ? handleNavigateCaseStudies : undefined}
+              >
+                <DemoImg
+                  source={section.image?.source as string}
+                  index={-1}
+                  project={project.title}
+                  activeIndex={-1}
+                  activeHeight={
+                    (section.image?.height && section.image?.height * 0.8) ||
+                    activeHeight
+                  }
+                  getWindowWidth={getWindowWidth}
+                  activeWidth={
+                    (section.image?.width && section.image?.width * 0.8) ||
+                    activeWidth
+                  }
+                  hideScrollbar
+                  noMask
+                  hideLink
+                />
+              </StyledCaseStudyImageContainer>
+            )}
+            {section.images && (
+              <StyledImageRow $mobile={getWindowWidth() < 800}>
+                {section.images.map((image, i) => {
+                  return (
+                    <DemoImg
+                      key={`Case_Study_${caseStudy.title.replaceAll(
+                        ' ',
+                        '_'
+                      )}_${idx}_Image_${i}`}
+                      source={image.source as string}
+                      index={-1}
+                      project={project.title}
+                      activeIndex={-1}
+                      activeHeight={image.height || activeHeight}
+                      getWindowWidth={getWindowWidth}
+                      activeWidth={image.width || activeWidth}
+                      hideScrollbar
+                      noMask
+                      hideLink
+                    />
+                  )
+                })}
+              </StyledImageRow>
+            )}
+            <StyledMobileTextContainer>
+              <StyledMobileText>{section.text}</StyledMobileText>
+            </StyledMobileTextContainer>
+          </StyledMobileContentContainer>
         )
       })}
 

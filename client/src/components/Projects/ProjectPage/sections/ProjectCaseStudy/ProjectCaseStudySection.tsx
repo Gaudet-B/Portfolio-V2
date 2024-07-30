@@ -1,8 +1,9 @@
-import { ProjectCaseStudy } from './ProjectCaseStudy'
+import { MobileCaseStudy, ProjectCaseStudy } from './ProjectCaseStudy'
 import {
   StyledCaseStudyContainer,
   StyledCaseStudyGrid,
   StyledCaseStudyHeader,
+  StyledMobileGrid,
 } from './styles'
 import { Project } from '../../../Projects'
 import { CaseStudies } from '../../../../../scripts/getCaseStudy'
@@ -20,21 +21,38 @@ export const ProjectCaseStudySection = ({
 }) => {
   return (
     <StyledCaseStudyContainer>
-      <StyledCaseStudyHeader>
-        Primary Projects/Initiatives Contributed to:
+      <StyledCaseStudyHeader $mobile={getWindowWidth() < 800}>
+        Primary Contributions:
       </StyledCaseStudyHeader>
-      <StyledCaseStudyGrid>
-        {caseStudies &&
-          caseStudies.cases.map((caseStudy, idx) => {
-            return ProjectCaseStudy({
-              caseStudy,
-              idx,
-              project,
-              getWindowWidth,
-              handleProjectClick,
-            })
-          })}
-      </StyledCaseStudyGrid>
+      {getWindowWidth() < 800 ? (
+        <StyledMobileGrid>
+          {caseStudies &&
+            caseStudies.cases.map((caseStudy, idx) => {
+              const props = {
+                caseStudy,
+                idx,
+                project,
+                getWindowWidth,
+                handleProjectClick,
+              }
+              return MobileCaseStudy({ ...props })
+            })}
+        </StyledMobileGrid>
+      ) : (
+        <StyledCaseStudyGrid>
+          {caseStudies &&
+            caseStudies.cases.map((caseStudy, idx) => {
+              const props = {
+                caseStudy,
+                idx,
+                project,
+                getWindowWidth,
+                handleProjectClick,
+              }
+              return ProjectCaseStudy({ ...props })
+            })}
+        </StyledCaseStudyGrid>
+      )}
     </StyledCaseStudyContainer>
   )
 }

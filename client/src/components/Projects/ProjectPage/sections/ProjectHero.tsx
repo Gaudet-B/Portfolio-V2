@@ -25,7 +25,7 @@ export const ProjectHero = ({
         project={project}
         getHeroImage={getHeroImage}
         getActiveDimensions={getActiveDimensions}
-        getWindowHeight={getWindowHeight}
+        // getWindowHeight={getWindowHeight}
         getWindowWidth={getWindowWidth}
       />
       <ProjectInfo mobile={mobile} project={project} />

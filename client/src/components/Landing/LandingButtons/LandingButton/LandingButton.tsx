@@ -1,5 +1,12 @@
+import { useMemo } from 'react'
 import Link from '../../../reuseable/Link'
 import { StyledMask, StyledButton, StyledLabel } from './styles'
+
+const MOBILE_STYLES = {
+  display: 'flex',
+  flexDirection: 'column-reverse',
+  marginBottom: '48px',
+} as React.CSSProperties
 
 /**
  * LandingButton Component
@@ -7,18 +14,26 @@ import { StyledMask, StyledButton, StyledLabel } from './styles'
  * @param props props
  * @returns JSX.Element
  */
-const LandingButton = (props: {
+const LandingButton = ({
+  image,
+  title,
+  windowWidth,
+}: {
   title: string
   windowWidth?: number
   image: string
 }) => {
+  const mobile = useMemo(() => {
+    if (windowWidth && windowWidth < 800) return true
+    return false
+  }, [windowWidth])
   return (
-    <Link to={`/${props.title}`}>
-      <StyledButton img={props.image}>
-        {props.windowWidth && props.windowWidth > 800 ? <StyledMask /> : null}
+    <Link to={`/${title}`} styles={mobile ? MOBILE_STYLES : {}}>
+      <StyledButton $img={image} $mobile={mobile}>
+        {windowWidth && windowWidth > 800 ? <StyledMask /> : null}
       </StyledButton>
-      <StyledLabel id={`${props.title}-label`}>
-        <p>{props.title[0].toUpperCase() + props.title.substring(1)}</p>
+      <StyledLabel id={`${title}-label`} $mobile={mobile}>
+        <p>{title[0].toUpperCase() + title.substring(1)}</p>
       </StyledLabel>
     </Link>
   )

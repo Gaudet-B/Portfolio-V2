@@ -36,11 +36,12 @@ const Contact = () => {
       <StyledContactContainer>
         <Navigation windowWidth={windowWidth} />
         <StyledFormContainer
+          $mobile={windowWidth < 800}
           id="container"
           data-open={containerStatus === 'open'}
           data-closed={containerStatus === 'closed'}
         >
-          <StyledTitle>Contact Brian</StyledTitle>
+          <StyledTitle $mobile={windowWidth < 800}>Contact Brian</StyledTitle>
           <Form windowWidth={windowWidth} />
         </StyledFormContainer>
       </StyledContactContainer>

@@ -1,6 +1,7 @@
 import styled, { keyframes } from 'styled-components'
 import styleGuide from '../../../../StyleGuide/StyleGuide'
 
+const MOBILE_CONTENT_MIN_WIDTH = 320
 const CONTENT_MIN_WIDTH = 400
 // const CONTENT_HEIGHT = 500
 
@@ -60,7 +61,9 @@ export const StyledCaseStudyContainer = styled.div`
   align-items: center;
 `
 
-export const StyledCaseStudyHeader = styled.h2`
+export const StyledCaseStudyHeader = styled.h2<{ $mobile?: boolean }>`
+  font-size: ${({ $mobile }) =>
+    $mobile ? fonts.sizes.medium : fonts.sizes.large};
   margin: 0 0 20px 0;
 `
 
@@ -71,6 +74,16 @@ export const StyledCaseStudyGrid = styled.div`
   /* flex-wrap: wrap; */
   gap: 6px;
 `
+
+export const StyledMobileGrid = styled.div`
+  width: 100%;
+  display: flex;
+  padding: 2px 8px;
+  justify-content: space-evenly;
+  /* flex-wrap: wrap; */
+  gap: 6px;
+`
+
 /** @TODO change max-width? */
 export const StyledScrollableContainer = styled.div<{ $shouldRender: boolean }>`
   display: ${({ $shouldRender }) => ($shouldRender ? 'flex' : 'none')};
@@ -120,17 +133,19 @@ export const StyledScrollableContainer = styled.div<{ $shouldRender: boolean }>`
   }
 `
 
-export const StyledCaseStudyRow = styled.div<{
-  $mobile: boolean
-}>`
+// export const StyledCaseStudyRow = styled.div<{
+//   $mobile: boolean
+// }>`
+// flex-direction: ${({ $mobile }) => ($mobile ? 'column' : 'row')}};
+
+export const StyledCaseStudyRow = styled.div<{ $mobile?: boolean }>`
   /* transform: translateX(-20px); */
   /* width: ${CONTENT_MIN_WIDTH}px; */
   scroll-snap-type: x mandatory;
   height: 100%;
   display: flex;
   gap: 80px;
-  flex-direction: ${({ $mobile }) => ($mobile ? 'column' : 'row')}};
-  align-items: center;
+  align-items: ${({ $mobile }) => ($mobile ? 'stretch' : 'center')};
   overflow: auto;
   &::-webkit-scrollbar {
     height: 10px;
@@ -145,9 +160,7 @@ export const StyledCaseStudyRow = styled.div<{
       &:horizontal {
         &:decrement {
           border-width: 5px 5px 5px 0;
-          border-color: transparent ${
-            colors.GrayShadow
-          } transparent transparent;
+          border-color: transparent ${colors.GrayShadow} transparent transparent;
           &:hover {
             border-color: transparent ${colors.MatrixGreen} transparent
               transparent;
@@ -155,9 +168,7 @@ export const StyledCaseStudyRow = styled.div<{
         }
         &:increment {
           border-width: 5px 0 5px 5px;
-          border-color: transparent transparent transparent ${
-            colors.GrayShadow
-          };
+          border-color: transparent transparent transparent ${colors.GrayShadow};
           &:hover {
             border-color: transparent transparent transparent
               ${colors.MatrixGreen};
@@ -204,21 +215,77 @@ export const StyledCaseStudyContentContainer = styled.div<{
   }
 `
 
+export const StyledMobileContainer = styled.div<{ $shouldRender: boolean }>`
+  display: ${({ $shouldRender }) => ($shouldRender ? 'flex' : 'none')};
+  width: 100%;
+  max-width: ${CONTENT_MIN_WIDTH - 40}px;
+  min-width: ${MOBILE_CONTENT_MIN_WIDTH}px;
+  padding: 2px 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-top: 2px solid ${colors.GhostGray};
+  border-bottom: 2px solid ${colors.GhostGray};
+  background-color: ${colors.MatteGray};
+  /* border-radius: 10px; */
+`
+
+export const StyledMobileContentContainer = styled.div<{ $reverse: boolean }>`
+  padding: 10px 0;
+  scroll-snap-align: center;
+  width: ${MOBILE_CONTENT_MIN_WIDTH}px;
+  display: flex;
+  flex-direction: ${({ $reverse }) => ($reverse ? 'column-reverse' : 'column')};
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`
+
+export const StyledCaseStudyColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
 export const StyledCaseStudyTextContainer = styled.div`
   width: ${CONTENT_MIN_WIDTH}px;
   text-align: center;
   white-space: wrap;
 `
 
-export const StyledCaseStudyImgContainer = styled.div<{
+/** @TODO split this into two components? */
+export const StyledCaseStudyImageContainer = styled.div<{
   $isClickable: boolean
+  $mobile?: boolean
 }>`
   cursor: ${({ $isClickable }) => ($isClickable ? 'pointer' : 'default')};
+  display: ${({ $mobile }) => ($mobile ? 'flex' : 'block')};
+  justify-content: ${({ $mobile }) => ($mobile ? 'center' : undefined)};
+  align-items: ${({ $mobile }) => ($mobile ? 'center' : undefined)};
+  /* height: ${({ $mobile }) => ($mobile ? '100%' : 'auto')}; */
+  width: ${({ $mobile }) => ($mobile ? '100%' : 'auto')};
+  background-color: ${({ $mobile }) =>
+    $mobile ? colors.SpaceBlack : undefined};
+  padding: ${({ $mobile }) => ($mobile ? '8px' : '0')};
+  border: ${({ $mobile }) =>
+    $mobile ? `0.5px solid ${colors.SpaceBlack}` : 'none'};
+  border-radius: ${({ $mobile }) => ($mobile ? '6px' : '0')};
 `
 
 export const StyledCaseStudyText = styled.p`
   width: ${CONTENT_MIN_WIDTH - 40}px;
   padding: 0 20px;
+`
+
+export const StyledMobileTextContainer = styled.div`
+  width: ${MOBILE_CONTENT_MIN_WIDTH}px;
+  text-align: center;
+  white-space: wrap;
+`
+
+export const StyledMobileText = styled.p`
+  width: ${MOBILE_CONTENT_MIN_WIDTH - 40}px;
+  margin: auto;
+  padding: 0;
 `
 
 export const StyledControlButton = styled.div`
@@ -236,12 +303,19 @@ export const StyledControlButton = styled.div`
   }
 `
 
-export const StyledImageRow = styled.div`
+export const StyledImageRow = styled.div<{ $mobile?: boolean }>`
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
   align-items: center;
+  width: ${({ $mobile }) => ($mobile ? '100%' : 'auto')};
+  background-color: ${({ $mobile }) =>
+    $mobile ? colors.SpaceBlack : undefined};
+  padding: ${({ $mobile }) => ($mobile ? '8px' : '0')};
+  border: ${({ $mobile }) =>
+    $mobile ? `0.5px solid ${colors.SpaceBlack}` : 'none'};
+  border-radius: ${({ $mobile }) => ($mobile ? '6px' : '0')};
 `
 
 export const StyledLeftPane = styled.div`

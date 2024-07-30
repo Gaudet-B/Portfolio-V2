@@ -6,12 +6,12 @@ export const ProjectPageHeader = ({
   project,
   projectType,
   mobile,
-  getWindowWidth,
-}: {
+}: // getWindowWidth,
+{
   project: Project
   projectType: string
   mobile: boolean
-  getWindowWidth: () => number
+  // getWindowWidth: () => number
 }) => {
   return (
     <StyledPageHeader>
@@ -23,7 +23,7 @@ export const ProjectPageHeader = ({
         <ProjectSummary
           type={'personal'}
           project={project}
-          getWindowWidth={getWindowWidth}
+          // getWindowWidth={getWindowWidth}
         />
       ) : null}
     </StyledPageHeader>

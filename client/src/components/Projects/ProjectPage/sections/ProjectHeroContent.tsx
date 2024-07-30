@@ -39,7 +39,7 @@ export const ProjectHeroContent = ({
     )
   } else
     return (
-      <StyledProjectHeroContainer>
+      <StyledProjectHeroContainer $mobile={mobile}>
         <StyledImgContainer>
           <HeroImage
             mobile={mobile}
