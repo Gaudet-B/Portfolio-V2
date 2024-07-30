@@ -1,32 +1,45 @@
-import React from 'react'
-
+import { PropsWithChildren } from 'react'
+import handleSwipe from '../../../hooks/useSwipe'
 import {
   StyledFullScreenMask,
   StyledContent,
   StyledCloseButton,
 } from './styles'
 
-const ContentModal = (props: {
+const ContentModal = ({
+  active,
+  children,
+  activeIndex,
+  handleClose,
+  handleImageBrowse,
+}: PropsWithChildren<{
   active: boolean
-  content: typeof React.Children
+  activeIndex?: number
   handleClose: () => void
-}) => {
+  handleImageBrowse: (idx: number, direction: 'left' | 'right') => void
+}>) => {
+  const swipeHandler = handleSwipe(
+    (direction: 'left' | 'right' | 'up' | 'down') => {
+      console.log(activeIndex, direction)
+      if (typeof activeIndex !== 'number' || activeIndex === -1) return
+      if (direction === 'left') handleImageBrowse(activeIndex, 'right')
+      if (direction === 'right') handleImageBrowse(activeIndex, 'left')
+    }
+  )
   return (
-    <StyledFullScreenMask active={props.active}>
-      {/* <StyledFullScreenMask active={props.active} onClick={props.handleClose}> */}
-      <StyledContent>
-        {/* <div
-          style={{
-            width: 'fit-content',
-          }}
-        > */}
-        <StyledCloseButton>
-          <span onClick={props.handleClose}>x</span>
-        </StyledCloseButton>
-        {/* </div> */}
-        {props.content}
-      </StyledContent>
-    </StyledFullScreenMask>
+    <div
+      onTouchStart={swipeHandler.touchStart}
+      onTouchEnd={swipeHandler.touchEnd}
+    >
+      <StyledFullScreenMask $active={active}>
+        <StyledContent>
+          <StyledCloseButton>
+            <span onClick={handleClose}>x</span>
+          </StyledCloseButton>
+          {children}
+        </StyledContent>
+      </StyledFullScreenMask>
+    </div>
   )
 }
 
