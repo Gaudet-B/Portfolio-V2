@@ -17,6 +17,7 @@ import {
 
 /* TYPES */
 import { Project } from '../../Projects'
+import { HeroImages } from '../../../../scripts/getImages'
 
 /**
  * @description - Project Card component - renders the menu card for each project
@@ -29,23 +30,45 @@ const ProjectCard = (props: {
   key: string
   index: number
   project: Project
-  images: {
-    [key: string]: string
-  }
+  images: HeroImages
 }) => {
   const { project, index, handleProjectClick, images } = props
-  const { pizza, draft, chat, portfolio, estimatica, vapyr, border, epoch } =
-    images
+  const {
+    pizza,
+    draft,
+    chat,
+    portfolio,
+    estimatica,
+    vapyr,
+    border,
+    epoch,
+    viasat,
+    mettel,
+  } = images
 
   const getSource = (project: string) => {
-    if (project === 'P!ZZA') return pizza
-    else if (project === 'MyDraft Partner') return draft
-    else if (project === 'chata') return chat
-    else if (project === 'Estimatica Redesign') return estimatica
-    else if (project === 'Vapyr Analytics') return vapyr
-    else if (project === 'Border') return border
-    else if (project === 'Epoch IT Solutions') return epoch
-    else return portfolio
+    switch (project) {
+      case 'P!ZZA':
+        return pizza
+      case 'MyDraft Partner':
+        return draft
+      case 'chata':
+        return chat
+      case 'Estimatica Redesign':
+        return estimatica
+      case 'Vapyr Analytics':
+        return vapyr
+      case 'Border':
+        return border
+      case 'Epoch IT Solutions':
+        return epoch
+      case 'Viasat':
+        return viasat
+      case 'MetTel':
+        return mettel
+      default:
+        return portfolio
+    }
   }
 
   const SOURCE = getSource(project.title)
@@ -91,15 +114,19 @@ const ProjectCard = (props: {
           <StyledCardMask
             onMouseOver={handleOver}
             onMouseOut={handleOut}
-            active={isActive}
+            $active={isActive}
           >
-            <StyledCardText active={isActive}>
+            <StyledCardText $active={isActive}>
               {project.categories.indexOf('Personal Project') >= 0
                 ? 'Personal Project'
                 : 'Professional Experience'}
             </StyledCardText>
-            <StyledCardTitle active={isActive}>{project.title}</StyledCardTitle>
-            <StyledCardlink active={isActive}>click for details</StyledCardlink>
+            <StyledCardTitle $active={isActive}>
+              {project.title}
+            </StyledCardTitle>
+            <StyledCardlink $active={isActive}>
+              click for details
+            </StyledCardlink>
           </StyledCardMask>
         </StyledCardOverlay>
       )}

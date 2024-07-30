@@ -19,7 +19,7 @@ import {
   displayCopyright,
   displayBackground,
 } from '../../scripts/dynamic'
-import getImages from '../../scripts/images'
+import getImages from '../../scripts/getImages'
 
 /* STYLES */
 import {
@@ -29,20 +29,8 @@ import {
   StyledMainContainer,
 } from './styles'
 
-/* TYPES */
-/** @type Images */
-export type Images = {
-  projects: Array<string[]>
-  icons: {
-    [key: string]: string
-  }
-  heros: {
-    [key: string]: string
-  }
-}
-
 /* CONSTANTS  */
-const IMAGES: Images = getImages()
+const IMAGES = getImages()
 const TYPEWRITER_TEXT = ['Brian F. Gaudet', '  ', 'Full Stack', 'Web Developer']
 
 /**
@@ -64,8 +52,6 @@ const Landing = () => {
   const resizeWindow = () => {
     setWindowHeight(window.innerHeight)
     setWindowWidth(window.innerWidth)
-    // console.log(windowHeight)
-    // console.log(windowWidth)
   }
 
   // function to start the typewriter
@@ -133,7 +119,7 @@ const Landing = () => {
     // only display background w/ anmations if screen is large enough - otherwise, use bg image
     <StyledLandingBackground
       id={'background-image'}
-      responsive={windowWidth < 800}
+      $responsive={windowWidth < 800}
     >
       {windowWidth <= 800 ? null : (
         <AnimatedBackground windowHeight={windowHeight} />
@@ -141,12 +127,12 @@ const Landing = () => {
 
       <LandingFonts />
       <StyledMainWrapper
-        responsive={windowWidth < 800}
-        small={windowHeight < 500}
+        $responsive={windowWidth < 800}
+        $small={windowHeight < 500}
       >
         <StyledMainContainer
-          responsive={windowWidth < 800}
-          small={windowHeight < 800}
+          $responsive={windowWidth < 800}
+          $small={windowHeight < 800}
         >
           <Typewriter
             text={TYPEWRITER_TEXT}
