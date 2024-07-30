@@ -1,4 +1,3 @@
-import { PropsWithChildren } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const linkStyles = {
@@ -13,18 +12,13 @@ const linkStyles = {
  * @param props - Props
  * @returns JSX.Element
  */
-const Link = ({
-  to,
-  children,
-  onClick,
-  popOut,
-  styles,
-}: PropsWithChildren<{
+const Link = (props: {
   to?: string
+  children?: React.ReactNode
   onClick?: () => void
   popOut?: boolean
-  styles?: React.CSSProperties
-}>) => {
+}) => {
+  const { to, children, onClick, popOut } = props
   const navigate = useNavigate()
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -33,20 +27,12 @@ const Link = ({
     if (to) navigate(to)
   }
 
-  const customStyles = styles
-    ? {
-        ...linkStyles,
-        ...styles,
-      }
-    : linkStyles
-
   return (
     <a
       href={to}
       onClick={!popOut ? handleClick : undefined}
-      /** @TODO add icon to communicate "new tab" to user (w3 might have SVG) */
       target={popOut ? '_blank' : undefined}
-      style={{ ...customStyles }}
+      style={linkStyles}
     >
       {!children ? null : children}
     </a>

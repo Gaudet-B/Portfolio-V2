@@ -6,8 +6,6 @@ import Link from '../reuseable/Link'
 
 /* STYLES */
 import {
-  NavFonts,
-  StyledNavMenu,
   StyledNavWrapper,
   StyledBackButton,
   StyledMainNav,
@@ -15,15 +13,16 @@ import {
   StyledNavLinksLarge,
   StyledLinkWrapper,
   StyledMobileMenu,
-  StyledHamburgerButton,
-  StyledMobileLinkWrapper,
 } from './styles'
 
 /* SCRIPTS */
-import getImages from '../../scripts/getImages'
+import getImages from '../../scripts/images'
+
+/* TYPES */
+import { Images } from '../Landing/Landing'
 
 /* CONSTANTS */
-const IMAGES = getImages()
+const IMAGES: Images = getImages()
 const { logo, burger } = IMAGES.icons
 
 /**
@@ -33,14 +32,89 @@ const { logo, burger } = IMAGES.icons
  */
 const Navigation = (props: {
   windowWidth: number
+  styles: any
+  // showMenu?: boolean
   handleRefresh?: () => void
 }) => {
+  // const { windowWidth, handleRefresh, styles, showMenu } = props
+
+  /** @NOTE REMOVE coordZ ??? */
+  // state variables
   const [page, setPage] = useState<string>('')
+  const [coordX, setCoordX] = useState('10rem')
+  const [coordY, setCoordY] = useState('0rem')
+  const [coordZ, setCoordZ] = useState('0px')
+  const [scale, setScale] = useState('1.0')
   const [show, setShow] = useState(false)
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = (e: any) => {
     e.preventDefault()
-    setShow(!show)
+
+    if (!show) {
+      let linkP = document.getElementById('link-projects')
+      if (linkP) {
+        linkP.innerHTML = 'PROJECTS'
+        linkP.style.margin = '.2rem 0'
+      }
+
+      let linkR = document.getElementById('link-resume')
+      if (linkR) {
+        linkR.innerHTML = 'RESUME'
+        linkR.style.margin = '.2rem 0'
+      }
+
+      let linkC = document.getElementById('link-contact')
+      if (linkC) {
+        linkC.innerHTML = 'CONTACT'
+        linkC.style.margin = '.2rem 0'
+      }
+
+      let linkM = document.getElementById('navMenu')
+      if (linkM) {
+        linkM.style.padding = '1.2rem .6rem'
+        linkM.style.backgroundColor = 'rgb(26, 26, 26, .95)'
+      }
+
+      setCoordX('0rem')
+      setCoordY('0rem')
+      // setCoordZ("10px")
+      setScale('1.0')
+
+      setShow(true)
+    } else {
+      // setCoordZ("-10px")
+      setCoordY('0rem')
+      setCoordX('10rem')
+      setScale('1.0')
+
+      setTimeout(() => {
+        let linkM = document.getElementById('navMenu')
+        if (linkM) {
+          linkM.style.padding = '0'
+          linkM.style.backgroundColor = 'transparent'
+        }
+
+        let linkP = document.getElementById('link-projects')
+        if (linkP) {
+          linkP.innerHTML = ''
+          linkP.style.margin = '0'
+        }
+
+        let linkR = document.getElementById('link-resume')
+        if (linkR) {
+          linkR.innerHTML = ''
+          linkR.style.margin = '0'
+        }
+
+        let linkC = document.getElementById('link-contact')
+        if (linkC) {
+          linkC.innerHTML = ''
+          linkC.style.margin = '0'
+        }
+
+        setShow(false)
+      }, 500)
+    }
   }
 
   const renderBackToMenu = () => {
@@ -69,43 +143,81 @@ const Navigation = (props: {
 
   const renderMobileNav = () => {
     return (
-      <StyledMobileMenu>
-        <StyledHamburgerButton onClick={handleClick}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          marginTop: '.5rem',
+        }}
+      >
+        <a onClick={handleClick}>
           {' '}
           <img
             src={burger}
             style={{ transform: 'scale(0.8)' }}
             alt="hamburger menu"
           />{' '}
-        </StyledHamburgerButton>
-        <StyledNavMenu id="navMenu" $show={show} data-open={show}>
-          <StyledMobileLinkWrapper $active={page === 'projects'}>
-            <Link to={'/projects'}>PROJECTS</Link>
-          </StyledMobileLinkWrapper>
-          <StyledMobileLinkWrapper $active={page === 'resume'}>
-            <Link to={'/resume'}>RESUME</Link>
-          </StyledMobileLinkWrapper>
-          <StyledMobileLinkWrapper $active={page === 'contact'}>
-            <Link to={'/contact'}>CONTACT</Link>
-          </StyledMobileLinkWrapper>
-        </StyledNavMenu>
-      </StyledMobileMenu>
+        </a>
+      </div>
     )
   }
 
   const renderDesktopNav = () => {
     return (
       <StyledNavLinksLarge>
-        <StyledLinkWrapper $active={page === 'projects'}>
+        <StyledLinkWrapper active={page === 'projects'}>
           <Link to={'/projects'}>PROJECTS</Link>
         </StyledLinkWrapper>
-        <StyledLinkWrapper $active={page === 'resume'}>
+        <StyledLinkWrapper active={page === 'resume'}>
           <Link to={'/resume'}>RESUME</Link>
         </StyledLinkWrapper>
-        <StyledLinkWrapper $active={page === 'contact'}>
+        <StyledLinkWrapper active={page === 'contact'}>
           <Link to={'/contact'}>CONTACT</Link>
         </StyledLinkWrapper>
       </StyledNavLinksLarge>
+    )
+  }
+
+  const renderMobileMenu = () => {
+    return (
+      <StyledMobileMenu>
+        <div
+          id="navMenu"
+          className={show ? props.styles.navMenu : ''}
+          style={{
+            transform: `perspective(50px) translate3d(${coordX}, ${coordY}, ${coordZ}) scale(${scale})`,
+            zIndex: '5',
+          }}
+        >
+          <a
+            id={'link-projects'}
+            href="/projects"
+            className={
+              page === 'projects'
+                ? props.styles.active + ' ' + props.styles.smallNav
+                : props.styles.smallNav
+            }
+          ></a>
+          <a
+            id={'link-resume'}
+            href="/resume"
+            className={
+              page === 'resume'
+                ? props.styles.active + ' ' + props.styles.smallNav
+                : props.styles.smallNav
+            }
+          ></a>
+          <a
+            id={'link-contact'}
+            href="/contact"
+            className={
+              page === 'contact'
+                ? props.styles.active + ' ' + props.styles.smallNav
+                : props.styles.smallNav
+            }
+          ></a>
+        </div>
+      </StyledMobileMenu>
     )
   }
 
@@ -117,18 +229,19 @@ const Navigation = (props: {
   }, [])
 
   return (
-    <>
-      <NavFonts />
-      <StyledNavWrapper $responsive={props.windowWidth < 800}>
-        <StyledMainNav $responsive={props.windowWidth < 800}>
-          <StyledLogoContainer>
-            {renderLogoLink()}
-            {props.handleRefresh ? renderBackToMenu() : null}
-          </StyledLogoContainer>
-          {props.windowWidth < 800 ? renderMobileNav() : renderDesktopNav()}
-        </StyledMainNav>
-      </StyledNavWrapper>
-    </>
+    <StyledNavWrapper windowWidth={props.windowWidth}>
+      <StyledMainNav
+        windowWidth={props.windowWidth}
+        noPadding={page === 'resume'}
+      >
+        <StyledLogoContainer>
+          {renderLogoLink()}
+          {props.handleRefresh ? renderBackToMenu() : null}
+        </StyledLogoContainer>
+        {props.windowWidth < 800 ? renderMobileNav() : renderDesktopNav()}
+      </StyledMainNav>
+      {renderMobileMenu()}
+    </StyledNavWrapper>
   )
 }
 

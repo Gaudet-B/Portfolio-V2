@@ -1,14 +1,13 @@
 import Button from '../../../reuseable/Button'
-import { CATEGORY_FILTERS } from '../ProjectsMenu'
 
 import { StyledFilterItem, StyledFilterList } from './styles'
 
 const CategoryFilters = (props: {
-  categories: Array<(typeof CATEGORY_FILTERS)[number]>
-  categoryFilters: typeof CATEGORY_FILTERS
+  categories: Array<string>
+  categoryFilters: Array<string>
   showTags: boolean
   handleFilterClick: () => void
-  handleCategorySelect: (filter: (typeof CATEGORY_FILTERS)[number]) => void
+  handleCategorySelect: (filter: string) => void
   chevronDirection: string
   styles: CSSModuleClasses
 }) => {
@@ -50,7 +49,7 @@ const CategoryFilters = (props: {
             : `${styles.categoryFilters} ${styles.categoryFiltersActive}`
         }
       >
-        {categoryFilters.map((filter, index) => {
+        {categoryFilters.map((filter: string, index: number) => {
           return (
             <StyledFilterItem
               show={showTags}

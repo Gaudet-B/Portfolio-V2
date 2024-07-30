@@ -1,19 +1,21 @@
 /* GLOBAL */
 import { useState, useEffect } from 'react'
-import { debounce } from 'lodash'
 
 /* PROJECT */
+// import Loading from '../reuseable/Loading'
 import Navigation from '../Navigation'
-import ProjectsRenderer from './ProjectsRenderer'
+// import ProjectPage from './ProjectPage'
+// import ProjectsMenu from './ProjectsMenu'
 
 /* SCRIPTS */
-import getImages from '../../scripts/getImages'
+import getImages from '../../scripts/images'
 import { getSessionStorageOrDefault } from '../../scripts/basic'
 
 /* ASSETS */
 import background from '../../assets/3d-background.png'
 
 /* STYLES */
+import navStyles from '../../styles/nav.style.module.css'
 import {
   GlobalFonts,
   StyledBackground,
@@ -22,6 +24,8 @@ import {
 } from './styles'
 
 /* TYPES */
+import { Images } from '../Landing/Landing'
+import ProjectsWrapper from './ProjectsWrapper'
 export type Project = {
   title: string
   myRole: string
@@ -36,8 +40,16 @@ export type Project = {
 }
 
 /* CONSTANTS */
-const IMAGES = getImages()
+const IMAGES: Images = getImages()
 const ANIMATION_TIMING = 700
+
+// const Error = () => {
+//   return (
+//     <div style={{ margin: '50px 0', textAlign: 'center' }}>
+//       There was an error loading the projects.
+//     </div>
+//   )
+// }
 
 /**
  * @description - Main Projects component - renders the projects menu and displays the active project info
@@ -81,10 +93,12 @@ const Projects = () => {
   }
 
   // function to be added to the onResize event listener
-  const resizeWindow = debounce(() => {
+  const resizeWindow = () => {
     setWindowHeight(window.innerHeight)
     setWindowWidth(window.innerWidth)
-  }, 500)
+    // console.log(windowHeight)
+    // console.log(windowWidth)
+  }
 
   const openContainer = () => setContainerStatus('open')
 
@@ -96,7 +110,11 @@ const Projects = () => {
       setShowMenu(true)
     }, ANIMATION_TIMING - 200)
     await new Promise((resolve) => setTimeout(resolve, ANIMATION_TIMING))
+    // let returnVal = false
+    // openContainer()
+    // return new Promise((resolve) => setTimeout(resolve, ANIMATION_TIMING))
     return new Promise((resolve) => resolve(true))
+    // return returnVal
   }
 
   const handleCloseMenu = () => {
@@ -111,13 +129,16 @@ const Projects = () => {
 
   const handleNavigateProjects = (direction: number, length: number) => {
     closeContainer()
+    // const { activeIndex } = props
     if (!length) return
     let newIndex = activeIndex + direction
     if (newIndex < 0) newIndex = length - 1
     if (newIndex > length - 1) newIndex = 0
     setTimeout(() => {
       handleCloseMenu()
+      // setShowMenu(false)
       handleActiveIndex(newIndex)
+      // setActiveIndex(newIndex)
       openContainer()
       const container = document.getElementById('scrollable-container')
       if (container) container.scroll({ top: 0, left: 0, behavior: 'smooth' })
@@ -128,8 +149,11 @@ const Projects = () => {
     closeContainer()
     setTimeout(() => {
       handleCloseMenu()
+      // setShowMenu(false)
       openContainer()
+      // setActiveProject(project)
       handleActiveIndex(index)
+      // setActiveIndex(index)
     }, ANIMATION_TIMING)
   }
 
@@ -137,8 +161,13 @@ const Projects = () => {
     closeContainer()
     const confirmation = await showMenuDelay()
     if (confirmation) {
+      // setShowMenu(true)
       openContainer()
     }
+    // setTimeout(() => {
+    //   setShowMenu(true)
+    //   openContainer()
+    // }, ANIMATION_TIMING)
   }
 
   useEffect(() => {
@@ -154,18 +183,26 @@ const Projects = () => {
       <GlobalFonts />
       <StyledProjectsContainer id="projectsContainer">
         <Navigation
+          // left="HOME"
+          // right="CONTACT"
           windowWidth={windowWidth || -1}
+          // menu={menu}
+          // setMenu={setMenu}
           handleRefresh={showMenu ? undefined : handleRefresh}
+          styles={navStyles}
+          // showMenu={showMenu}
         />
         <StyledMenuContainer
           id={'scrollable-container'}
           data-open={containerStatus === 'open'}
           data-closed={containerStatus === 'closed'}
-          $responsive={windowWidth ? windowWidth < 800 : false}
-          $setByWindowHeight={windowHeight ? windowHeight < 700 : false}
+          responsive={windowWidth && windowWidth < 800}
+          setByWindowHeight={windowHeight && windowHeight < 700}
         >
-          <ProjectsRenderer
+          <ProjectsWrapper
             activeIndex={activeIndex}
+            // changeActiveIndex={changeActiveIndex}
+            // activeProject={activeProject && activeProject}
             images={IMAGES}
             handleProjectClick={handleProjectClick}
             openContainer={openContainer}
@@ -174,6 +211,7 @@ const Projects = () => {
             showMenu={showMenu}
             handleNavigateProjects={handleNavigateProjects}
           />
+          {/* {renderActiveContent()} */}
         </StyledMenuContainer>
       </StyledProjectsContainer>
     </StyledBackground>
