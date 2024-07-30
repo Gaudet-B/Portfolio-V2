@@ -1,53 +1,51 @@
 import chevron from '../../../assets/icons/chevron-icon-light.png'
+import styleGuide from '../../StyleGuide/StyleGuide'
 import { StyledButton, StyledChevron, StyledText } from './styles'
 
-/**
- *
- * @param {ButtonProps} props
- * PropTypes:
- *  arrowDirection: string,
- *  text: string,
- *  size: oneOf([ 'extraSmall', 'small', 'medium', 'large' ]),
- *  color: oneOf( ['dark', 'light', 'disabled' ]),
- *  onClick: function,
- */
-const Button = (props: {
+const Button = ({
+  text,
+  size,
+  color,
+  onClick,
+  arrowDirection,
+  textWidth,
+  disabled,
+}: {
   text: string
-  size: string
-  color: string
+  size: keyof typeof styleGuide.fonts.sizes
+  color: 'light' | 'dark' | 'disabled'
   onClick: () => void
   arrowDirection?: string
   textWidth?: string
   disabled?: boolean
 }) => {
-  const BORDER = props.arrowDirection ? undefined : true
+  const BORDER = arrowDirection ? undefined : true
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    // console.log('click')
     e.preventDefault()
-    if (props.onClick) {
-      return props.onClick()
+    if (onClick) {
+      return onClick()
     }
   }
 
   const renderChevron = () => {
-    return <StyledChevron direction={props.arrowDirection} src={chevron} />
+    return <StyledChevron $direction={arrowDirection} src={chevron} />
   }
 
   return (
     <StyledButton
       onClick={handleClick}
-      size={props.size}
-      color={props.disabled ? 'disabled' : props.color}
-      border={BORDER}
-      disabled={props.disabled}
+      $size={size}
+      $color={disabled ? 'disabled' : color}
+      $border={BORDER}
+      $disabled={disabled}
     >
-      {props.arrowDirection ? renderChevron() : null}
+      {arrowDirection ? renderChevron() : null}
       <StyledText
-        leftSpacing={props.arrowDirection ? true : false}
-        textWidth={props.textWidth || undefined}
+        $leftSpacing={arrowDirection ? true : false}
+        $textWidth={textWidth || undefined}
       >
-        {props.text}
+        {text}
       </StyledText>
     </StyledButton>
   )
