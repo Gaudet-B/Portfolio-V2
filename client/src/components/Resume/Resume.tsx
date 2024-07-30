@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 
 import Navigation from '../Navigation'
 
-import styles from '../../styles/resume.style.module.css'
-import navStyles from '../../styles/nav.style.module.css'
+import { StyledResumeContainer } from './styles'
+import { StyledBackground } from '../Projects/styles'
 
 import git from '../../assets/icons/GitHub.jpg'
 import linked from '../../assets/icons/LinkedIn.jpg'
@@ -12,25 +12,18 @@ import styleGuide from '../StyleGuide/StyleGuide'
 
 const Resume = () => {
   // functions that track height and width of the window for responsive components
-  const getWindowHeight = () => {
-    return window.innerHeight
-  }
   const getWindowWidth = () => {
     return window.innerWidth
   }
 
-  // height and width of window are stored in local state
-  const [windowHeight, setWindowHeight] = useState(getWindowHeight())
+  // width of window are stored in local state
   const [windowWidth, setWindowWidth] = useState(getWindowWidth())
 
   // function to be added to the onResize event listener
-  const resizeWindow = () => {
-    setWindowHeight(window.innerHeight)
-    setWindowWidth(window.innerWidth)
-  }
+  const resizeWindow = () => setWindowWidth(window.innerWidth)
 
   useEffect(() => {
-    // add Bootstrap to document, remove when component unmounts (return statement - line 61)
+    // add Bootstrap to document, remove when component unmounts
     const link = document.createElement('link')
     link.href =
       'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css'
@@ -52,47 +45,48 @@ const Resume = () => {
   }, [])
 
   return (
-    <div className={styles.background}>
-      <div
-        className={`${styles.background} ${windowWidth > 900 ? 'px-5' : ''} ${
-          styles.mainContent
-        }`}
-      >
-        <Navigation windowWidth={windowWidth} styles={navStyles} />
-
+    <StyledBackground>
+      <div className={`${windowWidth > 900 ? 'px-5' : ''} d-flex flex-column`}>
+        <Navigation windowWidth={windowWidth} />
         <div
           className={`rounded text-light d-flex flex-column justify-content-center ${
-            windowWidth > 500 ? 'm-5' : 'm-1'
-          } mt-3`}
+            windowWidth > 500 ? 'py-2' : 'py-1'
+          }`}
           style={{
             backgroundColor: styleGuide.colors.SpaceBlack,
-            maxWidth: '1200px',
+            maxWidth: '1000px',
             margin: 'auto',
           }}
         >
-          <div
-            className={`border border-light rounded p-4 ${styles.resumeContainer}`}
+          <StyledResumeContainer
+            className={'border border-light rounded p-4'}
             style={{ backgroundColor: styleGuide.colors.GrayShadow }}
           >
             <div className="d-flex flex-row justify-content-between">
               <div
                 className="d-flex flex-column"
-                style={windowWidth > 900 ? { width: '60%' } : { width: '100%' }}
+                style={windowWidth > 900 ? { width: '70%' } : { width: '100%' }}
               >
                 <h1
-                  className="display-2 text-secondary"
+                  className="display-2 text-white-50"
                   style={{ whiteSpace: 'nowrap' }}
                 >
                   BRIAN GAUDET
                 </h1>
                 <p>
                   Highly motivated, self-sufficient and learning-obsessed
-                  developer who is seeking to collaborate with teams and
-                  individuals. Successful deployments on numerous projects have
-                  taught me both the struggle and reward of developing software
-                  applications from end to end. Experience in management,
-                  training, leadership and business operations will help guide
-                  me as I continue to grow.
+                  developer who is seeking to contribute to or lead web
+                  development projects with a focus on delivering maintainable
+                  code and a good developer experience.
+                </p>
+                <br />
+                <p>
+                  Successful contributions to enterprise teams have taught me
+                  both the challenge and reward associated with developing,
+                  deploying and maintaining modern web applications. Experience
+                  in management, training, leadership and business operations
+                  will continue to guide me as I grow in my career as a software
+                  engineer.
                 </p>
               </div>
 
@@ -108,8 +102,9 @@ const Resume = () => {
                   <a
                     className="my-1 d-flex flex-row link link-light text-decoration-none"
                     href="http://linkedin.com/in/brian-f-gaudet"
+                    /** @TODO add icon to communicate "new tab" to user (w3 might have SVG) */
                     target="_blank"
-                    style={{ width: 'fit-content' }}
+                    style={{ width: 'fit-content', whiteSpace: 'nowrap' }}
                   >
                     <p className="mt-1">linkedin.com/in/brian-f-gaudet</p>
                     <img
@@ -136,6 +131,7 @@ const Resume = () => {
                   <a
                     className="my-1 d-flex flex-row link link-light text-decoration-none"
                     href="http://github.com/Gaudet-B"
+                    /** @TODO add icon to communicate "new tab" to user (w3 might have SVG) */
                     target="_blank"
                   >
                     <p className="mt-1">github.com/Gaudet-B</p>
@@ -164,6 +160,7 @@ const Resume = () => {
                 <a
                   className="my-1 d-flex flex-row link link-light text-decoration-none"
                   href="http://linkedin.com/in/brian-f-gaudet"
+                  /** @TODO add icon to communicate "new tab" to user (w3 might have SVG) */
                   target="_blank"
                   style={{ width: 'fit-content' }}
                 >
@@ -190,6 +187,7 @@ const Resume = () => {
                 <a
                   className="my-1 d-flex flex-row link link-light text-decoration-none"
                   href="http://github.com/Gaudet-B"
+                  /** @TODO add icon to communicate "new tab" to user (w3 might have SVG) */
                   target="_blank"
                 >
                   <p className="mt-1">github.com/Gaudet-B</p>
@@ -204,12 +202,12 @@ const Resume = () => {
             )}
 
             <div className="mx-5 border-top border-secondary my-4"></div>
-            <h3 className="mt-5 mb-2 text-secondary">
+            <h3 className="mt-5 mb-2 text-white-50">
               TECHNOLOGIES & FRAMEWORKS
             </h3>
 
             <div className={`my-4 ${windowWidth > 800 ? 'mx-5' : 'mx-2'}`}>
-              <div
+              {/* <div
                 style={{
                   display: 'flex',
                   flexDirection: 'row',
@@ -258,17 +256,15 @@ const Resume = () => {
                   <span>{'Python, '}</span>
                   <span>{'SQL'}</span>
                 </div>
-              </div>
+              </div> */}
               <p className="mb-5">
-                JavaScript, Java, Express.js, Flask, MongoDB, Mongoose, Spring
-                Boot, Tailwind, Socket.IO, Postman, Jinja2, GitHub, Visual
-                Studio Code, react-query, Beautiful Soup, Selenium, bcrypt
+                React.js, Next.js, JavaScript, Vite.js, AWS, Python, Flask,
+                Java, Node.js, MySQL, PostgreSQL, MongoDB, TailwindCSS, GitHub,
+                Visual Studio Code, Selenium, terraform, Docker, react-query
               </p>
             </div>
 
-            <h3 className="mt-5 mb-3 text-secondary">
-              PROFESSIONAL EXPERIENCE
-            </h3>
+            <h3 className="mt-5 mb-3 text-white-50">PROFESSIONAL EXPERIENCE</h3>
 
             <div
               className={
@@ -279,16 +275,20 @@ const Resume = () => {
             >
               <div
                 className="d-flex flex-column"
-                style={windowWidth > 900 ? { width: '14%' } : { width: '24%' }}
+                style={windowWidth > 900 ? { width: '19%' } : { width: '24%' }}
               >
-                {windowWidth > 500 ? <h5>Border</h5> : <h6>Border</h6>}
+                {windowWidth > 500 ? (
+                  <h5>Border, LLC</h5>
+                ) : (
+                  <h6>Border, LLC</h6>
+                )}
                 <h6>San Diego, CA</h6>
-                <h6>2022 - present</h6>
+                <h6>2022 - 2024</h6>
               </div>
 
               <div
                 className=""
-                style={windowWidth > 900 ? { width: '85%' } : { width: '75%' }}
+                style={windowWidth > 900 ? { width: '80%' } : { width: '75%' }}
               >
                 <h5
                   className={
@@ -300,17 +300,19 @@ const Resume = () => {
                   Frontend Developer
                 </h5>
                 <ul>
-                  <li>
-                    Maintain daily and weekly communications as a member of
-                    agile teams across multiple enterprise clients.
+                  <li className="mb-3">
+                    Contributions included an application used to track security
+                    compliance of internal teams, and modernizing a legacy React
+                    application with Typescript and Vite.
+                  </li>
+                  <li className="mb-3">
+                    Maintained daily and weekly communications as a member of
+                    agile teams across multiple enterprise clients, including
+                    Viasat (San Diego) and MetTel (New York).
                   </li>
                   <li>
-                    Consistently deliver features in React.js (frontend) and
-                    Python (backend).
-                  </li>
-                  <li>
-                    Contribute to various internal projects utilizing new
-                    technologies.
+                    Consistently delivered features in frontend (React.js) and
+                    fullstack (React.js, Python) roles.
                   </li>
                 </ul>
               </div>
@@ -325,7 +327,7 @@ const Resume = () => {
             >
               <div
                 className="d-flex flex-column"
-                style={windowWidth > 900 ? { width: '14%' } : { width: '24%' }}
+                style={windowWidth > 900 ? { width: '19%' } : { width: '24%' }}
               >
                 {windowWidth > 500 ? (
                   <h5>Self-Employed</h5>
@@ -338,7 +340,7 @@ const Resume = () => {
 
               <div
                 className=""
-                style={windowWidth > 900 ? { width: '85%' } : { width: '75%' }}
+                style={windowWidth > 900 ? { width: '80%' } : { width: '75%' }}
               >
                 <h5
                   className={
@@ -350,18 +352,23 @@ const Resume = () => {
                   Freelance Software Developer
                 </h5>
                 <ul>
-                  <li>
-                    Obtain clients via Upwork or personal/professional
+                  <li className="mb-3">
+                    Obtain new clients via Upwork or personal/professional
                     networking.
                   </li>
+                  <li className="mb-3">
+                    Specialize in automation projects, API interfaces, and web
+                    development.
+                  </li>
                   <li>
-                    Target frontend jobs, specifically React.js and Next.js.
+                    Target new clients with frontend and web development work,
+                    specifically React.js and Next.js.
                   </li>
                 </ul>
               </div>
             </div>
 
-            <div
+            {/* <div
               className={
                 windowWidth > 900
                   ? 'mx-5 mt-4 mb-5 d-flex flex-row justify-content-between'
@@ -407,19 +414,19 @@ const Resume = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> */}
 
             <div className="mx-5 border-top border-secondary my-4"></div>
-            <h3 className="mt-5 mb-3 text-secondary">EDUCATION</h3>
+            <h3 className="mt-5 mb-3 text-white-50">EDUCATION</h3>
 
             <div className="mx-4">
               <ul className="mb-5">
-                <li>
+                <li className="mb-3">
                   <strong>Coding Dojo </strong> - San Jose, CA (online) -{' '}
                   <strong> Full-Stack Developer Certificate - </strong> Python,
                   MERN, Java - 2021
                 </li>
-                <li>
+                <li className="mb-3">
                   <strong>Court of Master Sommeliers </strong> - Americas -{' '}
                   <strong> Introductory Course Certification - </strong> 2017
                 </li>
@@ -440,10 +447,10 @@ const Resume = () => {
                 download a printable copy of this resume
               </a>
             </div>
-          </div>
+          </StyledResumeContainer>
         </div>
       </div>
-    </div>
+    </StyledBackground>
   )
 }
 

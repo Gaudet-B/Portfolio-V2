@@ -1,11 +1,12 @@
 import Button from '../../../reuseable/Button'
+import { PROJECT_TYPES } from '../ProjectsMenu'
 import { StyledTypeList } from './styles'
 
 interface ProjectTypesProps {
-  projectTypes: Array<string>
-  projectType: string
-  handleProjectType: (filter: string) => void
-  setProjectType: (type: string) => void
+  projectTypes: typeof PROJECT_TYPES
+  projectType: (typeof PROJECT_TYPES)[number] | 'All'
+  handleProjectType: (filter: (typeof PROJECT_TYPES)[number] | 'All') => void
+  setProjectType: (type: (typeof PROJECT_TYPES)[number] | 'All') => void
   styles: CSSModuleClasses
 }
 
