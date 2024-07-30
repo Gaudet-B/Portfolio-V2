@@ -1,9 +1,17 @@
 import Button from '../../../reuseable/Button'
 import { CATEGORY_FILTERS } from '../ProjectsMenu'
 
-import { StyledFilterItem, StyledFilterList } from './styles'
+import { StyledFilterItem } from './styles'
 
-const CategoryFilters = (props: {
+const CategoryFilters = ({
+  categories,
+  categoryFilters,
+  showTags,
+  handleFilterClick,
+  handleCategorySelect,
+  chevronDirection,
+  styles,
+}: {
   categories: Array<(typeof CATEGORY_FILTERS)[number]>
   categoryFilters: typeof CATEGORY_FILTERS
   showTags: boolean
@@ -12,16 +20,6 @@ const CategoryFilters = (props: {
   chevronDirection: string
   styles: CSSModuleClasses
 }) => {
-  const {
-    categories,
-    categoryFilters,
-    showTags,
-    handleFilterClick,
-    handleCategorySelect,
-    chevronDirection,
-    styles,
-  } = props
-
   const selected = categories[0] != 'All' ? categories.length : undefined
   const tagsText = selected ? `Tech (${selected})` : 'Tech'
 
@@ -53,8 +51,8 @@ const CategoryFilters = (props: {
         {categoryFilters.map((filter, index) => {
           return (
             <StyledFilterItem
-              show={showTags}
-              active={categories.indexOf(filter) > -1 && showTags}
+              $show={showTags}
+              $active={categories.indexOf(filter) > -1 && showTags}
               onClick={() => handleCategorySelect(filter)}
               id={`filter-${filter}`}
               key={`${filter}-${index + 5}`}

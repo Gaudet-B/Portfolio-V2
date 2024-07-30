@@ -15,34 +15,33 @@ const reverseSpinner = keyframes`
 export const StyledLoadingContainer = styled.div`
   height: inherit;
   width: inherit;
-  color: ${styleGuide.colors.Whitesmoke};
+  color: ${styleGuide.colors.WhiteSmoke};
 `
 
-export const StyledSpinner = styled.div`
+export const StyledSpinner = styled.div<{ $size: string }>`
   animation: ${spinner} 2.5s ease infinite;
-  border: solid ${(props) => (props.size == 'small' ? '2px' : '5px')}
-    transparent;
+  border: solid ${({ $size }) => ($size == 'small' ? '2px' : '5px')} transparent;
   border-bottom-color: #cfd0d1;
   border-left-color: #cfd0d1;
   border-top-color: #cfd0d1;
   border-radius: 50%;
-  height: ${(props) => (props.size === 'small' ? '40px' : '100px')};
-  width: ${(props) => (props.size === 'small' ? '40px' : '100px')};
+  height: ${({ $size }) => ($size === 'small' ? '40px' : '100px')};
+  width: ${({ $size }) => ($size === 'small' ? '40px' : '100px')};
   position: relative;
   top: 50%;
   left: 50%;
 `
 
-export const StyledSpinnerReverse = styled.div`
+export const StyledSpinnerReverse = styled.div<{ $size: string }>`
   animation: ${reverseSpinner} 3.5s linear infinite;
-  border: solid ${(props) => (props.size === 'small' ? '1px' : '4px')}
+  border: solid ${({ $size }) => ($size === 'small' ? '1px' : '4px')}
     transparent;
   border-bottom-color: #cfd0d1;
   border-right-color: #cfd0d1;
   border-top-color: #cfd0d1;
   border-radius: 50%;
-  height: ${(props) => (props.size === 'small' ? '24px' : '74px')};
-  width: ${(props) => (props.size === 'small' ? '24px' : '74px')};
+  height: ${({ $size }) => ($size === 'small' ? '24px' : '74px')};
+  width: ${({ $size }) => ($size === 'small' ? '24px' : '74px')};
   position: relative;
   top: 50%;
   left: 50%;
