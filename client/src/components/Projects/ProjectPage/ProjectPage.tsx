@@ -1,17 +1,11 @@
-/* GLOBAL */
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect, ReactNode } from 'react'
 import { debounce } from 'lodash'
-
-/* PROJECT */
-import Link from '../../reuseable/Link'
+import { ProjectPageBody, ProjectPageHeader } from './sections'
+import { DemoImg } from './components'
 import ContentModal from '../../reuseable/ContentModal'
-import CustomImageGallery from './CustomImageGallery'
-import DemoImg from './DemoImg'
-import DemoBanner from './DemoBanner'
-import ProjectRole from './ProjectRole'
-import ProjectTech from './ProjectTech'
-import ProjectDetails from './ProjectDetails'
-
+import { Project } from '../Projects'
+import { StyledPageContainer } from './styles'
+import { HeroImages, ProjectImages } from '../../../scripts/getImages'
 /* ASSETS */
 import draftHero from '../../../assets/draft/draft_hero.png'
 import pizzaHero from '../../../assets/pizza/pizza_hero.png'
@@ -32,62 +26,38 @@ import draftV2Demo4 from '../../../assets/draft/v2-demo-04.gif'
 import draftV2Demo5 from '../../../assets/draft/v2-demo-05.gif'
 // import arrow from '../../../assets/icons/chevron-icon-light.png'
 
-/* STYLES */
-import styles from '../../../styles/carousel.style.module.css'
-import {
-  StyledPageContainer,
-  StyledPageHeader,
-  StyledTitle,
-  StyledProjectType,
-  StyledSummaryContainer,
-  StyledProfessionalContainer,
-  StyledProjectSummary,
-  StyledProfessionalSummary,
-  StyledPageBody,
-  StyledSeparator,
-  StyledGithubLink,
-  StyledDemoWrapper,
-  StyledDemoContainer,
-  StyledDemoTitle,
-  StyledInstruction,
-  StyledLinkContainer,
-  StyledProjectControls,
-  StyledControlButton,
-  StyledButtonText,
-  StyledButtonProjectText,
-  StyledGalleryContainer,
-  StyledHeroContainer,
-  StyledInfoContainer,
-  StyledHeroImage,
-  StyledDraftDemoContainer,
-  StyledProjectLink,
-} from './styles'
-
-/* TYPES */
-import { Project } from '../Projects'
-import ChevronButton from './ChevronButton'
+const VIASAT_LOGO =
+  'https://viasat.brightspotgocdn.com/8e/d2/3de143f24cde8883c08fa2781180/int-vsat-tm-rgb-grd-72x24.svg'
 
 /**
- * @description - ProjectPage component - handles rendering all projects info
- * @param props - Props
- * @returns JSX.Element
+ * @description - ProjectPage component - handles all logic related to
+ * project info and renders the header and body of the project page
  */
-const ProjectPage = (props: {
+const ProjectPage = ({
+  project,
+  prevProject,
+  nextProject,
+  projectsLength,
+  images,
+  heros,
+  mobile,
+  getWindowHeight,
+  getWindowWidth,
+  handleNavigateProjects,
+  handleProjectClick,
+}: {
   project: Project
   prevProject: string
   nextProject: string
   projectsLength: number
-  images: string[] | [][]
-  heros: { [key: string]: string }
-  responsive: boolean
-  card: string
+  images: ProjectImages
+  heros: HeroImages
+  mobile: boolean
   getWindowHeight: () => number
   getWindowWidth: () => number
   handleNavigateProjects: (direction: number, length: number) => void
+  handleProjectClick: (index: number) => void
 }) => {
-  const { project, images, responsive, card, getWindowHeight, getWindowWidth } =
-    props
-
   // show DemoGif
   const [show, setShow] = useState(false)
 
@@ -106,7 +76,7 @@ const ProjectPage = (props: {
 
   // state variables that handle the carousel image modal
   const [showModal, setShowModal] = useState<boolean>(false)
-  const [modalContent, setModalContent] = useState<typeof React.Children>()
+  const [modalContent, setModalContent] = useState<ReactNode>()
 
   // timeout IDs stored in array so they can be cancelled
   const [timeouts, setTimeouts] = useState<number[]>([])
@@ -129,30 +99,30 @@ const ProjectPage = (props: {
 
   // function that loads pt.2 and pt.3 of the p!zza demo .gif
   const swapPizza = () => {
-    const pizzaTwo = setTimeout(() => setVideo(pizzaDemoTwo), 6100)
-    const pizzaThree = setTimeout(() => setVideo(pizzaDemoThree), 13100)
+    const pizzaTwo = setTimeout(() => setVideo(pizzaDemoTwo), 5100)
+    const pizzaThree = setTimeout(() => setVideo(pizzaDemoThree), 12100)
     return [pizzaTwo, pizzaThree]
   }
 
   // function that loads pt.2 of the chata demo .gif
   const swapChata = () => {
     const chataTwo = setTimeout(() => setVideo(chataDemoTwo), 7500)
-    const chataThree = setTimeout(() => setVideo(chataDemoThree), 21100)
+    const chataThree = setTimeout(() => setVideo(chataDemoThree), 19500)
     return [chataTwo, chataThree]
   }
 
   //
   const swapDraft = () => {
-    const draftTwo = setTimeout(() => setDraftV2Demo(draftV2Demo2), 6500)
-    const draftThree = setTimeout(() => setDraftV2Demo(draftV2Demo3), 11500)
-    const draftFour = setTimeout(() => setDraftV2Demo(draftV2Demo4), 24500)
-    const draftFive = setTimeout(() => setDraftV2Demo(draftV2Demo5), 29500)
+    const draftTwo = setTimeout(() => setDraftV2Demo(draftV2Demo2), 6000)
+    const draftThree = setTimeout(() => setDraftV2Demo(draftV2Demo3), 11000)
+    const draftFour = setTimeout(() => setDraftV2Demo(draftV2Demo4), 24000)
+    const draftFive = setTimeout(() => setDraftV2Demo(draftV2Demo5), 29000)
     return [draftTwo, draftThree, draftFour, draftFive]
   }
 
   // cancels all timeouts
   const cancelTimeouts = () => {
-    console.log(timeouts)
+    // console.log(timeouts)
     timeouts.forEach((timeout) => clearTimeout(timeout))
   }
 
@@ -177,11 +147,14 @@ const ProjectPage = (props: {
     }
   }, 500)
 
+  /** @TODO refactor this into an object with keys matching project.title */
   const getHeroImage = (title: string) => {
-    let image = props.heros.vapyr
-    if (title === 'Estimatica Redesign') image = props.heros.estimatica
-    if (title === 'Epoch IT Solutions') image = props.heros.epoch
-    if (title === 'Border') image = props.heros.border
+    let image = heros.vapyr
+    if (title === 'Estimatica Redesign') image = heros.estimatica
+    if (title === 'Epoch IT Solutions') image = heros.epoch
+    if (title === 'Border') image = heros.border
+    if (title === 'Viasat') image = heros.viasat
+    if (title === 'MetTel') image = heros.mettel
     return image
   }
 
@@ -195,139 +168,51 @@ const ProjectPage = (props: {
     setShowModal(false)
   }
 
-  const handleDemoClick = () => {
-    setShow(!show)
-  }
-
   const handleDraftDemoClick = (index: number) => {
-    setShow(!show)
     if (showDraftDemo === index) setShowDraftDemo(-1)
     else setShowDraftDemo(index)
   }
 
+  const handleDemoClick = () => {
+    console.log('clicked')
+    setShow(!show)
+  }
+
+  const getModalContent = (index: number, imgs: string[]): JSX.Element => {
+    const contentProps = {
+      key: `${imgs[index]}-demo`,
+      index: index,
+      source: imgs[index],
+      project: project.title,
+      activeIndex: index,
+      activeHeight: getActiveDimensions().height,
+      activeWidth: getActiveDimensions().width,
+      handleImageBrowse: handleImageBrowse,
+      getWindowHeight: getWindowHeight,
+      getWindowWidth: getWindowWidth,
+      modal: true,
+      hideLink: true,
+    }
+    return <DemoImg {...contentProps} />
+  }
+
+  const handleImageBrowse = (idx: number, direction: 'left' | 'right') => {
+    console.log(idx, direction)
+    const imgs = getImagesToDisplay(images)
+    let newIndex
+    if (direction === 'left') {
+      if (idx === 0) newIndex = imgs.length - 1
+      else newIndex = idx - 1
+    } else {
+      if (idx === imgs.length - 1) newIndex = 0
+      else newIndex = idx + 1
+    }
+    setActiveIndex(newIndex)
+    handleModal(getModalContent(newIndex, imgs))
+  }
+
   const handleTabs = (index: number) => {
     setActiveTab(index)
-  }
-
-  const renderProjectSummary = (type: string) => {
-    const summary = project.summary?.slice() || ''
-    const splitIndex = summary.indexOf('~')
-    if (splitIndex > 0) {
-      const firstHalf = summary.slice(0, splitIndex)
-      const secondHalf = summary.slice(splitIndex + 1)
-      return (
-        <StyledProfessionalContainer marginBottom={type === 'personal'}>
-          <StyledProfessionalSummary>{firstHalf}</StyledProfessionalSummary>
-          <StyledProfessionalSummary>{secondHalf}</StyledProfessionalSummary>
-        </StyledProfessionalContainer>
-      )
-    }
-    return (
-      <StyledSummaryContainer>
-        <StyledProjectSummary>{project.summary || ''}</StyledProjectSummary>
-      </StyledSummaryContainer>
-    )
-  }
-
-  const renderProjectDetails = () => {
-    return (
-      <ProjectDetails
-        details={project.details}
-        title={project.title}
-        responsive={responsive}
-        redesign={project.title === 'MyDraft Partner'}
-      />
-    )
-  }
-
-  const renderNoDemo = () => {
-    return (
-      <StyledInstruction noPointer>
-        demo currently not available
-      </StyledInstruction>
-    )
-  }
-
-  const renderDemoLink = (callback: () => void, action: string) => {
-    return (
-      <StyledInstruction onClick={callback}>
-        click to <strong>{action}</strong> demo
-      </StyledInstruction>
-    )
-  }
-
-  const renderProjectdemo = () => {
-    const renderDemoContent = () => {
-      if (project.title === 'MyDraft Partner') {
-        const draftDemoGifs = [video || SOURCE, draftV2Demo]
-        return (
-          <StyledDraftDemoContainer>
-            {draftDemoGifs.map((gif, index) => {
-              return (
-                <DemoImg
-                  index={index}
-                  source={gif}
-                  project={project.title}
-                  activeIndex={showDraftDemo}
-                  activeHeight={
-                    index === showDraftDemo
-                      ? getActiveDimensions().height
-                      : undefined
-                  }
-                  activeWidth={
-                    index === showDraftDemo
-                      ? getActiveDimensions().width
-                      : undefined
-                  }
-                  onClick={() => handleDraftDemoClick(index)}
-                  getWindowHeight={getWindowHeight}
-                  getWindowWidth={getWindowWidth}
-                  demo
-                  noMask
-                  hideDemo={showDraftDemo !== index && show}
-                />
-              )
-            })}
-          </StyledDraftDemoContainer>
-        )
-      }
-      return (
-        <DemoImg
-          index={!show ? 1 : 0}
-          source={video || SOURCE}
-          project={project.title}
-          activeIndex={0}
-          activeHeight={show ? getActiveDimensions().height : undefined}
-          activeWidth={
-            show && project.title === 'chata'
-              ? getActiveDimensions().width + 100
-              : !show
-              ? undefined
-              : getActiveDimensions().width
-          }
-          onClick={handleDemoClick}
-          getWindowHeight={getWindowHeight}
-          getWindowWidth={getWindowWidth}
-          demo
-          noMask
-        />
-      )
-    }
-    return (
-      <>
-        <StyledLinkContainer>
-          {!show
-            ? renderDemoLink(handleDemoClick, 'open')
-            : renderDemoLink(handleDemoClick, 'close')}
-          {project.title === 'chata' ||
-          project.title === 'P!ZZA' ||
-          project.title === 'MyDraft Partner'
-            ? renderDemoLink(restartDemo, 'restart')
-            : null}
-        </StyledLinkContainer>
-        {renderDemoContent()}
-      </>
-    )
   }
 
   const getActiveDimensions = (): { height: number; width: number } => {
@@ -338,6 +223,7 @@ const ProjectPage = (props: {
       if (width < 1000) return { height: 700, width: 450 }
       return { height: 900, width: 600 }
     }
+    if (width < 500) return { height: 230, width: width }
     if (width < 600) return { height: 300, width: 500 }
     if (width < 700) return { height: 300, width: 550 }
     if (width < 800) return { height: 350, width: 650 }
@@ -358,85 +244,22 @@ const ProjectPage = (props: {
     return imagesToReturn
   }
 
-  // fuction that opens a new window for the p!zza interactive demo
+  // fuction that opens a new window for the P!ZZA interactive demo
   const handlePizza = () => {
     window.open('/p!zza')
   }
 
-  const renderImageGallery = () => {
-    const imagesToDisplay: string[] = getImagesToDisplay(images)
-    return (
-      <StyledGalleryContainer>
-        <CustomImageGallery
-          project={project}
-          images={imagesToDisplay}
-          styles={styles}
-          getWindowHeight={getWindowHeight}
-          getWindowWidth={getWindowWidth}
-          activeIndex={activeIndex}
-          setActiveIndex={setActiveIndex}
-          handleModal={handleModal}
-          getActiveDimensions={getActiveDimensions}
-          redesign={project.title === 'MyDraft Partner'}
-          activeTab={activeTab}
-          handleTabs={handleTabs}
-        />
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '24px',
-            marginTop: '24px',
-            transform: 'translateX(-30px)',
-          }}
-        >
-          <ProjectRole
-            role={project.myRole}
-            direction={'row'}
-            // redesign={project.title === 'MyDraft Partner'}
-          />
-          <ProjectTech
-            tech={project.technologies}
-            direction={'row'}
-            redesign={project.title === 'MyDraft Partner'}
-          />
-        </div>
-      </StyledGalleryContainer>
-    )
-  }
-
-  const renderHeroImage = () => {
-    return (
-      <StyledHeroContainer>
-        <StyledHeroImage>
-          <DemoImg
-            index={-1}
-            source={getHeroImage(project.title)}
-            project={project.title}
-            activeIndex={-1}
-            activeHeight={getActiveDimensions().height / 3}
-            activeWidth={getActiveDimensions().width / 3}
-            getWindowHeight={getWindowHeight}
-            getWindowWidth={getWindowWidth}
-            hideScrollbar
-          />
-        </StyledHeroImage>
-        <StyledInfoContainer redesign>
-          <ProjectRole role={project.myRole} direction={'row'} professional />
-          <ProjectTech tech={project.technologies} direction={'row'} />
-          {project.externalLink ? (
-            <>
-              <div></div>
-              <StyledProjectLink>
-                <a href={project.externalLink} target={'_blank'}>
-                  {project.externalLink}
-                </a>
-              </StyledProjectLink>
-            </>
-          ) : null}
-        </StyledInfoContainer>
-      </StyledHeroContainer>
-    )
+  const getTotalTime = (title: string): number => {
+    switch (title) {
+      case 'P!ZZA':
+        return 17200
+      case 'chata':
+        return 27000
+      case 'MyDraft Partner':
+        return 70000
+      default:
+        return 0
+    }
   }
 
   const projectType =
@@ -463,113 +286,77 @@ const ProjectPage = (props: {
     }
   }, [project])
 
+  const draftDemoGifs = [video || SOURCE, draftV2Demo]
+
   return (
     <>
+      {/** @TODO should this modal be rendered by default and hidden until opened? (display: none) */}
       {modalContent && (
         <ContentModal
           active={showModal}
-          content={modalContent}
+          children={modalContent}
+          activeIndex={activeIndex}
           handleClose={handleCloseModal}
+          handleImageBrowse={handleImageBrowse}
         />
       )}
 
       <StyledPageContainer>
-        <StyledPageHeader>
-          <StyledTitle>{project.title}</StyledTitle>
+        <ProjectPageHeader
+          project={project}
+          projectType={projectType}
+          mobile={mobile}
+          // getWindowWidth={getWindowWidth}
+        />
 
-          <StyledProjectType>{projectType}</StyledProjectType>
-
-          {projectType === 'Personal Project'
-            ? renderProjectSummary('personal')
-            : null}
-        </StyledPageHeader>
-        <StyledPageBody>
-          {project.title === 'P!ZZA' ? (
-            <DemoBanner
-              handleClick={handlePizza}
-              text={'this project has an interactive demo!'}
-            />
-          ) : null}
-
-          {projectType === 'Personal Project'
-            ? renderImageGallery()
-            : renderHeroImage()}
-
-          <StyledSeparator />
-
-          {projectType === 'Personal Project'
-            ? renderProjectDetails()
-            : renderProjectSummary('professional')}
-
-          <StyledSeparator />
-
-          {projectType === 'Personal Project' ? (
-            <>
-              <Link to={project.github} popOut>
-                <StyledGithubLink>Github Repo</StyledGithubLink>
-              </Link>
-              <StyledDemoWrapper>
-                <StyledDemoContainer
-                  /** @NOTE - the 'expand' animation isn't smooth, regular transform handles better */
-                  animation={'contract'}
-                  id={`demo-${card}`}
-                >
-                  <StyledDemoTitle>Demo</StyledDemoTitle>
-
-                  {project.title === 'briangaudet.com'
-                    ? renderNoDemo()
-                    : renderProjectdemo()}
-                </StyledDemoContainer>
-              </StyledDemoWrapper>
-            </>
-          ) : null}
-
-          <StyledProjectControls>
-            <StyledControlButton
-              onClick={() => {
-                setShow(false)
-                props.handleNavigateProjects(-1, props.projectsLength)
-              }}
-            >
-              <ChevronButton
-                direction={'left'}
-                noMargin
-                customHeight={62}
-                customWidth={45}
-                reverseHover
-              />
-              <StyledButtonText>
-                <span>previous</span>
-                <span>project</span>
-                <StyledButtonProjectText>
-                  {`{ ${props.prevProject} }`}
-                </StyledButtonProjectText>
-              </StyledButtonText>
-            </StyledControlButton>
-            <StyledControlButton
-              onClick={() => {
-                setShow(false)
-                props.handleNavigateProjects(1, props.projectsLength)
-              }}
-              positiveX
-            >
-              <StyledButtonText>
-                <span>next</span>
-                <span>project</span>
-                <StyledButtonProjectText>
-                  {`{ ${props.nextProject} }`}
-                </StyledButtonProjectText>
-              </StyledButtonText>
-              <ChevronButton
-                direction={'right'}
-                noMargin
-                customHeight={62}
-                customWidth={45}
-                reverseHover
-              />
-            </StyledControlButton>
-          </StyledProjectControls>
-        </StyledPageBody>
+        <ProjectPageBody
+          {...{
+            mobile,
+            project,
+            getHeroImage,
+            handlePizza,
+            source: SOURCE,
+            isPersonal: projectType === 'Personal Project',
+            imageProps: {
+              heros,
+              images,
+              activeTab,
+              activeIndex,
+              handleTabs,
+              handleModal,
+              setActiveIndex,
+              getModalContent,
+              getWindowWidth,
+              getWindowHeight,
+              getActiveDimensions,
+              handleImageBrowse,
+              getImagesToDisplay,
+            },
+            demoProps: {
+              source: SOURCE,
+              video: video,
+              show,
+              draftDemoGifs,
+              showDraftDemo,
+              handleDemoClick,
+              getActiveDimensions,
+              handleDraftDemoClick,
+              getWindowHeight,
+              getWindowWidth,
+              getTotalTime,
+              restartDemo,
+            },
+            controlsProps: {
+              projectsLength,
+              prevProject,
+              nextProject,
+              mobile,
+              handleShow: setShow,
+              handleNavigateProjects,
+              handleProjectClick,
+            },
+          }}
+        />
       </StyledPageContainer>
     </>
   )
