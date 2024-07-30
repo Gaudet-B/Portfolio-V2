@@ -6,11 +6,11 @@ import {
   StyledSpinnerReverse,
 } from './styles'
 
-const Loading = (props: { size: string }) => {
+const Loading = ({ size }: { size: string }) => {
   return (
-    <StyledLoadingContainer size={props.size}>
-      <StyledSpinner size={props.size}>
-        <StyledSpinnerReverse size={props.size} />
+    <StyledLoadingContainer>
+      <StyledSpinner $size={size}>
+        <StyledSpinnerReverse $size={size} />
       </StyledSpinner>
     </StyledLoadingContainer>
   )

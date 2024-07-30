@@ -20,18 +20,24 @@ export const StyledTypewriter = styled.div`
   margin-bottom: 12px;
 `
 
-export const StyledTypewriterText = styled.h1`
+export const StyledTypewriterText = styled.h1<{
+  $invisible: boolean
+  $heading: boolean
+  $responsive: boolean
+  $responsiveSubtext: boolean
+}>`
   top: 18%;
   margin-top: 6px;
-  height: ${(props) => (props.invisible ? '20px' : undefined)};
+  height: ${({ $invisible }) => ($invisible ? '20px' : undefined)};
 
   width: 10em;
   margin: 6px 0;
-  color: ${(props) =>
-    props.heading ? styleGuide.colors.White : styleGuide.colors.MatrixGreen};
-  font-size: ${(props) => (props.heading ? '4em' : '2.5em')};
-  font-size: ${(props) => (props.responsive ? '2.5em' : undefined)};
-  font-size: ${(props) => (props.responsiveSubtext ? '2em' : undefined)};
+  color: ${({ $heading }) =>
+    $heading ? styleGuide.colors.White : styleGuide.colors.MatrixGreen};
+  font-size: ${({ $heading }) => ($heading ? '4em' : '2.5em')};
+  font-size: ${({ $responsive }) => ($responsive ? '2.5em' : undefined)};
+  font-size: ${({ $responsiveSubtext }) =>
+    $responsiveSubtext ? '2em' : undefined};
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
