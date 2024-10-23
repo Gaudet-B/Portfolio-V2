@@ -23,6 +23,7 @@ export type HasCaseStudy = (typeof CASE_STUDIES)[number]
 export type ImageProps = {
   heros: HeroImages
   images: ProjectImages
+  // images: [] | string[] | string[][]
   activeTab?: number
   activeIndex?: number
   handleTabs: (index: number) => void
@@ -33,7 +34,7 @@ export type ImageProps = {
   getWindowHeight: () => number
   getActiveDimensions: () => { height: number; width: number }
   handleImageBrowse: (index: number, direction: 'left' | 'right') => void
-  getImagesToDisplay: (images: any[]) => string[]
+  getImagesToDisplay: (images: ProjectImages) => string[]
 }
 
 export type DemoProps = {

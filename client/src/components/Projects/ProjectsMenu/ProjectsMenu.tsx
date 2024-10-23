@@ -74,7 +74,6 @@ const ProjectsMenu = (props: {
       return
     }
     if (categories.indexOf(filter) === 0 && categories.length === 1) {
-      console.log(categories.length)
       setCategories(['All'])
       return
     }
@@ -82,7 +81,6 @@ const ProjectsMenu = (props: {
     if (categories.indexOf(filter) > -1) {
       const index = categories.indexOf(filter)
       newArray.splice(index, 1)
-      console.log(newArray)
     } else {
       newArray.push(filter)
     }

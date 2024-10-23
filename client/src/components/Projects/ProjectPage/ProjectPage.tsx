@@ -122,7 +122,6 @@ const ProjectPage = ({
 
   // cancels all timeouts
   const cancelTimeouts = () => {
-    // console.log(timeouts)
     timeouts.forEach((timeout) => clearTimeout(timeout))
   }
 
@@ -197,7 +196,6 @@ const ProjectPage = ({
   }
 
   const handleImageBrowse = (idx: number, direction: 'left' | 'right') => {
-    console.log(idx, direction)
     const imgs = getImagesToDisplay(images)
     let newIndex
     if (direction === 'left') {
@@ -233,12 +231,14 @@ const ProjectPage = ({
     return { height: 600, width: 1050 }
   }
 
-  const getImagesToDisplay = (imgs: any[]): string[] => {
+  const getImagesToDisplay = (imgs: ProjectImages): string[] => {
     let imagesToReturn: string[] = []
-    if (typeof imgs[0] === 'string') imagesToReturn = [...imgs]
-    else {
-      if (activeTab !== undefined && activeTab > -1) {
-        imagesToReturn = [...imgs[activeTab]]
+    if (imgs) {
+      if (typeof imgs[0] === 'string') imagesToReturn = [...imgs] as string[]
+      else {
+        if (activeTab !== undefined && activeTab > -1) {
+          imagesToReturn = [...imgs[activeTab]]
+        }
       }
     }
     return imagesToReturn

@@ -9,10 +9,14 @@ import ProjectsMenu from './ProjectsMenu'
 
 /* TYPES */
 import { Images } from '../../scripts/getImages'
+import { Project } from './Projects'
 
 const fetchProjects = async () => {
-  const res = await fetch('http://localhost:8000/api/projects')
-  return res.json()
+  // const res = await fetch('http://localhost:8000/api/projects')
+  return (await fetch('http://localhost:8000/api/projects')).json() as Promise<
+    Array<Project>
+  >
+  // return res.json()
 }
 
 const Loader = (props: { openContainer: () => void }) => {
@@ -68,42 +72,49 @@ const ProjectsRenderer = ({
 
   if (error) return <Error openContainer={openContainer} error={error} />
 
-  const mobile = getWindowWidth() < 800
+  if (data) {
+    const projects = data.toReversed()
+    const mobile = getWindowWidth() < 800
 
-  const menuProps = {
-    mobile,
-    projects: data,
-    handleProjectClick,
-    images: images.heros,
+    const menuProps = {
+      mobile,
+      projects,
+      handleProjectClick,
+      images: images.heros,
+    }
+
+    const activeProject = projects[activeIndex]
+
+    const nextProject =
+      activeIndex === projects.length - 1
+        ? projects[0]
+        : projects[activeIndex + 1]
+
+    const prevProject =
+      activeIndex === 0
+        ? projects[projects.length - 1]
+        : projects[activeIndex - 1]
+
+    const projectProps = {
+      mobile,
+      project: activeProject,
+      nextProject: nextProject.title,
+      prevProject: prevProject.title,
+      projectsLength: projects.length,
+      images: images.projects[activeIndex],
+      heros: images.heros,
+      getWindowHeight,
+      getWindowWidth,
+      handleProjectClick,
+      handleNavigateProjects,
+    }
+
+    return showMenu ? (
+      <ProjectsMenu {...{ ...menuProps }} />
+    ) : (
+      <ProjectPage {...{ ...projectProps }} />
+    )
   }
-
-  const activeProject = data[activeIndex]
-
-  const nextProject =
-    activeIndex === data.length - 1 ? data[0] : data[activeIndex + 1]
-
-  const prevProject =
-    activeIndex === 0 ? data[data.length - 1] : data[activeIndex - 1]
-
-  const projectProps = {
-    mobile,
-    project: activeProject,
-    nextProject: nextProject.title,
-    prevProject: prevProject.title,
-    projectsLength: data.length,
-    images: images.projects[activeIndex],
-    heros: images.heros,
-    getWindowHeight,
-    getWindowWidth,
-    handleProjectClick,
-    handleNavigateProjects,
-  }
-
-  return showMenu ? (
-    <ProjectsMenu {...{ ...menuProps }} />
-  ) : (
-    <ProjectPage {...{ ...projectProps }} />
-  )
 }
 
 export default ProjectsRenderer

@@ -100,14 +100,16 @@ const borderImages = [] as string[]
 
 //
 const projects = [
-  [draftImages, draftRedesign],
-  pizzaImages,
-  portfolioImages,
-  chatImages,
-  vapyrImages,
-  estimaticaImages,
-  epochImages,
+  undefined,
+  undefined,
   borderImages,
+  epochImages,
+  estimaticaImages,
+  vapyrImages,
+  chatImages,
+  portfolioImages,
+  pizzaImages,
+  [draftImages, draftRedesign],
 ]
 
 //

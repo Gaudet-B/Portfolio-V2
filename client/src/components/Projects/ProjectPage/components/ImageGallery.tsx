@@ -6,6 +6,7 @@ import { ProjectTech } from './ProjectTech'
 
 /** @TODO REMOVE THIS !!! */
 import styles from '../../../../styles/carousel.style.module.css'
+import { ProjectImages } from '../../../../scripts/getImages'
 
 export type ModalContent = JSX.Element
 
@@ -25,7 +26,7 @@ export const ImageGallery = ({
   handleImageBrowse,
   getImagesToDisplay,
 }: {
-  images: string[] | string[][]
+  images: ProjectImages
   mobile: boolean
   project: Project
   activeTab?: number
@@ -38,7 +39,7 @@ export const ImageGallery = ({
   getWindowHeight: () => number
   getActiveDimensions: () => { height: number; width: number }
   handleImageBrowse: (index: number, direction: 'left' | 'right') => void
-  getImagesToDisplay: (images: any[]) => string[]
+  getImagesToDisplay: (images: ProjectImages) => string[]
 }) => {
   const imagesToDisplay: string[] = getImagesToDisplay(images)
   return (

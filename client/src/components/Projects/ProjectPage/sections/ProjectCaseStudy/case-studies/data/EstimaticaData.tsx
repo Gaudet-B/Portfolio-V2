@@ -7,9 +7,27 @@ import before from '../../../../../../../assets/estimatica/before_01.PNG'
 import after from '../../../../../../../assets/estimatica/after_02.PNG'
 import wplogo from '../../../../../../../assets/estimatica/wordpress-logo-black-n-white.jpg'
 import jscomponents from '../../../../../../../assets/estimatica/js-component-icon.svg'
+import openinnewtab from '../../../../../../../assets/open-in-new-tab.svg'
 import jsheader from '../../../../../../../assets/estimatica/jsheader.png'
+import OpenInNewTab from '../../../../../../reuseable/icons/OpenInNewTab'
 
-const Link = ({ children }: PropsWithChildren) => {
+const Link1 = ({ children }: PropsWithChildren) => {
+  return (
+    <a
+      href="https://estimaticainc.com/"
+      target="_blank"
+      style={{
+        color: `${styleGuide.colors.LabelGreen}`,
+        fontWeight: 'bold',
+        textDecoration: 'none',
+      }}
+    >
+      {children}
+    </a>
+  )
+}
+
+const Link2 = ({ children }: PropsWithChildren) => {
   return (
     <a
       href="https://narrow.land"
@@ -25,15 +43,44 @@ const Link = ({ children }: PropsWithChildren) => {
   )
 }
 
+const Link3 = ({ children }: PropsWithChildren) => {
+  return (
+    <a
+      href="https://estimaticainc.com"
+      target="_blank"
+      style={{
+        color: `${styleGuide.colors.LabelGreen}`,
+        fontWeight: 'bold',
+        // textDecoration: 'none',
+        display: 'flex',
+        gap: '3px',
+      }}
+    >
+      {children}
+      <OpenInNewTab color={styleGuide.colors.LabelGreen} size={20} />
+    </a>
+  )
+}
+
 export const EstimaticaSummary = () => {
   return (
-    <StyledText>
-      Estimatica is based out of Massachusetts and provides fast and accurate
-      cost estimating services for commercial construction projects nationwide.
-      Their website was in need of a facelift as the company had grown to reach
-      new markets, so they hired <Link>Narrow.Land</Link>, a web design studio
-      also based in Massachusetts.
-    </StyledText>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '24px',
+        alignItems: 'center',
+      }}
+    >
+      <StyledText>
+        Based in Massachusetts, <Link1>Estimatica Inc.</Link1> provides fast and
+        accurate cost estimating services for commercial construction projects
+        nationwide. Their website was in need of a facelift as the company had
+        grown to reach new markets, so they hired <Link2>Narrow.Land</Link2>, a
+        web design studio also based in Massachusetts.
+      </StyledText>
+      <Link3>visit estimaticainc.com</Link3>
+    </div>
   )
 }
 
