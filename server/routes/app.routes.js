@@ -14,6 +14,7 @@ module.exports = (app) => {
 
   app.post('/api/loginadmin', AdminController.login)
   app.get('/api/logoutadmin', AdminController.logout)
+  /** @TODO Replace this route with GraphQL */
   app.get('/api/projects', ProjectController.all)
   app.post(
     '/api/projects/new',

@@ -4,22 +4,45 @@ const cookieParser = require('cookie-parser')
 const nodemailer = require('nodemailer')
 const { createHandler } = require('graphql-http/lib/use/express')
 const { buildSchema } = require('graphql')
+const { Project } = require('./models/project.model')
 
 const app = express()
 
 const schema = buildSchema(`
     type Query {
         hello: String
+        projects: [Project]
+    }
+    type Project {
+      title: String
+      myRole: String
+      languages: String
+      technologies: String
+      summary: String
+      details: [String]
+      demo: [String]
+      image: String
+      mainImage: String
+      github: String
+      categories: [String]
     }
 `)
 
 const root = {
   hello: () => 'Hello World',
+  projects: async () => {
+    try {
+      return await Project.find()
+    } catch (error) {
+      console.error('Error fetching projects', error)
+      throw new Error(error)
+    }
+  },
 }
 
 const handler = createHandler({ schema, rootValue: root })
 
-app.use('/graphql', handler)
+// app.use('/graphql', handler)
 
 require('./config/mongoose.config')
 require('dotenv').config()
@@ -33,6 +56,8 @@ app.use(cookieParser())
 app.use(cors({ credentials: true, origin: 'http://localhost:5173' }))
 
 app.use(express.urlencoded({ extended: true }))
+
+app.use('/graphql', handler)
 
 const appRoutes = require('./routes/app.routes')
 appRoutes(app)

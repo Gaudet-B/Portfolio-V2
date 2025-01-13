@@ -13,10 +13,22 @@ import { Project } from './Projects'
 
 const fetchProjects = async () => {
   // const res = await fetch('http://localhost:8000/api/projects')
-  return (await fetch('http://localhost:8000/api/projects')).json() as Promise<
-    Array<Project>
-  >
-  // return res.json()
+
+  /** @NOTE this changed when graphQL was implemented */
+  // return (await fetch('http://localhost:8000/api/projects')).json() as Promise<
+  //   Array<Project>
+  // >
+
+  return (
+    (
+      await fetch(
+        'http://localhost:8000/graphql?query={projects{title,myRole,languages,technologies,summary,details,demo,image,mainImage,github,categories}}'
+      )
+    )
+      /** @NOTE this changed when graphQL was implemented */
+      // ).json() as Promise<Array<Project>>
+      .json() as Promise<{ data: { projects: Array<Project> } }>
+  )
 }
 
 const Loader = (props: { openContainer: () => void }) => {
@@ -73,7 +85,11 @@ const ProjectsRenderer = ({
   if (error) return <Error openContainer={openContainer} error={error} />
 
   if (data) {
-    const projects = data.toReversed()
+    /** @NOTE this changed when graphQL was implemented */
+    // const projects = data.toReversed()
+    const projects = data.data.projects.reverse()
+    console.log('projects', projects)
+
     const mobile = getWindowWidth() < 800
 
     const menuProps = {
@@ -115,6 +131,8 @@ const ProjectsRenderer = ({
       <ProjectPage {...{ ...projectProps }} />
     )
   }
+
+  return <Loader openContainer={openContainer} />
 }
 
 export default ProjectsRenderer
